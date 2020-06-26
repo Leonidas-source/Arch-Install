@@ -49,7 +49,7 @@ mount $part1 /mnt/boot
 clear
 nano /etc/pacman.d/mirrorlist
 clear
-pacstrap /mnt base linux linux-firmware dhcpcd nano && genfstab -U /mnt >> /mnt/etc/fstab
+pacstrap /mnt base linux linux-firmware dhcpcd nano exfat-utils && genfstab -U /mnt >> /mnt/etc/fstab
 clear
 mv locale.conf /mnt/etc
 mv installarchp2 /mnt
