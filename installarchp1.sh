@@ -1,14 +1,14 @@
 #!/bin/bash
 function erasedisk {
 	clear
-	lsblk
+	lsblk -f
 	echo "Set your disk"
 	read disk
 	dd if=/dev/zero of=$disk status=progress
 }
 function format {
 	clear
-	lsblk
+	lsblk -f
 	echo "set your EFI partition"
 	read part1
 	mkfs.exfat $part1
@@ -22,7 +22,7 @@ function format {
 }
 function swap {
 	clear
-	lsblk
+	lsblk -f
 	echo "Set your Swap partition"
 	read part3
 	mkswap $part3
