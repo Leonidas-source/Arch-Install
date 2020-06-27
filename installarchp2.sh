@@ -72,5 +72,6 @@ clear
 echo "Should I install sudo(yes/no)?"
 read sdo
 [ "$sdo" == "yes" ] && heyyy
+wm
 exit
 
