@@ -9,7 +9,7 @@ function user {
 	echo "Done"
 }
 function heyyy {
-	pacman -S sudo
+	yes|pacman -S sudo
 	EDITOR=nano visudo
 }
 ln -sf /usr/share/zoneinfo/Asia/Tomsk /etc/localtime
