@@ -52,7 +52,7 @@ clear
 pacstrap /mnt base linux linux-firmware dhcpcd nano exfat-utils && genfstab -U /mnt >> /mnt/etc/fstab
 clear
 mv locale.conf /mnt/etc
-mv installarchp2 /mnt
+mv installarchp2.sh /mnt
 arch-chroot /mnt
 
 
