@@ -83,7 +83,7 @@ function grubB {
 function grubU {
 	clear
 	pacman -S efibootmgr
-	grub-install --target=x86_64-efi --efi-directory=esp --bootloader-id=GRUB
+	grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 	clear
 	echo "Do you have Windows installed on your PC(yes/no)?"
 	read win
