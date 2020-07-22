@@ -29,7 +29,7 @@ function partial {
 	2) urandom"
 	read zeroing
 	[ "$zeroing" == "1" ] && dd if=/dev/zero of=$disk bs=$block count=$input status=progress
-	[ "$zeroing" == "2" ] && dd if=/dev/urandom of=$disk bs=$block count=$input status=progress
+	[ "$zeroing" == "2" ] && dd if=/dev/urandom of=$disk bs=$block count=$input status=progress iflag=fullblock
 }
 function formatforUEFI {
 	clear
@@ -144,7 +144,7 @@ function nonman {
 	2) urandom"
 	read zeroingy
 	[ "$zeroingy" == "1" ] && dd if=/dev/zero of=$killdisk bs=$blocky count=$inputy status=progress
-	[ "$zeroingy" == "2" ] && dd if=/dev/urandom of=$killdisk bs=$blocky count=$inputy status=progress
+	[ "$zeroingy" == "2" ] && dd if=/dev/urandom of=$killdisk bs=$blocky count=$inputy status=progress iflag=fullblock
 }
 function hommy {
 	clear
