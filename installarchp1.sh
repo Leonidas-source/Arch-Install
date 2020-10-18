@@ -292,7 +292,7 @@ rm /etc/pacman.d/mirrorlist
 mv mirrorlist /etc/pacman.d/
 nano /etc/pacman.d/mirrorlist
 clear
-pacstrap /mnt base linux linux-firmware dhcpcd nano mc exfat-utils && genfstab -U /mnt >> /mnt/etc/fstab
+pacstrap /mnt base linux linux-firmware dhcpcd nano mc exfat-utils btrfs-progs && genfstab -U /mnt >> /mnt/etc/fstab
 clear
 mv locale.conf /mnt/etc
 mv installarchp2.sh /mnt
