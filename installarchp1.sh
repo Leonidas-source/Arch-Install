@@ -75,10 +75,7 @@ function ohhmanifeelsosleepy {
 	mkdir test
 	mount $part2 test
 	btrfs subvolume create test/root
-	btrfs subvolume list test
-	echo "Set ID for root"
-	read manpower
-	btrfs subvolume set-default $manpower test
+	btrfs subvolume set-default 256 test
 	umount $part2
 }
 function swap {
@@ -104,10 +101,7 @@ function btrfser {
 	mkdir test
 	mount $root test
 	btrfs subvolume create test/root
-	btrfs subvolume list test
-	echo "Set ID for root"
-	read manpower
-	btrfs subvolume set-default $manpower test
+	btrfs subvolume set-default 256 test
 	umount $root
 }
 function formatforBIOS {
@@ -216,10 +210,7 @@ function btrfserforhome {
 	mkdir fuckme
 	mount $homepart fuckme
 	btrfs subvolume create fuckme/home
-	btrfs subvolume list fuckme
-	echo "Set ID for home"
-	read fuck
-	btrfs subvolume set-default $fuck fuckme
+	btrfs subvolume set-default 256 fuckme
 	umount $homepart
 }
 function formathome {
