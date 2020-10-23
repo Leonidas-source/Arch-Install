@@ -292,3 +292,5 @@ arch-chroot /mnt sh installarchp2.sh
 clear
 gruby
 clear
+python clear.py
+clear
