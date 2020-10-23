@@ -75,7 +75,8 @@ function ohhmanifeelsosleepy {
 	mkdir test
 	mount $part2 test
 	btrfs subvolume create test/root
-	btrfs subvolume set-default 256 test
+	a= btrfs subvolume list test/root | awk -F '[\/ ]+' '/ID / {print $2}' 
+	btrfs subvolume set-default $a test
 	umount $part2
 }
 function swap {
@@ -210,7 +211,8 @@ function btrfserforhome {
 	mkdir fuckme
 	mount $homepart fuckme
 	btrfs subvolume create fuckme/home
-	btrfs subvolume set-default 256 fuckme
+	b= btrfs subvolume list fuckme/home | awk -F '[\/ ]+' '/ID / {print $2}' 
+	btrfs subvolume set-default $b fuckme
 	umount $homepart
 }
 function formathome {
