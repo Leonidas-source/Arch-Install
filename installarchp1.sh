@@ -104,7 +104,6 @@ function btrfser {
 	btrfs subvolume create test/root
 	c= btrfs subvolume list test/root | awk -F '[\/ ]+' '/ID / {print $2}' 
 	btrfs subvolume set-default $c test
-	btrfs subvolume set-default 256 test
 	umount $root
 }
 function formatforBIOS {
