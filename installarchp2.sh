@@ -50,7 +50,7 @@ function deepin {
 }
 function plasma {
 	clear
-	pacman -S plasma-meta
+	pacman -S plasma-meta konsole dolphin
 	systemctl enable sddm
 }
 function mate {
@@ -83,9 +83,6 @@ function installpack {
 	clear
 	pacman -S $moar
 }
-clear
-timer= curl https://ipapi.co/timezone
-ln -sf /usr/share/zoneinfo/$timer /etc/localtime
 clear
 nano /etc/locale.gen
 clear
