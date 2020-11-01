@@ -84,8 +84,8 @@ function installpack {
 	pacman -S $moar
 }
 clear
-time= curl https://ipapi.co/timezone
-ln -sf /usr/share/zoneinfo/$time /etc/localtime
+timer= curl https://ipapi.co/timezone
+ln -sf /usr/share/zoneinfo/$timer /etc/localtime
 clear
 nano /etc/locale.gen
 clear
