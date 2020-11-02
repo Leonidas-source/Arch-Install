@@ -297,7 +297,7 @@ gruby
 clear
 rm /mnt/grubinstall.sh
 rm /mnt/installarchp2.sh
-yes|pacman -S curl
+yes|pacman -Sy curl
 timer= curl https://ipapi.co/timezone
 ln -sf /usr/share/zoneinfo/$timer /mnt/etc/localtime
 clear
