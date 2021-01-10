@@ -84,7 +84,7 @@ function ohhmanifeelsosleepy {
 	mkdir test
 	mount $part2 test
 	btrfs subvolume create test/root
-	a= btrfs subvolume list test/root | awk -F '[\/ ]+' '/ID / {print $2}'
+	a= btrfs subvolume list test/root | awk -F '[/ ]+' '/ID / {print $2}'
 	btrfs subvolume set-default $a test
 	umount $part2
 }
@@ -111,7 +111,7 @@ function btrfser {
 	mkdir test
 	mount $root test
 	btrfs subvolume create test/root
-	c= btrfs subvolume list test/root | awk -F '[\/ ]+' '/ID / {print $2}'
+	c= btrfs subvolume list test/root | awk -F '[/ ]+' '/ID / {print $2}'
 	btrfs subvolume set-default $c test
 	umount $root
 }
@@ -175,7 +175,7 @@ function btrfserforhome {
 	mkdir fuckme
 	mount $homepart fuckme
 	btrfs subvolume create fuckme/home
-	b= btrfs subvolume list fuckme/home | awk -F '[\/ ]+' '/ID / {print $2}'
+	b= btrfs subvolume list fuckme/home | awk -F '[/ ]+' '/ID / {print $2}'
 	btrfs subvolume set-default $b fuckme
 	umount $homepart
 }
