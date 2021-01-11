@@ -50,7 +50,7 @@ function deepin {
 }
 function plasma {
 	clear
-	pacman -S plasma-meta konsole dolphin
+	pacman -S plasma-meta konsole dolphin kate
 	systemctl enable sddm
 }
 function mate {
