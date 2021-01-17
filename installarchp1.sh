@@ -246,7 +246,7 @@ echo "set your kernel
 1)Stable(default)
 2)Hardened(more secure)
 3)LTS(long time support)
-4)Zen Kernel(the best Linux kernel possible for everyday systems)"
+4)Zen Kernel(Zen Patched Kernel)"
 read kernel
 [ "$kernel" == "1" ] && pacstrap /mnt base linux linux-firmware dhcpcd nano mc exfat-utils btrfs-progs curl && genfstab -U /mnt >> /mnt/etc/fstab
 [ "$kernel" == "2" ] && pacstrap /mnt base linux-hardened linux-firmware dhcpcd nano mc exfat-utils btrfs-progs curl && genfstab -U /mnt >> /mnt/etc/fstab
