@@ -257,7 +257,7 @@ mv userland.sh /mnt
 mv grubinstall.sh /mnt
 arch-chroot /mnt sh userland.sh
 clear
-ls | grep 2 && touch 2 /mnt
+ls | grep 2 && mv 2 /mnt
 ls /mnt | grep 2 && pewpew || booter
 clear
 rm /mnt/grubinstall.sh
