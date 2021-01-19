@@ -228,17 +228,17 @@ function systemdpart2 {
 	touch arch.conf
 	cd /root
 	echo "title   Arch Linux" | cat >> /mnt/boot/loader/entries/arch.conf
-	ls | grep LINUX && echo "linux   /vmlinuz-linux" | cat >> /mnt/boot/loader/entries/arch.conf
-	ls | grep HARD && echo "linux   /vmlinuz-linux-hardened" | cat >> /mnt/boot/loader/entries/arch.conf
-	ls | grep LTS && echo "linux   /vmlinuz-linux-lts" | cat >> /mnt/boot/loader/entries/arch.conf
-	ls | grep ZEN && echo "linux   /vmlinuz-linux-zen" | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep -w "LINUX" && echo "linux   /vmlinuz-linux" | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep -w "HARD" && echo "linux   /vmlinuz-linux-hardened" | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep -w "LTS" && echo "linux   /vmlinuz-linux-lts" | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep -w "ZEN" && echo "linux   /vmlinuz-linux-zen" | cat >> /mnt/boot/loader/entries/arch.conf
 	systemdpart3
 }
 function systemdpart3 {
-	ls | grep LINUX && echo "initrd  /initramfs-linux.img" | cat >> /mnt/boot/loader/entries/arch.conf
-	ls | grep HARD && echo "initrd  /initramfs-linux-hardened.img" | cat >> /mnt/boot/loader/entries/arch.conf
-	ls | grep LTS && echo "initrd  /initramfs-linux-lts.img" | cat >> /mnt/boot/loader/entries/arch.conf
-	ls | grep ZEN && echo "initrd  /initramfs-linux-zen.img" | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep -w "LINUX" && echo "initrd  /initramfs-linux.img" | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep -w "HARD" && echo "initrd  /initramfs-linux-hardened.img" | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep -w "LTS" && echo "initrd  /initramfs-linux-lts.img" | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep -w "ZEN" && echo "initrd  /initramfs-linux-zen.img" | cat >> /mnt/boot/loader/entries/arch.conf
 	ESP4=$(lsblk -f $ESP3 -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
 	echo "options "'"'root=UUID="$ESP4"'"' " rw " | cat >> /mnt/mnt/boot/loader/entries/arch.conf
 }
