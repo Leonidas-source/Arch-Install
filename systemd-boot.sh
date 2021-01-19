@@ -1,6 +1,8 @@
 #!/bin/bash
 function loader {
   cd /boot/loader/
+  rm loader.conf
+  touch loader.conf
   echo "default arch.conf" | cat >> loader.conf
   echo "timeout  5" | cat >> loader.conf
   echo "console-mode max" | cat >> loader.conf
