@@ -226,7 +226,7 @@ function systemdpart2 {
 	mkdir /mnt/boot/loader/entries
 	cd /mnt/boot/loader/entries
 	touch arch.conf
-	cd /root
+	cd $reserve_thing
 	echo "title   Arch Linux" | cat >> /mnt/boot/loader/entries/arch.conf
 	ls | grep -w "LINUX" && echo "linux   /vmlinuz-linux" | cat >> /mnt/boot/loader/entries/arch.conf
 	ls | grep -w "HARD" && echo "linux   /vmlinuz-linux-hardened" | cat >> /mnt/boot/loader/entries/arch.conf
@@ -245,6 +245,7 @@ function systemdpart3 {
 function pewpew {
 	arch-chroot /mnt sh grubinstall.sh
 }
+reserve_thing=$(pwd)
 clear
 echo "Should I Erase your disk?
 1) Yes
