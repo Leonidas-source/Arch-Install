@@ -9,7 +9,7 @@ function loader {
   echo "editor   no" | cat >> loader.conf
 }
 function entry {
-  mkdir /boot/entries
+  mkdir /boot/loader/entries
   cd /boot/entries/ 
   touch arch.conf
   cd /
