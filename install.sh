@@ -215,11 +215,11 @@ function systemd {
 function systemdpart1 {
 	cd /mnt/boot/loader/
 	rm loader.conf
-  touch loader.conf
-  echo "default arch.conf" | cat >> loader.conf
-  echo "timeout  5" | cat >> loader.conf
-  echo "console-mode max" | cat >> loader.conf
-  echo "editor   no" | cat >> loader.conf
+	touch loader.conf
+	echo "default arch.conf" | cat >> loader.conf
+	echo "timeout  5" | cat >> loader.conf
+	echo "console-mode max" | cat >> loader.conf
+	echo "editor   no" | cat >> loader.conf
 	systemdpart2
 }
 function systemdpart2 {
@@ -236,9 +236,9 @@ function systemdpart2 {
 }
 function systemdpart3 {
 	ls | grep LINUX && echo "initrd  /initramfs-linux.img" | cat >> /mnt/boot/loader/entries/arch.conf
-  ls | grep HARD && echo "initrd  /initramfs-linux-hardened.img" | cat >> /mnt/boot/loader/entries/arch.conf
-  ls | grep LTS && echo "initrd  /initramfs-linux-lts.img" | cat >> /mnt/boot/loader/entries/arch.conf
-  ls | grep ZEN && echo "initrd  /initramfs-linux-zen.img" | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep HARD && echo "initrd  /initramfs-linux-hardened.img" | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep LTS && echo "initrd  /initramfs-linux-lts.img" | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep ZEN && echo "initrd  /initramfs-linux-zen.img" | cat >> /mnt/boot/loader/entries/arch.conf
 	ESP4=$(lsblk -f $ESP3 -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
 	echo "options "'"'root=UUID="$ESP4"'"' " rw " | cat >> /mnt/mnt/boot/loader/entries/arch.conf
 }
