@@ -7,6 +7,8 @@ function loader {
   echo "editor   no" | cat >> loader.conf
 }
 function entry {
+  cd /boot/entries/
+  touch arch.conf
   cd /
   echo "title   Arch Linux" | cat >> /boot/entries/arch.conf
   ls | grep LINUX && echo "linux   /vmlinuz-linux" | cat >> /boot/entries/arch.conf
