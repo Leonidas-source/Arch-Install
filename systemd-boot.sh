@@ -21,7 +21,6 @@ function entry_two {
   ls | grep ZEN && echo "initrd  /initramfs-linux-zen.img" | cat >> /boot/entries/arch.conf
 }
 bootctl install
-sleep 20s
 loader
 entry
 entry_two
