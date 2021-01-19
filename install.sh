@@ -60,6 +60,7 @@ function formatforUEFI {
 	echo "Set your / partition"
 	read ESP3
 	clear
+	touch ESP
 	echo "Set filesystem for /
 	1) ext4
 	2) ext3
@@ -239,8 +240,7 @@ function systemdpart3 {
 	ls | grep -w "HARD" && echo "initrd  /initramfs-linux-hardened.img" | cat >> /mnt/boot/loader/entries/arch.conf
 	ls | grep -w "LTS" && echo "initrd  /initramfs-linux-lts.img" | cat >> /mnt/boot/loader/entries/arch.conf
 	ls | grep -w "ZEN" && echo "initrd  /initramfs-linux-zen.img" | cat >> /mnt/boot/loader/entries/arch.conf
-	ESP4=$(lsblk -f $ESP3 -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
-	echo "options "'"'root=UUID="$ESP4"'"' " rw " | cat >> /mnt/mnt/boot/loader/entries/arch.conf
+	ls | grep -w "ESP" && ESP4=$(lsblk -f $ESP3 -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g') ; echo "options "'"'root=UUID="$ESP4"'"' " rw " | cat >> /mnt/mnt/boot/loader/entries/arch.conf
 }
 function pewpew {
 	arch-chroot /mnt sh grubinstall.sh
