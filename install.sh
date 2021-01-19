@@ -245,7 +245,7 @@ function systemdpart3 {
 	echo "enter root partition"
 	read root_partition
 	ESP4=$(lsblk -f $root_partition -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
-	echo "options "'"'root=UUID="$ESP4"'"' " rw " | cat >> /mnt/boot/loader/entries/arch.conf
+	echo "options root="'"'UUID="$ESP4"'"' " rw " | cat >> /mnt/boot/loader/entries/arch.conf
 }
 function pewpew {
 	arch-chroot /mnt sh grubinstall.sh
