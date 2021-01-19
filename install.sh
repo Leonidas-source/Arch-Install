@@ -213,6 +213,7 @@ function systemd {
 	cp HARD /mnt
 	cp LTS /mnt
 	cp ZEN /mnt
+	arch-chroot /mnt bootctl install
 	arch-chroot /mnt sh systemd-boot.sh
 }
 function pewpew {
