@@ -226,7 +226,7 @@ function systemdpart2 {
 	mkdir /mnt/boot/loader/entries
 	cd /mnt/boot/loader/entries
 	touch arch.conf
-	cd /
+	cd /root
 	echo "title   Arch Linux" | cat >> /mnt/boot/loader/entries/arch.conf
 	ls | grep LINUX && echo "linux   /vmlinuz-linux" | cat >> /mnt/boot/loader/entries/arch.conf
 	ls | grep HARD && echo "linux   /vmlinuz-linux-hardened" | cat >> /mnt/boot/loader/entries/arch.conf
