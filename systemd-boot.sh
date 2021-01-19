@@ -1,6 +1,5 @@
 #!/bin/bash
 function loader {
-  bootctl install
   cd /boot/loader/
   echo "default arch.conf" | cat >> loader.conf
   echo "timeout  5" | cat >> loader.conf
