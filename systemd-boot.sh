@@ -1,5 +1,5 @@
 #!/bin/bash
-function loader {
+function flexer {
   cd /boot/loader/
   rm loader.conf
   touch loader.conf
@@ -25,7 +25,7 @@ function entry_two {
   ls | grep LTS && echo "initrd  /initramfs-linux-lts.img" | cat >> /boot/loader/entries/arch.conf
   ls | grep ZEN && echo "initrd  /initramfs-linux-zen.img" | cat >> /boot/loader/entries/arch.conf
 }
-loader
+flexer
 entry
 entry_two
 lsblk
