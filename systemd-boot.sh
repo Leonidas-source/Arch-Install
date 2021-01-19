@@ -33,5 +33,5 @@ echo "Set / partition"
 read ESP3
 clear
 ESP4=$(lsblk -f $ESP3 -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
-echo "options "root=UUID='$ESP4' " rw " | cat >> /boot/loader/entries/arch.conf
+echo "options "root=UUID="$ESP4" " rw " | cat >> /boot/loader/entries/arch.conf
 exit
