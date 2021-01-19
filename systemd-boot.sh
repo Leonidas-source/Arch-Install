@@ -11,6 +11,7 @@ function loader {
 function entry {
   cd $source_path
   touch arch.conf
+  mkdir /mnt/boot/entries
   mv arch.conf /mnt/boot/entries/
   echo "title   Arch Linux" | cat >> /mnt/boot/entries/arch.conf
   ls | grep LINUX && echo "linux   /vmlinuz-linux" | cat >> /mnt/boot/entries/arch.conf
