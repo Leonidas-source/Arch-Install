@@ -315,11 +315,7 @@ clear
 cfdisk $membrane
 clear
 system
-echo "Should I format all partitions?
-1) Yes
-2) No"
-read answr2
-[ "$answr2" == "1" ] && check_BIOS
+check_BIOS
 clear
 echo "Should I install Swap partiotion?
 1) Yes
