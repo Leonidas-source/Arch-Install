@@ -40,8 +40,8 @@ function wmy {
 }
 function cinnamon {
 	clear
-	pacman -S cinnamon gdm
-	systemctl enable gdm
+	pacman -S cinnamon lxdm-gtk3
+	systemctl enable lxdm
 }
 function deepin {
 	clear
@@ -55,7 +55,7 @@ function plasma {
 }
 function mate {
 	clear
-	pacman -S mate mate-extra lxdm
+	pacman -S mate mate-extra lxdm-gtk3
 	systemctl enable lxdm
 }
 function gnome {
@@ -65,7 +65,7 @@ function gnome {
 }
 function xfce {
 	clear
-	pacman -S xfce4 lxdm
+	pacman -S xfce4 lxdm-gtk3
 	systemctl enable lxdm
 }
 function pack {
