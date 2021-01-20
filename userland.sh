@@ -65,7 +65,7 @@ function gnome {
 }
 function xfce {
 	clear
-	pacman -S xfce4 lxdm-gtk3
+	pacman -S xfce4 lxdm-gtk3 xfce4-xkb-plugin
 	systemctl enable lxdm
 }
 function pack {
