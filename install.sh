@@ -98,7 +98,7 @@ function formatforUEFI {
 	1) yes
 	2) no${reset}"
 	read answr4
-	[ "$answr4" == "yes" ] && format_root
+	[ "$answr4" == "1" ] && format_root
 	clear
 	mount $ESP3 /mnt
 	mkdir /mnt/boot
@@ -181,7 +181,7 @@ function formatforBIOS {
 	1) yes
 	2) no${reset}"
 	read answr6
-	[ "$answr6" == "yes" ] && format_root_BIOS
+	[ "$answr6" == "1" ] && format_root_BIOS
 	clear
 	mount $root /mnt
 }
