@@ -93,7 +93,7 @@ function formatforUEFI {
 	clear
 	lsblk
 	echo -e "${red}${bold}Set your / partition${reset}"
-	read ESP3
+	read -e ESP3
 	echo -e "${red}${bold}Should I format it?
 	1) yes
 	2) no${reset}"
