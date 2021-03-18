@@ -322,7 +322,7 @@ function encryption {
 function root_encryption {
 	clear
 	lsblk
-	echo -e "${red}${bold}Set root partition?${reset}"
+	echo -e "${red}${bold}Set root partition${reset}"
 	read answr
 	cryptsetup luksFormat $answr
 	cryptsetup open $answr root
