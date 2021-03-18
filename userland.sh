@@ -82,8 +82,8 @@ function xfce {
 function pack {
 	clear
 	echo -e "${red}${bold}Should I install some additional packages?
-	1) Yes
-	2) No${reset}"
+	1) yes
+	2) no${reset}"
 	read pick
 	[ "$pick" == "1" ] && installpack
 }
@@ -117,20 +117,20 @@ echo -e "${red}${bold}Set your root password${reset}"
 passwd
 clear
 echo -e "${red}${bold}Should I add user?
-1) Yes
-2) No${reset}"
+1) yes
+2) no${reset}"
 read answr
 [ "$answr" == "1" ] && user
 clear
 echo -e "${red}${bold}Should I enable dhcpcd?
-1) Yes
-2) No${reset}"
+1) yes
+2) no${reset}"
 read dhcp
 [ "$dhcp" == "1" ] && systemctl enable dhcpcd
 clear
 echo -e "${red}${bold}Should I install sudo?
-1) Yes
-2) No${reset}"
+1) yes
+2) no${reset}"
 read sdo
 [ "$sdo" == "1" ] && heyyy
 wm
