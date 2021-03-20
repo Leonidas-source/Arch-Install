@@ -306,7 +306,7 @@ function systemdpart3 {
 	echo -e "${red}${bold}Enter root partition${reset}"
 	read root_partition
 	ESP4=$(lsblk -f $root_partition -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
-	ls | grep -w "encrypt" && echo "options rd.luks.name=$ESP4=cryptroot root="'"'UUID="$ESP3"'"' " rw " | cat >> /mnt/boot/loader/entries/arch.conf || echo "options root="'"'UUID="$ESP4"'"' " rw " | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep -w "encrypt" && echo "options rd.luks.name="$ESP4"=root_partition root="'"'UUID="$ESP3"'"' " rw " | cat >> /mnt/boot/loader/entries/arch.conf || echo "options root="'"'UUID="$ESP4"'"' " rw " | cat >> /mnt/boot/loader/entries/arch.conf
 }
 function pewpew {
 	arch-chroot /mnt sh grubinstall.sh
