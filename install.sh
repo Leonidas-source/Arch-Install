@@ -354,7 +354,8 @@ function securetab {
 	clear
 	rm /mnt/etc/crypttab
 	touch /mnt/etc/crypttab
-	echo "secure_home UUID=$home_encrypted none luks,timeout=120" | cat >> /mnt/etc/crypttab
+	Calc=$(lsblk -f $home_encrypted -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
+	echo "secure_home UUID=$Calc none luks,timeout=120" | cat >> /mnt/etc/crypttab
 }
 reserve_thing=$(pwd)
 clear
