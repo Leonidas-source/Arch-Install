@@ -203,7 +203,7 @@ function installhome {
 	clear
 	lsblk
 	echo -e "${red}${bold}Set your home partition${reset}"
-	read homepart
+	read -e homepart
 	clear
 	echo -e "${red}${bold}Should I format it?
 	1) Yes
