@@ -211,8 +211,21 @@ function installhome {
 	read somehome
 	[ "$somehome" == "1" ] && formathome
 	mkdir /mnt/home
+	compression
 	create_home_entry
-	mount $homepart /mnt/home
+}
+function compression {
+	clear
+	echo -e "${red}${bold}set your compression
+	1) zlib
+	2) lzo
+	3) zstd
+	4) no compression${reset}"
+	read compress
+	[ "$compress" == "1" ] && (mount -o compress-force=zlib $homepart /mnt/home && touch zlib)
+	[ "$compress" == "2" ] && (mount -o compress-force=lzo $homepart /mnt/home && touch lzo)
+	[ "$compress" == "3" ] && (mount -o compress-force=zstd $homepart /mnt/home && touch zstd)
+	[ "$compress" == "4" ] && (mount $homepart /mnt/home && touch nocom)
 }
 function create_home_entry {
 	touch home.mount
@@ -225,7 +238,10 @@ function create_home_entry {
 	echo "Where=/home" | cat >> home.mount
 	oohmy2=$(lsblk -f $homepart -o FSTYPE | sed s/"FSTYPE"/""/g | sed '/^$/d;s/[[:blank:]]//g')
 	echo "Type=$oohmy2" | cat >> home.mount
-	echo " " | cat >> home.mount
+	ls | grep -w "zlib" && echo "Options=compress-force=zlib" | cat >> home.mount
+	ls | grep -w "lzo" && echo "Options=compress-force=lzo" | cat >> home.mount
+	ls | grep -w "zstd" && echo "Options=compress-force=zstd" | cat >> home.mount
+	ls | grep -w "nocom" && echo " " | cat >> home.mount
 	echo "[Install]" | cat >> home.mount
 	echo "WantedBy=multi-user.target" | cat >> home.mount
 }
