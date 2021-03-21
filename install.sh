@@ -128,6 +128,17 @@ function ohhmanifeelsosleepy {
 	btrfs subvolume create test/root
 	btrfs subvolume set-default 256 test
 	umount $ESP3
+	clear
+	echo -e "${red}${bold}set your compression type
+	1) zlib
+	2) lzo
+	3) zstd
+	4) no compression${reset}"
+	read rofl
+	[ "$rofl" == "1" ] && touch zlib_root
+	[ "$rofl" == "2" ] && touch lzo_root
+	[ "$rofl" == "3" ] && touch zstd_root
+	[ "$rofl" == "4" ] && touch nocom_root
 }
 function swap {
 	clear
@@ -306,17 +317,17 @@ function systemdpart2 {
 	touch arch.conf
 	cd $reserve_thing
 	echo "title   Arch Linux" | cat >> /mnt/boot/loader/entries/arch.conf
-	ls | grep -w "LINUX" && echo "linux   /vmlinuz-linux" | cat >> /mnt/boot/loader/entries/arch.conf
-	ls | grep -w "HARD" && echo "linux   /vmlinuz-linux-hardened" | cat >> /mnt/boot/loader/entries/arch.conf
-	ls | grep -w "LTS" && echo "linux   /vmlinuz-linux-lts" | cat >> /mnt/boot/loader/entries/arch.conf
-	ls | grep -w "ZEN" && echo "linux   /vmlinuz-linux-zen" | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep -w "LINUX" && echo "linux /vmlinuz-linux" | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep -w "HARD" && echo "linux /vmlinuz-linux-hardened" | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep -w "LTS" && echo "linux /vmlinuz-linux-lts" | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep -w "ZEN" && echo "linux /vmlinuz-linux-zen" | cat >> /mnt/boot/loader/entries/arch.conf
 	systemdpart3
 }
 function systemdpart3 {
-	ls | grep -w "LINUX" && echo "initrd  /initramfs-linux.img" | cat >> /mnt/boot/loader/entries/arch.conf
-	ls | grep -w "HARD" && echo "initrd  /initramfs-linux-hardened.img" | cat >> /mnt/boot/loader/entries/arch.conf
-	ls | grep -w "LTS" && echo "initrd  /initramfs-linux-lts.img" | cat >> /mnt/boot/loader/entries/arch.conf
-	ls | grep -w "ZEN" && echo "initrd  /initramfs-linux-zen.img" | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep -w "LINUX" && echo "initrd /initramfs-linux.img" | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep -w "HARD" && echo "initrd /initramfs-linux-hardened.img" | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep -w "LTS" && echo "initrd /initramfs-linux-lts.img" | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep -w "ZEN" && echo "initrd /initramfs-linux-zen.img" | cat >> /mnt/boot/loader/entries/arch.conf
 	clear
 	lsblk
 	echo -e "${red}${bold}Enter root partition${reset}"
