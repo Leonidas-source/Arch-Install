@@ -306,9 +306,9 @@ function systemdpart1 {
 	rm loader.conf
 	touch loader.conf
 	echo "default arch.conf" | cat >> loader.conf
-	echo "timeout  5" | cat >> loader.conf
+	echo "timeout 0" | cat >> loader.conf
 	echo "console-mode max" | cat >> loader.conf
-	echo "editor   no" | cat >> loader.conf
+	echo "editor no" | cat >> loader.conf
 	systemdpart2
 }
 function systemdpart2 {
@@ -316,7 +316,7 @@ function systemdpart2 {
 	cd /mnt/boot/loader/entries
 	touch arch.conf
 	cd $reserve_thing
-	echo "title   Arch Linux" | cat >> /mnt/boot/loader/entries/arch.conf
+	echo "title Arch Linux" | cat >> /mnt/boot/loader/entries/arch.conf
 	ls | grep -w "LINUX" && echo "linux /vmlinuz-linux" | cat >> /mnt/boot/loader/entries/arch.conf
 	ls | grep -w "HARD" && echo "linux /vmlinuz-linux-hardened" | cat >> /mnt/boot/loader/entries/arch.conf
 	ls | grep -w "LTS" && echo "linux /vmlinuz-linux-lts" | cat >> /mnt/boot/loader/entries/arch.conf
@@ -334,11 +334,11 @@ function systemdpart3 {
 	read root_partition
 	i_forgot=$(lsblk -f $ESP3 -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
 	ESP4=$(lsblk -f $root_partition -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
-	ls | grep -w "encrypt" && (echo "options rd.luks.name="$ESP4"=root_partition root="'"'UUID="$i_forgot"'"' " rw " | cat >> /mnt/boot/loader/entries/arch.conf && touch already)
-	ls | grep -w "zlib_root" && (echo "options root="'"'UUID="$ESP4"'"' " rw compress-force=zlib " | cat >> /mnt/boot/loader/entries/arch.conf && touch already)
-	ls | grep -w "lzo_root" && (echo "options root="'"'UUID="$ESP4"'"' " rw compress-force=lzo " | cat >> /mnt/boot/loader/entries/arch.conf && touch already)
-	ls | grep -w "zstd_root" && (echo "options root="'"'UUID="$ESP4"'"' " rw compress-force=zstd " | cat >> /mnt/boot/loader/entries/arch.conf && touch already)
-	ls | grep -w "already" || echo "options root="'"'UUID="$ESP4"'"' " rw " | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep -w "zlib_root" && var=$(echo "compress-force=zlib")
+	ls | grep -w "lzo_root" && var=$(echo "compress-force=lzo")
+	ls | grep -w "zstd_root" && var=$(echo "compress-force=zstd")
+	ls | grep -w "encrypt" && (echo "options rd.luks.name="$ESP4"=root_partition root="'"'UUID="$i_forgot"'"' " rw $var" | cat >> /mnt/boot/loader/entries/arch.conf && touch already)
+	ls | grep -w "already" || echo "options root="'"'UUID="$ESP4"'"' " rw $var" | cat >> /mnt/boot/loader/entries/arch.conf
 }
 function pewpew {
 	arch-chroot /mnt sh grubinstall.sh
