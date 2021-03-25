@@ -55,6 +55,8 @@ function partial {
 	[ "$zeroing" == "2" ] && dd if=/dev/urandom of=$disk bs=$block count=$input status=progress iflag=fullblock
 }
 function format_root {
+	ls | grep -w "encrypt" && ESP3=/dev/mapper/root
+	clear
 	echo -e "${red}${bold}Set filesystem for /
 	1) ext4
 	2) ext3
@@ -94,6 +96,8 @@ function formatforUEFI {
 	lsblk
 	echo -e "${red}${bold}Set your / partition${reset}"
 	read -e ESP3
+	encryption
+	clear
 	echo -e "${red}${bold}Should I format it?
 	1) yes
 	2) no${reset}"
@@ -197,6 +201,10 @@ function formatforBIOS {
 	mount $root /mnt
 }
 function home {
+	ls | grep -w "encrypt_for_home" && formathome || set_home
+
+}
+function set_home {
 	clear
 	echo -e "${red}${bold}Should I set home partition?
 	1) Yes
@@ -267,6 +275,7 @@ function btrfserforhome {
 	create_home_entry
 }
 function formathome {
+	ls | grep -w "encrypt_for_home" && homepart=/dev/mapper/secure_home
 	clear
 	echo -e "${red}${bold}Set your filesystem for /home
 	1) ext4
@@ -332,12 +341,12 @@ function systemdpart3 {
 	lsblk
 	echo -e "${red}${bold}Enter root partition${reset}"
 	read root_partition
-	i_forgot=$(lsblk -f $ESP3 -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
+	i_forgot=$(lsblk -f /dev/mapper/root -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
 	ESP4=$(lsblk -f $root_partition -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
 	ls | grep -w "zlib_root" && var=$(echo "compress-force=zlib")
 	ls | grep -w "lzo_root" && var=$(echo "compress-force=lzo")
 	ls | grep -w "zstd_root" && var=$(echo "compress-force=zstd")
-	ls | grep -w "encrypt" && echo "options rd.luks.name="$ESP4"=root_partition root="'"'UUID="$i_forgot"'"' " rw $var" | cat >> /mnt/boot/loader/entries/arch.conf ; touch already
+	ls | grep -w "encrypt" && echo "options rd.luks.name="$ESP4"=root_partition root="'"'UUID="$i_forgot"'"' " rw $var" | cat >> /mnt/boot/loader/entries/arch.conf && touch already
 	ls | grep -w "already" || echo "options root="'"'UUID="$ESP4"'"' " rw $var" | cat >> /mnt/boot/loader/entries/arch.conf
 }
 function pewpew {
@@ -353,11 +362,8 @@ function encryption {
 }
 function root_encryption {
 	clear
-	lsblk
-	echo -e "${red}${bold}Set root partition${reset}"
-	read answr
-	cryptsetup luksFormat $answr
-	cryptsetup open $answr root
+	cryptsetup luksFormat $ESP3
+	cryptsetup open $ESP3 root
 	touch encrypt
 }
 function encryption_for_home {
@@ -401,8 +407,6 @@ echo -e "${red}${bold}Set disk to install Arch Linux${reset}"
 read membrane
 clear
 cfdisk $membrane
-encryption
-encryption_for_home
 clear
 system
 check_BIOS
@@ -413,6 +417,7 @@ echo -e "${red}${bold}Should I install Swap partiotion?
 read answr3
 [ "$answr3" == "1" ] && swap
 clear
+encryption_for_home
 home
 clear
 rm /etc/pacman.d/mirrorlist
