@@ -343,7 +343,7 @@ function systemdpart3 {
 	ls | grep -w "zlib_root" && var=$(echo "compress-force=zlib")
 	ls | grep -w "lzo_root" && var=$(echo "compress-force=lzo")
 	ls | grep -w "zstd_root" && var=$(echo "compress-force=zstd")
-	ls | grep -w "encrypt" && echo "options rd.luks.name="$ESP4"=root_partition root="'"'UUID="$i_forgot"'"' " rw $var" | cat >> /mnt/boot/loader/entries/arch.conf && touch already
+	ls | grep -w "encrypt" && echo "options rd.luks.name="$i_forgot"=root_partition root="'"'UUID="$ESP4"'"' " rw $var" | cat >> /mnt/boot/loader/entries/arch.conf && touch already
 	ls | grep -w "already" || echo "options root="'"'UUID="$ESP4"'"' " rw $var" | cat >> /mnt/boot/loader/entries/arch.conf
 }
 function pewpew {
