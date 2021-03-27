@@ -54,4 +54,5 @@ function systemdpart3 {
 	ls | grep -w "encrypt" || echo "options root="'"'UUID="$arg3"'"' " rw $var" | cat >> /mnt/boot/loader/entries/arch.conf
 }
 reserve_thing=$(pwd)
+clear
 systemd
