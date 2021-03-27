@@ -50,7 +50,7 @@ function systemdpart3 {
 	ls | grep -w "zlib_root" && var=$(echo "compress-force=zlib")
 	ls | grep -w "lzo_root" && var=$(echo "compress-force=lzo")
 	ls | grep -w "zstd_root" && var=$(echo "compress-force=zstd")
-	ls | grep -w "encrypt" && echo "options rd.luks.name="$arg3"=root_partition root="'"'UUID="$arg"'"' " rw $var" | cat >> /mnt/boot/loader/entries/arch.conf
+	ls | grep -w "encrypt" && echo "options rd.luks.name=$arg3=root_partition root="'"'UUID="$arg"'"' " rw $var" | cat >> /mnt/boot/loader/entries/arch.conf
 	ls | grep -w "encrypt" || echo "options root="'"'UUID="$arg3"'"' " rw $var" | cat >> /mnt/boot/loader/entries/arch.conf
 }
 reserve_thing=$(pwd)
