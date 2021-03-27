@@ -44,9 +44,9 @@ function systemdpart3 {
 	clear
 	lsblk
 	echo -e "${red}${bold}Set your root partition(/dev/sda,/dev/sdb...)${reset}"
-	read root
+	read rofl
 	arg=$(lsblk -f /dev/mapper/root -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
-	real=$(lsblk -f $root -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
+	real=$(lsblk -f $rofl -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
 	ls | grep -w "zlib_root" && var=$(echo "compress-force=zlib")
 	ls | grep -w "lzo_root" && var=$(echo "compress-force=lzo")
 	ls | grep -w "zstd_root" && var=$(echo "compress-force=zstd")
