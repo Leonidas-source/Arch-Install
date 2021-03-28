@@ -376,7 +376,7 @@ clear
 encryption_for_home
 home
 clear
-reflector --latest 200 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+reflector --latest 100 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 clear
 echo -e "${red}${bold}Set your kernel
 1)Stable(default)
