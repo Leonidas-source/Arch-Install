@@ -39,6 +39,6 @@ lsblk
 echo -e "${red}${bold}Set / partition${reset}"
 read ESP3
 clear
-ESP4=$(lsblk -f $ESP3 -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
+ESP4=$(lsblk -fd $ESP3 -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
 ls | grep -w "encrypt" && secure || regular
 exit
