@@ -209,6 +209,7 @@ function home {
 	[ "$home" == "1" ] && home_set
 }
 function home_set {
+	clear
 	echo -e "${red}${bold}Should I encrypt /home
 	1) yes
 	2) no${reset}"
