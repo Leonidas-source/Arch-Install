@@ -45,7 +45,7 @@ function systemdpart3 {
 	lsblk
 	echo -e "${red}${bold}Set your root partition(/dev/sda,/dev/sdb...)${reset}"
 	read arg2
-	arg3=$(lsblk -f $arg2 -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
+	arg3=$(lsblk -fd $arg2 -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
 	ls | grep -w "zlib_root" && var=$(echo "compress-force=zlib")
 	ls | grep -w "lzo_root" && var=$(echo "compress-force=lzo")
 	ls | grep -w "zstd_root" && var=$(echo "compress-force=zstd")
