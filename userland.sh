@@ -76,7 +76,7 @@ function gnome {
 }
 function xfce {
 	clear
-	pacman -S xfce4 lxdm-gtk3 xfce4-xkb-plugin mousepad xfce4-pulseaudio-plugin pavucontrol
+	pacman -S xfce4 lxdm-gtk3 xfce4-xkb-plugin mousepad xfce4-pulseaudio-plugin pavucontrol pulseaudio
 	systemctl enable lxdm
 }
 function pack {
