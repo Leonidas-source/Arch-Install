@@ -365,6 +365,7 @@ function partition_another_disk_part2 {
 }
 function bootloader {
 	clear
+	efibootmgr
 	echo -e "${red}${bold}Should I remove your UEFI bootloader?
 	1) yes
 	2) no${reset}"
