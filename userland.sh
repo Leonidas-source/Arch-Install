@@ -105,7 +105,7 @@ function fstab {
 function doas {
 	clear
 	pacman -S opendoas
-	ls /etc | grep -w "doas.conf" && rm doas.conf
+	ls /etc | grep -w "doas.conf" && rm /etc/doas.conf
 	echo "permit persist $name as root" >> /etc/doas.conf
 }
 clear
