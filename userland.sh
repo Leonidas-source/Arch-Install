@@ -71,7 +71,7 @@ function mate {
 }
 function gnome {
 	clear
-	pacman -S gnome
+	pacman -S gnome ffmpegthumbnailer gst-libav gst-plugins-ugly
 	systemctl enable gdm
 }
 function xfce {
