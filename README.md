@@ -4,8 +4,8 @@
 2) Install git
 ![image](https://user-images.githubusercontent.com/66934329/114667943-4e227380-9d2a-11eb-91a3-17cb15ad6c9b.png)
 ![image](https://user-images.githubusercontent.com/66934329/114668040-74e0aa00-9d2a-11eb-9184-8f34cfd26aad.png)
-![image](https://user-images.githubusercontent.com/66934329/114668161-9a6db380-9d2a-11eb-8d55-1ca55f29a4e8.png)
 3) Clone my repository
+![image](https://user-images.githubusercontent.com/66934329/114668161-9a6db380-9d2a-11eb-8d55-1ca55f29a4e8.png)
 ![image](https://user-images.githubusercontent.com/66934329/114668263-bb360900-9d2a-11eb-8ddb-291da6dc7699.png)
 ![image](https://user-images.githubusercontent.com/66934329/114668315-cab55200-9d2a-11eb-8232-53f2a5caabf2.png)
 ![image](https://user-images.githubusercontent.com/66934329/114668374-dbfe5e80-9d2a-11eb-96ea-e645e1d71838.png)
