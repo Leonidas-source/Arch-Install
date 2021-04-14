@@ -49,9 +49,9 @@ function wmy {
 	[ "$answr3" == "4" ] && xfce
 	[ "$answr3" == "5" ] && deepin
 	[ "$answr3" == "6" ] && cinnamon
-	[ "$answr3" == "7" ] && sway
+	[ "$answr3" == "7" ] && swayed
 }
-function sway {
+function swayed {
 	clear
 	pacman -S sway pulseaudio pamixer
 }
