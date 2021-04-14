@@ -1,6 +1,7 @@
 # Arch-Install
 1) Check your ethernet connection by pinging google website
 ![image](https://user-images.githubusercontent.com/66934329/114667785-1d423e80-9d2a-11eb-97d3-392b67db6bee.png)
+2) Clone my repository
 ![image](https://user-images.githubusercontent.com/66934329/114667943-4e227380-9d2a-11eb-91a3-17cb15ad6c9b.png)
 ![image](https://user-images.githubusercontent.com/66934329/114668040-74e0aa00-9d2a-11eb-9184-8f34cfd26aad.png)
 ![image](https://user-images.githubusercontent.com/66934329/114668161-9a6db380-9d2a-11eb-8d55-1ca55f29a4e8.png)
