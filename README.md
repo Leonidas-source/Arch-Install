@@ -17,7 +17,7 @@
 ![image](https://user-images.githubusercontent.com/66934329/114668449-f2a4b580-9d2a-11eb-9d9f-0d0ecc1a43f0.png)
 8) Next step partition table(i recommend gpt)
 ![image](https://user-images.githubusercontent.com/66934329/114668497-051eef00-9d2b-11eb-8099-6da69ae5cf24.png)
-9) On gpt we need at least 2 partitions (boot partition, partition for /)
+9) On gpt we need at least 2 partitions (EFI partition, partition for /)
 ![image](https://user-images.githubusercontent.com/66934329/114668580-1d8f0980-9d2b-11eb-886b-a80e7f00f098.png)
 10) Here you can set up another disk if you need that
 ![image](https://user-images.githubusercontent.com/66934329/114668635-28499e80-9d2b-11eb-8e53-662b8dd31072.png)
