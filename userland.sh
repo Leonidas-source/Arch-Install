@@ -40,7 +40,8 @@ function wmy {
 	3) gnome
 	4) xfce
 	5) deepin
-	6) cinnamon${reset}"
+	6) cinnamon
+	7) sway${reset}"
 	read answr3
 	[ "$answr3" == "1" ] && plasma
 	[ "$answr3" == "2" ] && mate
@@ -48,6 +49,11 @@ function wmy {
 	[ "$answr3" == "4" ] && xfce
 	[ "$answr3" == "5" ] && deepin
 	[ "$answr3" == "6" ] && cinnamon
+	[ "$answr3" == "7" ] && sway
+}
+function sway {
+	clear
+	pacman -S sway pulseaudio pamixer
 }
 function cinnamon {
 	clear
