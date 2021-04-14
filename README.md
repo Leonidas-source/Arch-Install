@@ -8,12 +8,19 @@
 ![image](https://user-images.githubusercontent.com/66934329/114668161-9a6db380-9d2a-11eb-8d55-1ca55f29a4e8.png)
 4) Execute install.sh
 ![image](https://user-images.githubusercontent.com/66934329/114668263-bb360900-9d2a-11eb-8ddb-291da6dc7699.png)
+5) Here you can remove your bootloader well you know just in case
 ![image](https://user-images.githubusercontent.com/66934329/114668315-cab55200-9d2a-11eb-8232-53f2a5caabf2.png)
+6) Here you can delete everething from your disk
 ![image](https://user-images.githubusercontent.com/66934329/114668374-dbfe5e80-9d2a-11eb-96ea-e645e1d71838.png)
+7) Ok, we need to set up disk where / would be 
 ![image](https://user-images.githubusercontent.com/66934329/114668421-e91b4d80-9d2a-11eb-865d-01318a4b8e33.png)
+8) Next step disk label(i recommend gpt)
 ![image](https://user-images.githubusercontent.com/66934329/114668449-f2a4b580-9d2a-11eb-9d9f-0d0ecc1a43f0.png)
+9) On gpt we need at least 2 partitions (boot partition, partition for /)
 ![image](https://user-images.githubusercontent.com/66934329/114668497-051eef00-9d2b-11eb-8099-6da69ae5cf24.png)
+10) Here you can set up another disk if you need that
 ![image](https://user-images.githubusercontent.com/66934329/114668580-1d8f0980-9d2b-11eb-886b-a80e7f00f098.png)
+11) Here set your system type 
 ![image](https://user-images.githubusercontent.com/66934329/114668635-28499e80-9d2b-11eb-8e53-662b8dd31072.png)
 ![image](https://user-images.githubusercontent.com/66934329/114668678-33043380-9d2b-11eb-86e3-2d29bcb506bf.png)
 ![image](https://user-images.githubusercontent.com/66934329/114668750-49aa8a80-9d2b-11eb-8dd4-0930e610d85a.png)
