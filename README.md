@@ -23,6 +23,7 @@
 ![image](https://user-images.githubusercontent.com/66934329/114668635-28499e80-9d2b-11eb-8e53-662b8dd31072.png)
 11) Here set your system type 
 ![image](https://user-images.githubusercontent.com/66934329/114668678-33043380-9d2b-11eb-86e3-2d29bcb506bf.png)
+12) Here you need to set your EFI partition)
 ![image](https://user-images.githubusercontent.com/66934329/114668750-49aa8a80-9d2b-11eb-8dd4-0930e610d85a.png)
 ![image](https://user-images.githubusercontent.com/66934329/114668778-53cc8900-9d2b-11eb-8474-af7780b81554.png)
 ![image](https://user-images.githubusercontent.com/66934329/114668828-6050e180-9d2b-11eb-8ea2-0b2002c3da5a.png)
