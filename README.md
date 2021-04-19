@@ -29,6 +29,7 @@
 ![image](https://user-images.githubusercontent.com/66934329/114668778-53cc8900-9d2b-11eb-8474-af7780b81554.png)
 14) For better compatibility you should choose fat32, but if you don't want to use bootloader and you prefer EFISTUB you can choose exfat 
 ![image](https://user-images.githubusercontent.com/66934329/114668828-6050e180-9d2b-11eb-8ea2-0b2002c3da5a.png)
+15) Ok, here you need to set your partition for / mount point
 ![image](https://user-images.githubusercontent.com/66934329/114668869-6e9efd80-9d2b-11eb-81b6-ff4d4bdd84f1.png)
 ![image](https://user-images.githubusercontent.com/66934329/114668941-88404500-9d2b-11eb-8180-315f83e3e924.png)
 ![image](https://user-images.githubusercontent.com/66934329/114668967-91311680-9d2b-11eb-81a3-b4c603812cd3.png)
