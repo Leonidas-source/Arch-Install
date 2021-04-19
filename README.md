@@ -25,7 +25,9 @@
 ![image](https://user-images.githubusercontent.com/66934329/114668678-33043380-9d2b-11eb-86e3-2d29bcb506bf.png)
 12) Here you need to set your EFI partition)
 ![image](https://user-images.githubusercontent.com/66934329/114668750-49aa8a80-9d2b-11eb-8dd4-0930e610d85a.png)
+13) If you want to format EFI partition press 1 and Enter
 ![image](https://user-images.githubusercontent.com/66934329/114668778-53cc8900-9d2b-11eb-8474-af7780b81554.png)
+14) For better compatibility you should choose fat32, but if you don't want to use bootloader and you prefer EFISTUB you can choose exfat 
 ![image](https://user-images.githubusercontent.com/66934329/114668828-6050e180-9d2b-11eb-8ea2-0b2002c3da5a.png)
 ![image](https://user-images.githubusercontent.com/66934329/114668869-6e9efd80-9d2b-11eb-81b6-ff4d4bdd84f1.png)
 ![image](https://user-images.githubusercontent.com/66934329/114668941-88404500-9d2b-11eb-8180-315f83e3e924.png)
