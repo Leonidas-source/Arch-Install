@@ -43,6 +43,7 @@
 ![image](https://user-images.githubusercontent.com/66934329/114669218-d5241b80-9d2b-11eb-96df-4955ae0ad22e.png)
 20) Here you can set up /home mount point
 ![image](https://user-images.githubusercontent.com/66934329/114669253-df461a00-9d2b-11eb-912f-dc9ac243150c.png)
+21) After that you'll see black screen for 5-10 minutes or less because of optimal mirror search 
 ![image](https://user-images.githubusercontent.com/66934329/114669288-ea00af00-9d2b-11eb-9fd0-b5ea69f0d598.png)
 ![image](https://user-images.githubusercontent.com/66934329/114670507-444e3f80-9d2d-11eb-81c2-07c2666e550b.png)
 ![image](https://user-images.githubusercontent.com/66934329/114670546-516b2e80-9d2d-11eb-9f48-79fe69a574f8.png)
