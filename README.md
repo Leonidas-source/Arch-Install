@@ -49,8 +49,10 @@
 ![image](https://user-images.githubusercontent.com/66934329/114670507-444e3f80-9d2d-11eb-81c2-07c2666e550b.png)
 23) And now it's installing base system
 ![image](https://user-images.githubusercontent.com/66934329/114670546-516b2e80-9d2d-11eb-9f48-79fe69a574f8.png)
+24) Now you have to define your locale in nano(to navigate use arrows).
 ![image](https://user-images.githubusercontent.com/66934329/114670959-bcb50080-9d2d-11eb-872f-20d4f6284434.png)
 ![image](https://user-images.githubusercontent.com/66934329/114671010-d0f8fd80-9d2d-11eb-8e8a-26b281a42017.png)
+25) To save use F3 and to exit use F2
 ![image](https://user-images.githubusercontent.com/66934329/114671072-e2420a00-9d2d-11eb-8494-b727f945ac7b.png)
 ![image](https://user-images.githubusercontent.com/66934329/114671136-f2f28000-9d2d-11eb-9c48-32aa09402bce.png)
 ![image](https://user-images.githubusercontent.com/66934329/114671187-00a80580-9d2e-11eb-8d2e-665876a0069a.png)
