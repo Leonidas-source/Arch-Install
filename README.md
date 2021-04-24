@@ -41,6 +41,7 @@
 ![image](https://user-images.githubusercontent.com/66934329/114669164-ca698680-9d2b-11eb-90fd-63958334ee79.png)
 19) Here you can define swap partition
 ![image](https://user-images.githubusercontent.com/66934329/114669218-d5241b80-9d2b-11eb-96df-4955ae0ad22e.png)
+20) Here you can set up /home mount point
 ![image](https://user-images.githubusercontent.com/66934329/114669253-df461a00-9d2b-11eb-912f-dc9ac243150c.png)
 ![image](https://user-images.githubusercontent.com/66934329/114669288-ea00af00-9d2b-11eb-9fd0-b5ea69f0d598.png)
 ![image](https://user-images.githubusercontent.com/66934329/114670507-444e3f80-9d2d-11eb-81c2-07c2666e550b.png)
