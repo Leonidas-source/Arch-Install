@@ -39,6 +39,7 @@
 18) Because i choosed btrfs option, now i can choose compression which btrfs filesystem support 
 ![image](https://user-images.githubusercontent.com/66934329/114669117-be7dc480-9d2b-11eb-9d28-54f97226360d.png)
 ![image](https://user-images.githubusercontent.com/66934329/114669164-ca698680-9d2b-11eb-90fd-63958334ee79.png)
+19) Here you can define swap partition
 ![image](https://user-images.githubusercontent.com/66934329/114669218-d5241b80-9d2b-11eb-96df-4955ae0ad22e.png)
 ![image](https://user-images.githubusercontent.com/66934329/114669253-df461a00-9d2b-11eb-912f-dc9ac243150c.png)
 ![image](https://user-images.githubusercontent.com/66934329/114669288-ea00af00-9d2b-11eb-9fd0-b5ea69f0d598.png)
