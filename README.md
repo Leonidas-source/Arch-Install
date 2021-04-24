@@ -34,6 +34,7 @@
 ![image](https://user-images.githubusercontent.com/66934329/114668941-88404500-9d2b-11eb-8180-315f83e3e924.png)
 16) Here you can encypt your / partition
 ![image](https://user-images.githubusercontent.com/66934329/114668967-91311680-9d2b-11eb-81a3-b4c603812cd3.png)
+17) Here you can choose your filesystem for /
 ![image](https://user-images.githubusercontent.com/66934329/114669080-b3c32f80-9d2b-11eb-85a2-cf67ed94b8b0.png)
 ![image](https://user-images.githubusercontent.com/66934329/114669117-be7dc480-9d2b-11eb-9d28-54f97226360d.png)
 ![image](https://user-images.githubusercontent.com/66934329/114669164-ca698680-9d2b-11eb-90fd-63958334ee79.png)
