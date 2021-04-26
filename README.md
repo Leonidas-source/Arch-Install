@@ -60,16 +60,24 @@
 27) Here you can set up your root password
 ![image](https://user-images.githubusercontent.com/66934329/114671221-0bfb3100-9d2e-11eb-9e99-609953f8054f.png)
 ![image](https://user-images.githubusercontent.com/66934329/114671270-19182000-9d2e-11eb-82a3-ad15778ff263.png)
+28) Here you can set up your user
 ![image](https://user-images.githubusercontent.com/66934329/114671303-23d2b500-9d2e-11eb-98f8-8c8f21c3b221.png)
 ![image](https://user-images.githubusercontent.com/66934329/114671345-30efa400-9d2e-11eb-8cbf-bc11ba160cb1.png)
+29) Here you can set up password for your user
 ![image](https://user-images.githubusercontent.com/66934329/114671385-3fd65680-9d2e-11eb-90a4-abc1a2a6914a.png)
+30) Here you can enable ethernet
 ![image](https://user-images.githubusercontent.com/66934329/114671431-4d8bdc00-9d2e-11eb-9e4f-6fe8237fb88d.png)
+31) Here you can choose programm that allows a system administrator to delegate authority to give certain users—or groups of users
 ![image](https://user-images.githubusercontent.com/66934329/114671483-58df0780-9d2e-11eb-93a7-953f0b724701.png)
 ![image](https://user-images.githubusercontent.com/66934329/114671515-62686f80-9d2e-11eb-85cc-a316d053f3ab.png)
+32) Here you can choose to install desktop environment
 ![image](https://user-images.githubusercontent.com/66934329/114671561-6e543180-9d2e-11eb-9df4-552b2714ea9c.png)
+33) Here you can choose particular desktop environment
 ![image](https://user-images.githubusercontent.com/66934329/114671612-7a3ff380-9d2e-11eb-9856-85f9016e8ac7.png)
 ![image](https://user-images.githubusercontent.com/66934329/114671671-8926a600-9d2e-11eb-8ade-1296cf884675.png)
+34) Here you can install packages by typing their names(After choose menu)
 ![image](https://user-images.githubusercontent.com/66934329/114671861-c12de900-9d2e-11eb-8f29-393030b5e965.png)
+35) Here you can install bootloader 
 ![image](https://user-images.githubusercontent.com/66934329/114671921-cdb24180-9d2e-11eb-8520-93cc80a41279.png)
 ![image](https://user-images.githubusercontent.com/66934329/114671985-db67c700-9d2e-11eb-9717-45bd7062055d.png)
 ![image](https://user-images.githubusercontent.com/66934329/114672091-f33f4b00-9d2e-11eb-8b84-c0ac30ad7476.png)
