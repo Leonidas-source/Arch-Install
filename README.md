@@ -57,6 +57,7 @@
 ![image](https://user-images.githubusercontent.com/66934329/114671136-f2f28000-9d2d-11eb-9c48-32aa09402bce.png)
 26) Here you can set up your host name
 ![image](https://user-images.githubusercontent.com/66934329/114671187-00a80580-9d2e-11eb-8d2e-665876a0069a.png)
+27) Here you can set up your root password
 ![image](https://user-images.githubusercontent.com/66934329/114671221-0bfb3100-9d2e-11eb-9e99-609953f8054f.png)
 ![image](https://user-images.githubusercontent.com/66934329/114671270-19182000-9d2e-11eb-82a3-ad15778ff263.png)
 ![image](https://user-images.githubusercontent.com/66934329/114671303-23d2b500-9d2e-11eb-98f8-8c8f21c3b221.png)
