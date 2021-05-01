@@ -13,12 +13,12 @@ reset="\e[0m"
 function erasedisk {
 	clear
 	lsblk
-	echo -e "${red}${bold}Set your disk${reset}"
+	echo -e "${red}${bold}set your disk${reset}"
 	read disk
 	clear
-	echo -e "${red}${bold}Set mode of erasing
-	1) Auto
-	2) Manual${reset}"
+	echo -e "${red}${bold}set mode of erasing
+	1) auto
+	2) manual${reset}"
 	read method
 	[ "$method" == "1" ] && full
 	[ "$method" == "2" ] && partial
@@ -53,7 +53,7 @@ function once_more {
 }
 function system {
 	clear
-	echo -e "${red}${bold}Set your system
+	echo -e "${red}${bold}set your system
 	1) BIOS
 	2) UEFI${reset}"
 	read some
@@ -65,9 +65,9 @@ function check_BIOS {
 function formatforBIOS {
 	clear
 	lsblk
-	echo -e "${red}${bold}Set you / partition${reset}"
+	echo -e "${red}${bold}set you / partition${reset}"
 	read root
-	echo -e "should i format it?
+	echo -e "${red}${bold}should i format it?
 	1) yes
 	2) no${reset}"
 	read answr6
