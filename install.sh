@@ -415,7 +415,7 @@ clear
 reflector --latest 100 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 clear
 echo -e "${red}${bold}set your kernel
-1)Stable(default)
+1)Vanilla(default)
 2)Hardened(more secure)
 3)LTS(long time support)
 4)Zen Kernel(Zen Patched Kernel)${reset}"
