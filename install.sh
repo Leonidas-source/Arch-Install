@@ -30,13 +30,13 @@ function full {
 }
 function partial {
 	clear
-	echo -e "${red}${bold}Set your block size${reset}"
+	echo -e "${red}${bold}set your block size${reset}"
 	read block
 	clear
-	echo -e "${red}${bold}Set your input(count)${reset}"
+	echo -e "${red}${bold}set your input(count)${reset}"
 	read input
 	clear
-	echo -e "${red}${bold}Select source
+	echo -e "${red}${bold}select source
 	1) zero
 	2) urandom${reset}"
 	read zeroing
@@ -45,7 +45,7 @@ function partial {
 }
 function once_more {
 	clear
-	echo -e "${red}${bold}Should I erase another disk?
+	echo -e "${red}${bold}should I erase another disk?
 	1) yes
 	2) no${reset}"
 	read addit
@@ -76,7 +76,7 @@ function formatforBIOS {
 	mount $root /mnt
 }
 function format_root_BIOS {
-	echo -e "${red}${bold}Set filesystem for /
+	echo -e "${red}${bold}set filesystem for /
 	1) ext4
 	2) ext3
 	3) xfs
@@ -105,20 +105,20 @@ function btrfser {
 function formatforUEFI {
 	clear
 	lsblk
-	echo -e "${red}${bold}Set your EFI partition${reset}"
+	echo -e "${red}${bold}set your EFI partition${reset}"
 	read part1
-	echo -e "${red}${bold}Should I format it?
+	echo -e "${red}${bold}should I format it?
 	1) yes
 	2) no${reset}"
 	read answr5
 	[ "$answr5" == "1" ] && format_efi
 	clear
 	lsblk
-	echo -e "${red}${bold}Set your / partition${reset}"
+	echo -e "${red}${bold}set your / partition${reset}"
 	read -e ESP3
 	encryption
 	clear
-	echo -e "${red}${bold}Should I format it?
+	echo -e "${red}${bold}should I format it?
 	1) yes
 	2) no${reset}"
 	read answr4
@@ -130,7 +130,7 @@ function formatforUEFI {
 	mount $part1 /mnt/boot
 }
 function format_efi {
-	echo -e "${red}${bold}Set your filesystem for EFI partition
+	echo -e "${red}${bold}set your filesystem for EFI partition
 	1) FAT32
 	2) EXFAT${reset}"
 	read EXFAT
@@ -139,7 +139,7 @@ function format_efi {
 }
 function encryption {
 	clear
-	echo -e "${red}${bold}Should I encrypt root partition?
+	echo -e "${red}${bold}should I encrypt root partition?
 	1) yes
 	2) no${reset}"
 	read answr
@@ -154,7 +154,7 @@ function root_encryption {
 function format_root {
 	ls | grep -w "encrypt" && ESP3=/dev/mapper/root
 	clear
-	echo -e "${red}${bold}Set filesystem for /
+	echo -e "${red}${bold}set filesystem for /
 	1) ext4
 	2) ext3
 	3) xfs
@@ -194,14 +194,14 @@ function ohhmanifeelsosleepy {
 function swap {
 	clear
 	lsblk
-	echo -e "${red}${bold}Set your Swap partition${reset}"
+	echo -e "${red}${bold}set your swap partition${reset}"
 	read part3
 	mkswap $part3
 	swapon $part3
 }
 function home {
 	clear
-	echo -e "${red}${bold}Should I set home partition?
+	echo -e "${red}${bold}should I set home partition?
 	1) yes
 	2) no${reset}"
 	read home
@@ -209,7 +209,7 @@ function home {
 }
 function home_set {
 	clear
-	echo -e "${red}${bold}Should I encrypt /home
+	echo -e "${red}${bold}should I encrypt /home
 	1) yes
 	2) no${reset}"
 	read home
@@ -220,7 +220,7 @@ function home_set {
 function home_encryption {
 	clear
 	lsblk
-	echo -e "${red}${bold}Set home partition${reset}"
+	echo -e "${red}${bold}set home partition${reset}"
 	read home_encrypted
 	cryptsetup luksFormat $home_encrypted
 	cryptsetup open $home_encrypted secure_home
@@ -230,10 +230,10 @@ function installhome {
 	clear
 	touch installhome_config
 	lsblk
-	echo -e "${red}${bold}Set your home partition${reset}"
+	echo -e "${red}${bold}set your home partition${reset}"
 	read -e homepart
 	clear
-	echo -e "${red}${bold}Should I format it?
+	echo -e "${red}${bold}should I format it?
 	1) yes
 	2) no${reset}"
 	read somehome
@@ -245,7 +245,7 @@ function installhome {
 function formathome {
 	ls | grep -w "encrypt_for_home" && homepart=/dev/mapper/secure_home
 	clear
-	echo -e "${red}${bold}Set your filesystem for /home
+	echo -e "${red}${bold}set your filesystem for /home
 	1) ext4
 	2) ext3
 	3) xfs
@@ -330,7 +330,7 @@ function create_boot_entry {
 }
 function booter {
 	clear
-	echo -e "${red}${bold}Set your bootloader
+	echo -e "${red}${bold}set your bootloader
 	1) grub
 	2) EFISTUB
 	3) systemd-boot
@@ -353,7 +353,7 @@ function securetab {
 }
 function partition_another_disk_part1 {
 	clear
-	echo -e "${red}${bold}Should I partition another disk?
+	echo -e "${red}${bold}should I partition another disk?
 	1) yes
 	2) no${reset}"
 	read answr7
@@ -362,14 +362,14 @@ function partition_another_disk_part1 {
 function partition_another_disk_part2 {
 	clear
 	lsblk
-	echo -e "${red}${bold}Set your disk${reset}"
+	echo -e "${red}${bold}set your disk${reset}"
 	read answr7
 	cfdisk $answr7
 }
 function bootloader {
 	clear
 	efibootmgr
-	echo -e "${red}${bold}Should I remove your UEFI bootloader?
+	echo -e "${red}${bold}should I remove your UEFI bootloader?
 	1) yes
 	2) no${reset}"
 	read uefi_arg
@@ -378,21 +378,24 @@ function bootloader {
 function uefi_list {
 	clear
 	efibootmgr -v
-	echo -e "${red}${bold}Set number of the bootloader(0001,0002..etc)${reset}"
+	echo -e "${red}${bold}set number of the bootloader(0001,0002..etc)${reset}"
 	read uefi_arg
 	efibootmgr -b $uefi_arg -B
 	bootloader
 }
+pewpew() {
+	arch-chroot /mnt bash grubinstall.sh
+}
 bootloader
 clear
-echo -e "${red}${bold}Should I Erase your disk?
+echo -e "${red}${bold}should I Erase your disk?
 1) yes
 2) no${reset}"
 read answr
 [ "$answr" == "1" ] && erasedisk
 clear
 lsblk
-echo -e "${red}${bold}Set disk to install Arch Linux${reset}"
+echo -e "${red}${bold}set disk to install Arch Linux${reset}"
 read membrane
 clear
 cfdisk $membrane
@@ -401,7 +404,7 @@ clear
 system
 check_BIOS
 clear
-echo -e "${red}${bold}Should I install Swap partiotion?
+echo -e "${red}${bold}should I install swap partiotion?
 1) yes
 2) no${reset}"
 read answr3
@@ -411,7 +414,7 @@ home
 clear
 reflector --latest 100 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 clear
-echo -e "${red}${bold}Set your kernel
+echo -e "${red}${bold}set your kernel
 1)Stable(default)
 2)Hardened(more secure)
 3)LTS(long time support)
