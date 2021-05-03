@@ -79,6 +79,7 @@
 ![image](https://user-images.githubusercontent.com/66934329/114671861-c12de900-9d2e-11eb-8f29-393030b5e965.png)
 35) Here you can install bootloader 
 ![image](https://user-images.githubusercontent.com/66934329/114671921-cdb24180-9d2e-11eb-8520-93cc80a41279.png)
+36) Set your / partition
 ![image](https://user-images.githubusercontent.com/66934329/114671985-db67c700-9d2e-11eb-9717-45bd7062055d.png)
 ![image](https://user-images.githubusercontent.com/66934329/114672091-f33f4b00-9d2e-11eb-8b84-c0ac30ad7476.png)
 ![image](https://user-images.githubusercontent.com/66934329/114672171-08b47500-9d2f-11eb-8c8f-737dd885c9cc.png)
