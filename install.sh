@@ -415,10 +415,10 @@ clear
 reflector --latest 100 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 clear
 echo -e "${red}${bold}set your kernel
-1)Vanilla(default)
-2)Hardened(more secure)
-3)LTS(long time support)
-4)Zen Kernel(Zen Patched Kernel)${reset}"
+1)Vanilla (default)
+2)Hardened (more secure)
+3)LTS (long time support)
+4)Zen Kernel (Zen Patched Kernel)${reset}"
 read kernel
 [ "$kernel" == "1" ] && pacstrap /mnt base linux linux-firmware dhcpcd nano mc exfat-utils btrfs-progs tpm2-tss && touch LINUX
 [ "$kernel" == "2" ] && pacstrap /mnt base linux-hardened linux-firmware dhcpcd nano mc exfat-utils btrfs-progs tpm2-tss && touch HARD
