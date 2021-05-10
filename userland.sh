@@ -36,20 +36,34 @@ function wmy {
 	clear
 	echo -e "${red}${bold}Set your DE
 	1) plasma
-	2) mate
-	3) gnome
-	4) xfce
-	5) deepin
-	6) cinnamon
-	7) sway${reset}"
+	2) gnome
+	3) cinnamon
+	4) deepin
+	5) mate
+	6) budgie
+	6) xfce
+	7) enlightenment
+	8) sway${reset}"
 	read answr3
 	[ "$answr3" == "1" ] && plasma
-	[ "$answr3" == "2" ] && mate
-	[ "$answr3" == "3" ] && gnome
-	[ "$answr3" == "4" ] && xfce
-	[ "$answr3" == "5" ] && deepin
-	[ "$answr3" == "6" ] && cinnamon
-	[ "$answr3" == "7" ] && sway
+	[ "$answr3" == "2" ] && gnome
+	[ "$answr3" == "3" ] && cinnamon
+	[ "$answr3" == "4" ] && deepin
+	[ "$answr3" == "5" ] && mate
+	[ "$answr3" == "6" ] && budgie
+	[ "$answr3" == "7" ] && xfce
+	[ "$answr3" == "8" ] && enlightenment
+	[ "$answr3" == "9" ] && sway
+}
+function budgie {
+	clear
+	pacman -S lxdm-gtk3 budgie-desktop
+	systemctl enable lxdm
+}
+function enlightenment {
+	clear
+	pacman -S enlightenment lxdm-gtk3 terminology
+	systemctl enable lxdm
 }
 function sway {
 	clear
@@ -62,7 +76,7 @@ function cinnamon {
 }
 function deepin {
 	clear
-	pacman -S deepin 
+	pacman -S deepin
 	systemctl enable lightdm
 }
 function plasma {
