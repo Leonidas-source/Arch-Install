@@ -62,8 +62,8 @@ function cinnamon {
 }
 function deepin {
 	clear
-	pacman -S deepin gdm
-	systemctl enable gdm
+	pacman -S deepin 
+	systemctl enable lightdm
 }
 function plasma {
 	clear
