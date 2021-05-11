@@ -41,9 +41,9 @@ function wmy {
 	4) deepin
 	5) mate
 	6) budgie
-	6) xfce
-	7) enlightenment
-	8) sway${reset}"
+	7) xfce
+	8) enlightenment
+	9) sway${reset}"
 	read answr3
 	[ "$answr3" == "1" ] && plasma
 	[ "$answr3" == "2" ] && gnome
