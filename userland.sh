@@ -92,9 +92,10 @@ function plasma {
 }
 function disable_wallet {
 	mkdir /home/$name/.config
+	chmod 777 /home/$name/.config
 	echo "[Wallet]" >> /home/$name/.config/kwalletrc
 	echo "Enabled=false" >> /home/$name/.config/kwalletrc
-	chmod o=rw /home/$name/.config/kwalletrc
+	chmod 777 /home/$name/.config/kwalletrc
 }
 function mate {
 	clear
