@@ -84,7 +84,7 @@ function plasma {
 	pacman -S plasma-meta konsole dolphin kate plasma-wayland-session
 	systemctl enable sddm
 	clear
-	echo -e "${red}${bold}Should i disable kde wallet?
+	echo -e "${red}${bold}should i disable kde wallet?
 	1) yes
 	2) no${reset}"
 	read answr
