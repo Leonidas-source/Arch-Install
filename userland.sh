@@ -91,8 +91,7 @@ function plasma {
 	[ "$answr" == "1" ] && disable_wallet
 }
 function disable_wallet {
-	find /home/$name/.config/kwalletrc && rm /home/$name/.config/kwalletrc
-	touch /home/$name/.config/kwalletrc
+	mkdir /home/$name/.config
 	echo "[Wallet]" >> /home/$name/.config/kwalletrc
 	echo "Enabled=false" >> /home/$name/.config/kwalletrc
 	chmod o=rw /home/$name/.config/kwalletrc
