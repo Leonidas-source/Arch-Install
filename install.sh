@@ -45,7 +45,7 @@ function partial {
 }
 function once_more {
 	clear
-	echo -e "${red}${bold}should I erase another disk?
+	echo -e "${red}${bold}should i erase another disk?
 	1) yes
 	2) no${reset}"
 	read addit
@@ -139,7 +139,7 @@ function format_efi {
 }
 function encryption {
 	clear
-	echo -e "${red}${bold}should I encrypt root partition?
+	echo -e "${red}${bold}should i encrypt root partition?
 	1) yes
 	2) no${reset}"
 	read answr
@@ -201,7 +201,7 @@ function swap {
 }
 function home {
 	clear
-	echo -e "${red}${bold}should I set home partition?
+	echo -e "${red}${bold}should i set home partition?
 	1) yes
 	2) no${reset}"
 	read home
@@ -209,7 +209,7 @@ function home {
 }
 function home_set {
 	clear
-	echo -e "${red}${bold}should I encrypt /home
+	echo -e "${red}${bold}should i encrypt /home
 	1) yes
 	2) no${reset}"
 	read home
@@ -233,7 +233,7 @@ function installhome {
 	echo -e "${red}${bold}set your home partition${reset}"
 	read -e homepart
 	clear
-	echo -e "${red}${bold}should I format it?
+	echo -e "${red}${bold}should i format it?
 	1) yes
 	2) no${reset}"
 	read somehome
@@ -353,7 +353,7 @@ function securetab {
 }
 function partition_another_disk_part1 {
 	clear
-	echo -e "${red}${bold}should I partition another disk?
+	echo -e "${red}${bold}should i partition another disk?
 	1) yes
 	2) no${reset}"
 	read answr7
@@ -369,7 +369,7 @@ function partition_another_disk_part2 {
 function bootloader {
 	clear
 	efibootmgr
-	echo -e "${red}${bold}should I remove your UEFI bootloader?
+	echo -e "${red}${bold}should i remove your UEFI bootloader?
 	1) yes
 	2) no${reset}"
 	read uefi_arg
@@ -388,7 +388,7 @@ pewpew() {
 }
 bootloader
 clear
-echo -e "${red}${bold}should I Erase your disk?
+echo -e "${red}${bold}should i erase your disk?
 1) yes
 2) no${reset}"
 read answr
@@ -404,7 +404,7 @@ clear
 system
 check_BIOS
 clear
-echo -e "${red}${bold}should I install swap partiotion?
+echo -e "${red}${bold}should i install swap partiotion?
 1) yes
 2) no${reset}"
 read answr3
