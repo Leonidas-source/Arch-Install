@@ -12,11 +12,11 @@ uline="\e[4m"
 reset="\e[0m"
 function user {
 	clear
-	echo -e "${red}${bold}Set name for your user${reset}"
+	echo -e "${red}${bold}set name for your user${reset}"
 	read name
 	useradd -m $name
 	clear
-	echo -e "${red}${bold}Set password for your user${reset}"
+	echo -e "${red}${bold}set password for your user${reset}"
 	passwd $name
 }
 function heyyy {
@@ -26,7 +26,7 @@ function heyyy {
 }
 function wm {
 	clear
-	echo -e "${red}${bold}Should I install DE?
+	echo -e "${red}${bold}should i install DE?
 	1) yes
 	2) no${reset}"
 	read answr2
@@ -34,7 +34,7 @@ function wm {
 }
 function wmy {
 	clear
-	echo -e "${red}${bold}Set your DE
+	echo -e "${red}${bold}set your DE
 	1) plasma
 	2) gnome
 	3) cinnamon
@@ -83,6 +83,18 @@ function plasma {
 	clear
 	pacman -S plasma-meta konsole dolphin kate plasma-wayland-session
 	systemctl enable sddm
+	clear
+	echo -e "${red}${bold}Should i disable kde wallet?
+	1) yes
+	2) no${reset}"
+	read answr
+	[ "$answr" == "1" ] && disable_wallet
+}
+function disable_wallet {
+	find /home/$name/.config/kwalletrc && rm /home/$name/.config/kwalletrc
+	touch /home/$name/.config/kwalletrc
+	echo "[Wallet]" >> /home/$name/.config/kwalletrc
+	echo "Enabled=false" >> /home/$name/.config/kwalletrc
 }
 function mate {
 	clear
@@ -101,7 +113,7 @@ function xfce {
 }
 function pack {
 	clear
-	echo -e "${red}${bold}Should I install some additional packages?
+	echo -e "${red}${bold}should i install some additional packages?
 	1) yes
 	2) no${reset}"
 	read pick
@@ -109,7 +121,7 @@ function pack {
 }
 function installpack {
 	clear
-	echo -e "${red}${bold}Enter packages to install${reset}"
+	echo -e "${red}${bold}enter packages to install${reset}"
 	read moar
 	clear
 	pacman -S $moar
@@ -135,26 +147,26 @@ nano /etc/locale.gen
 clear
 locale-gen
 clear
-echo -e "${red}${bold}Set your hostname${reset}"
-echo -e "${red}${bold}To exit press CTRL+D twice${reset}"
+echo -e "${red}${bold}set your hostname${reset}"
+echo -e "${red}${bold}to exit press CTRL+D twice${reset}"
 cat > /etc/hostname
 clear
-echo -e "${red}${bold}Set your root password${reset}"
+echo -e "${red}${bold}set your root password${reset}"
 passwd
 clear
-echo -e "${red}${bold}Should I add user?
+echo -e "${red}${bold}should i add user?
 1) yes
 2) no${reset}"
 read answr
 [ "$answr" == "1" ] && user
 clear
-echo -e "${red}${bold}Should I enable dhcpcd?
+echo -e "${red}${bold}should i enable dhcpcd?
 1) yes
 2) no${reset}"
 read dhcp
 [ "$dhcp" == "1" ] && systemctl enable dhcpcd
 clear
-echo -e "${red}${bold}What should I install?
+echo -e "${red}${bold}what should i install?
 1) sudo
 2) doas
 3) nothing${reset}"
