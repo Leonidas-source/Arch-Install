@@ -404,7 +404,7 @@ clear
 system
 check_BIOS
 clear
-echo -e "${red}${bold}should i install swap partiotion?
+echo -e "${red}${bold}should i install swap partition?
 1) yes
 2) no${reset}"
 read answr3
@@ -412,7 +412,7 @@ read answr3
 clear
 home
 clear
-reflector --latest 100 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+reflector --latest 50 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 clear
 echo -e "${red}${bold}set your kernel
 1) Vanilla (default)
