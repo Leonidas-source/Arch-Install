@@ -81,7 +81,7 @@ function deepin {
 }
 function plasma {
 	clear
-	pacman -S plasma-meta konsole dolphin kate plasma-wayland-session
+	pacman -S plasma-meta konsole dolphin kate plasma-wayland-session gwenview
 	systemctl enable sddm
 	clear
 	echo -e "${red}${bold}should i disable kde wallet?
