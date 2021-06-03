@@ -81,7 +81,7 @@ function deepin {
 }
 function plasma {
 	clear
-	pacman -S plasma-meta konsole dolphin kate plasma-wayland-session gwenview ark p7zip unrar unarchiver lzop lrzip okular
+	pacman -S plasma-meta konsole dolphin kate plasma-wayland-session gwenview ark p7zip unrar unarchiver lzop lrzip okular unrar
 	systemctl enable sddm
 	clear
 	echo -e "${red}${bold}should i disable kde wallet?
