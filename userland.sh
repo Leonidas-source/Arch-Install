@@ -83,6 +83,7 @@ function plasma {
 	clear
 	pacman -S plasma-meta konsole dolphin kate plasma-wayland-session gwenview ark p7zip unrar unarchiver lzop lrzip okular filelight
 	systemctl enable sddm
+	systemctl enable NetworkManager.service
 	clear
 	echo -e "${red}${bold}should i disable kde wallet?
 	1) yes
