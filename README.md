@@ -32,7 +32,7 @@
 15) Ok, here you need to set your partition for / mount point
 ![image](https://user-images.githubusercontent.com/66934329/114668869-6e9efd80-9d2b-11eb-81b6-ff4d4bdd84f1.png)
 ![image](https://user-images.githubusercontent.com/66934329/114668941-88404500-9d2b-11eb-8180-315f83e3e924.png)
-16) Here you can encypt your / partition
+16) Here you can encypt your root partition
 ![image](https://user-images.githubusercontent.com/66934329/114668967-91311680-9d2b-11eb-81a3-b4c603812cd3.png)
 17) Here you can choose your filesystem for /
 ![image](https://user-images.githubusercontent.com/66934329/114669080-b3c32f80-9d2b-11eb-85a2-cf67ed94b8b0.png)
