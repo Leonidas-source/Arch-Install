@@ -15,7 +15,7 @@
 ![image](https://user-images.githubusercontent.com/66934329/114668421-e91b4d80-9d2a-11eb-865d-01318a4b8e33.png)
 7) Ok, we need to set up disk where / would be 
 ![image](https://user-images.githubusercontent.com/66934329/114668449-f2a4b580-9d2a-11eb-9d9f-0d0ecc1a43f0.png)
-8) Next step partition table(i recommend gpt)
+8) Next step partition table(i recommend GPT for UEFI installation and MBR for BIOS installation)
 ![image](https://user-images.githubusercontent.com/66934329/114668497-051eef00-9d2b-11eb-8099-6da69ae5cf24.png)
 9) On gpt we need at least 2 partitions (EFI partition, partition for /)
 ![image](https://user-images.githubusercontent.com/66934329/114668580-1d8f0980-9d2b-11eb-886b-a80e7f00f098.png)
