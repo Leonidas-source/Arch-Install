@@ -433,6 +433,7 @@ ls | grep -w "home.mount" && mv home.mount /mnt
 mv vconsole.conf /mnt/etc
 cp encrypt /mnt
 mv mkinitcpio.conf /mnt
+cp locale.gen /mnt
 arch-chroot /mnt bash userland.sh
 clear
 ls | grep 2 && mv 2 /mnt

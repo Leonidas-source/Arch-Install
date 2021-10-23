@@ -144,9 +144,8 @@ function doas {
 }
 clear
 fstab
-clear
-nano /etc/locale.gen
-clear
+rm /etc/locale.gen
+mv locale.gen /etc/
 locale-gen
 clear
 echo -e "${red}${bold}set your hostname${reset}"
