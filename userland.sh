@@ -13,7 +13,7 @@ function user {
 }
 function heyyy {
 	clear
-	pacman -S sudo
+	yes|pacman -S sudo
 	EDITOR=nano visudo
 }
 function wm {
@@ -46,34 +46,35 @@ function wmy {
 	[ "$answr3" == "7" ] && xfce
 	[ "$answr3" == "8" ] && enlightenment
 	[ "$answr3" == "9" ] && sway
+	video_detection
 }
 function budgie {
 	clear
-	pacman -S lxdm-gtk3 budgie-desktop
+	yes|pacman -S lxdm-gtk3 budgie-desktop
 	systemctl enable lxdm
 }
 function enlightenment {
 	clear
-	pacman -S enlightenment lxdm-gtk3 terminology
+	yes|pacman -S enlightenment lxdm-gtk3 terminology
 	systemctl enable lxdm
 }
 function sway {
 	clear
-	pacman -S sway pulseaudio pamixer
+	yes|pacman -S sway pulseaudio pamixer
 }
 function cinnamon {
 	clear
-	pacman -S cinnamon lxdm-gtk3
+	yes|pacman -S cinnamon lxdm-gtk3
 	systemctl enable lxdm
 }
 function deepin {
 	clear
-	pacman -S deepin
+	yes|pacman -S deepin
 	systemctl enable lightdm
 }
 function plasma {
 	clear
-	pacman -S plasma-meta konsole dolphin kate plasma-wayland-session gwenview ark p7zip unrar unarchiver lzop lrzip okular filelight
+	yes|pacman -S plasma-meta konsole dolphin kate plasma-wayland-session gwenview ark p7zip unrar unarchiver lzop lrzip okular filelight
 	systemctl enable sddm
 	systemctl enable NetworkManager.service
 	clear
@@ -92,17 +93,17 @@ function disable_wallet {
 }
 function mate {
 	clear
-	pacman -S mate mate-extra lxdm-gtk3
+	yes|pacman -S mate mate-extra lxdm-gtk3
 	systemctl enable lxdm
 }
 function gnome {
 	clear
-	pacman -S gnome ffmpegthumbnailer gst-libav gst-plugins-ugly
+	yes|pacman -S gnome ffmpegthumbnailer gst-libav gst-plugins-ugly
 	systemctl enable gdm
 }
 function xfce {
 	clear
-	pacman -S xfce4 lxdm-gtk3 xfce4-xkb-plugin mousepad xfce4-pulseaudio-plugin pavucontrol pulseaudio xfce4-screenshooter xfce4-taskmanager
+	yes|pacman -S xfce4 lxdm-gtk3 xfce4-xkb-plugin mousepad xfce4-pulseaudio-plugin pavucontrol pulseaudio xfce4-screenshooter xfce4-taskmanager
 	systemctl enable lxdm
 }
 function pack {
@@ -118,7 +119,7 @@ function installpack {
 	echo -e "${red}${bold}enter packages to install${reset}"
 	read moar
 	clear
-	pacman -S $moar
+	yes|pacman -S $moar
 }
 function fstab {
 	mv boot.mount /etc/systemd/system/
@@ -130,9 +131,16 @@ function fstab {
 }
 function doas {
 	clear
-	pacman -S opendoas
+	yes|pacman -S opendoas
 	ls /etc | grep -w "doas.conf" && rm /etc/doas.conf
 	echo "permit persist $name as root" >> /etc/doas.conf
+}
+function video_detection {
+	clear
+	lspci | grep Radeon && amdgpu_drivers
+}
+function amdgpu_drivers {
+	yes|pacman -S xf86-video-amdgpu vulkan-radeon
 }
 clear
 fstab
