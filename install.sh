@@ -127,7 +127,7 @@ function format_efi {
 	2) EXFAT${reset}"
 	read EXFAT
 	[ "$EXFAT" == "1" ] && mkfs.vfat $part1
-	[ "$EXFAT" == "2" ] && mkfs.exfat $part1
+	[ "$EXFAT" == "2" ] && mkfs.exfat $part1 && touch nobootloader
 }
 function encryption {
 	clear
@@ -322,6 +322,22 @@ function create_boot_entry {
 }
 function booter {
 	clear
+	find nobootloader || search
+	find nobootloader && bash stub.sh
+}
+function search {
+	ls | grep -w "encrypt" && menu_for_encrypted || menu_for_non_encrypted
+}
+function menu_for_encrypted {
+	echo -e "${red}${bold}set your bootloader
+	1) EFISTUB
+	2) systemd-boot
+	3) none${reset}"
+	read efilol
+	[ "$efilol" == "1" ] && bash stub.sh
+	[ "$efilol" == "2" ] && bash systemd-boot.sh
+}
+function menu_for_non_encrypted {
 	echo -e "${red}${bold}set your bootloader
 	1) grub
 	2) EFISTUB
