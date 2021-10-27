@@ -50,31 +50,31 @@ function wmy {
 }
 function budgie {
 	clear
-	yes|pacman -S lxdm-gtk3 budgie-desktop
+	pacman -S lxdm-gtk3 budgie-desktop
 	systemctl enable lxdm
 }
 function enlightenment {
 	clear
-	yes|pacman -S enlightenment lxdm-gtk3 terminology
+	pacman -S enlightenment lxdm-gtk3 terminology
 	systemctl enable lxdm
 }
 function sway {
 	clear
-	yes|pacman -S sway pulseaudio pamixer
+	pacman -S sway pulseaudio pamixer
 }
 function cinnamon {
 	clear
-	yes|pacman -S cinnamon lxdm-gtk3
+	pacman -S cinnamon lxdm-gtk3
 	systemctl enable lxdm
 }
 function deepin {
 	clear
-	yes|pacman -S deepin
+	pacman -S deepin
 	systemctl enable lightdm
 }
 function plasma {
 	clear
-	yes|pacman -S plasma-meta konsole dolphin kate plasma-wayland-session gwenview ark p7zip unrar unarchiver lzop lrzip okular filelight
+	pacman -S plasma-meta konsole dolphin kate plasma-wayland-session gwenview ark p7zip unrar unarchiver lzop lrzip okular filelight
 	systemctl enable sddm
 	systemctl enable NetworkManager.service
 	clear
@@ -93,17 +93,17 @@ function disable_wallet {
 }
 function mate {
 	clear
-	yes|pacman -S mate mate-extra lxdm-gtk3
+	pacman -S mate mate-extra lxdm-gtk3
 	systemctl enable lxdm
 }
 function gnome {
 	clear
-	yes|pacman -S gnome ffmpegthumbnailer gst-libav gst-plugins-ugly
+	pacman -S gnome ffmpegthumbnailer gst-libav gst-plugins-ugly
 	systemctl enable gdm
 }
 function xfce {
 	clear
-	yes|pacman -S xfce4 lxdm-gtk3 xfce4-xkb-plugin mousepad xfce4-pulseaudio-plugin pavucontrol pulseaudio xfce4-screenshooter xfce4-taskmanager
+	pacman -S xfce4 lxdm-gtk3 xfce4-xkb-plugin mousepad xfce4-pulseaudio-plugin pavucontrol pulseaudio xfce4-screenshooter xfce4-taskmanager
 	systemctl enable lxdm
 }
 function pack {
@@ -119,7 +119,7 @@ function installpack {
 	echo -e "${red}${bold}enter packages to install${reset}"
 	read moar
 	clear
-	yes|pacman -S $moar
+	pacman -S $moar
 }
 function fstab {
 	mv boot.mount /etc/systemd/system/
@@ -140,7 +140,7 @@ function video_detection {
 	lspci | grep Radeon && amdgpu_drivers
 }
 function amdgpu_drivers {
-	yes|pacman -S xf86-video-amdgpu vulkan-radeon
+	pacman -S xf86-video-amdgpu vulkan-radeon
 }
 clear
 fstab
