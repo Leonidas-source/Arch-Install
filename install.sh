@@ -37,7 +37,7 @@ function partial {
 }
 function once_more {
 	clear
-	echo -e "${red}${bold}should i erase another disk?
+	echo -e "${red}${bold}Should I erase another disk?
 	1) yes
 	2) no${reset}"
 	read addit
