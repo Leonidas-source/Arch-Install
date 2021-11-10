@@ -13,7 +13,7 @@ function user {
 }
 function heyyy {
 	clear
-	yes|pacman -S sudo
+	pacman -S sudo
 	EDITOR=nano visudo
 }
 function wm {
@@ -131,7 +131,7 @@ function fstab {
 }
 function doas {
 	clear
-	yes|pacman -S opendoas
+	pacman -S opendoas
 	ls /etc | grep -w "doas.conf" && rm /etc/doas.conf
 	echo "permit persist $name as root" >> /etc/doas.conf
 }
