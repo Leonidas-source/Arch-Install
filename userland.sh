@@ -18,7 +18,7 @@ function heyyy {
 }
 function wm {
 	clear
-	echo -e "${red}${bold}should i install DE?
+	echo -e "${red}${bold}should I install DE?
 	1) yes
 	2) no${reset}"
 	read answr2
@@ -78,7 +78,7 @@ function plasma {
 	systemctl enable sddm
 	systemctl enable NetworkManager.service
 	clear
-	echo -e "${red}${bold}should i disable kde wallet?
+	echo -e "${red}${bold}should I disable kde wallet?
 	1) yes
 	2) no${reset}"
 	read answr
@@ -108,7 +108,7 @@ function xfce {
 }
 function pack {
 	clear
-	echo -e "${red}${bold}should i install some additional packages?
+	echo -e "${red}${bold}should I install some additional packages?
 	1) yes
 	2) no${reset}"
 	read pick
@@ -155,19 +155,19 @@ clear
 echo -e "${red}${bold}set your root password${reset}"
 passwd
 clear
-echo -e "${red}${bold}should i add user?
+echo -e "${red}${bold}should I add user?
 1) yes
 2) no${reset}"
 read answr
 [ "$answr" == "1" ] && user
 clear
-echo -e "${red}${bold}should i enable dhcpcd?
+echo -e "${red}${bold}should I enable dhcpcd?
 1) yes
 2) no${reset}"
 read dhcp
 [ "$dhcp" == "1" ] && systemctl enable dhcpcd
 clear
-echo -e "${red}${bold}what should i install?
+echo -e "${red}${bold}what should I install?
 1) sudo
 2) doas
 3) nothing${reset}"
