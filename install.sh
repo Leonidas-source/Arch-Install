@@ -329,6 +329,7 @@ function search {
 	ls | grep -w "encrypt" && menu_for_encrypted || menu_for_non_encrypted
 }
 function menu_for_encrypted {
+	clear
 	echo -e "${red}${bold}set your bootloader
 	1) EFISTUB
 	2) systemd-boot
@@ -338,6 +339,7 @@ function menu_for_encrypted {
 	[ "$efilol" == "2" ] && bash systemd-boot.sh
 }
 function menu_for_non_encrypted {
+	clear
 	echo -e "${red}${bold}set your bootloader
 	1) grub
 	2) EFISTUB
