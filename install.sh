@@ -59,7 +59,7 @@ function formatforBIOS {
 	lsblk
 	echo -e "${red}${bold}set you / partition${reset}"
 	read root
-	echo -e "${red}${bold}should i format it?
+	echo -e "${red}${bold}should I format it?
 	1) yes
 	2) no${reset}"
 	read answr6
@@ -131,7 +131,7 @@ function format_efi {
 }
 function encryption {
 	clear
-	echo -e "${red}${bold}should i encrypt root partition?
+	echo -e "${red}${bold}should I encrypt root partition?
 	1) yes
 	2) no${reset}"
 	read answr
@@ -193,7 +193,7 @@ function swap {
 }
 function home {
 	clear
-	echo -e "${red}${bold}should i set home partition?
+	echo -e "${red}${bold}should I set home partition?
 	1) yes
 	2) no${reset}"
 	read home
@@ -201,7 +201,7 @@ function home {
 }
 function home_set {
 	clear
-	echo -e "${red}${bold}should i encrypt /home
+	echo -e "${red}${bold}should I encrypt /home
 	1) yes
 	2) no${reset}"
 	read home
@@ -361,7 +361,7 @@ function securetab {
 }
 function partition_another_disk_part1 {
 	clear
-	echo -e "${red}${bold}should i partition another disk?
+	echo -e "${red}${bold}should I partition another disk?
 	1) yes
 	2) no${reset}"
 	read answr7
@@ -377,7 +377,7 @@ function partition_another_disk_part2 {
 function bootloader {
 	clear
 	efibootmgr
-	echo -e "${red}${bold}should i remove your UEFI bootloader?
+	echo -e "${red}${bold}should I remove your UEFI bootloader?
 	1) yes
 	2) no${reset}"
 	read uefi_arg
@@ -396,7 +396,7 @@ pewpew() {
 }
 bootloader
 clear
-echo -e "${red}${bold}should i erase your disk?
+echo -e "${red}${bold}should I erase your disk?
 1) yes
 2) no${reset}"
 read answr
@@ -412,7 +412,7 @@ clear
 system
 check_BIOS
 clear
-echo -e "${red}${bold}should i install swap partition?
+echo -e "${red}${bold}should I install swap partition?
 1) yes
 2) no${reset}"
 read answr3
@@ -423,10 +423,10 @@ clear
 reflector --latest 50 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 clear
 echo -e "${red}${bold}set your kernel
-1) Vanilla (default)
-2) Hardened (more secure)
-3) LTS (long time support)
-4) Zen Kernel (Zen Patched Kernel)${reset}"
+1) Stable (stable kernel)
+2) Hardened (more secure kernel)
+3) LTS (long term support kernel)
+4) Zen Kernel (Zen patched kernel)${reset}"
 read kernel
 [ "$kernel" == "1" ] && pacstrap /mnt base linux linux-firmware polkit dhcpcd nano mc exfat-utils btrfs-progs && touch LINUX
 [ "$kernel" == "2" ] && pacstrap /mnt base linux-hardened linux-firmware dhcpcd nano mc exfat-utils btrfs-progs && touch HARD
