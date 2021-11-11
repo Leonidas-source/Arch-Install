@@ -422,6 +422,7 @@ read answr3
 clear
 home
 clear
+echo -e "${red}${bold}Setting up optimal mirrors please wait...${reset}"
 reflector --latest 50 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 clear
 echo -e "${red}${bold}set your kernel
