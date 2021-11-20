@@ -108,6 +108,7 @@ function formatforUEFI {
 	lsblk
 	echo -e "${red}${bold}set your / partition${reset}"
 	read -e ESP3
+	echo $ESP3 | cat >> root_partition
 	encryption
 	clear
 	echo -e "${red}${bold}should I format it?
@@ -456,3 +457,5 @@ ls /mnt | grep -w "encrypt" && rm /mnt/encrypt
 ls /mnt | grep -w "mkinitcpio.conf" && rm /mnt/mkinitcpio.conf
 check_for_home_encryption
 ln -sf /usr/share/zoneinfo/"$(curl --fail https://ipapi.co/timezone)" /mnt/etc/localtime
+clear
+echo "${red}${bold}Installation is complete!!!${reset}"

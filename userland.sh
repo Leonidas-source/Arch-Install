@@ -29,48 +29,30 @@ function wmy {
 	echo -e "${red}${bold}set your DE
 	1) plasma
 	2) gnome
-	3) cinnamon
-	4) deepin
-	5) mate
-	6) budgie
-	7) xfce
-	8) enlightenment
-	9) sway${reset}"
+	3) deepin
+	4) cutefish
+	5) budgie
+	6) cinnamon
+	7) mate
+	8) xfce
+	9) enlightenment
+	10) lxde
+	11) lxqt
+	12) sway${reset}"
 	read answr3
 	[ "$answr3" == "1" ] && plasma
 	[ "$answr3" == "2" ] && gnome
-	[ "$answr3" == "3" ] && cinnamon
-	[ "$answr3" == "4" ] && deepin
-	[ "$answr3" == "5" ] && mate
-	[ "$answr3" == "6" ] && budgie
-	[ "$answr3" == "7" ] && xfce
-	[ "$answr3" == "8" ] && enlightenment
-	[ "$answr3" == "9" ] && sway
+	[ "$answr3" == "3" ] && deepin
+	[ "$answr3" == "4" ] && cutefish
+	[ "$answr3" == "5" ] && budgie
+	[ "$answr3" == "6" ] && cinnamon
+	[ "$answr3" == "7" ] && mate
+	[ "$answr3" == "8" ] && xfce
+	[ "$answr3" == "9" ] && enlightenment
+	[ "$answr3" == "10" ] && lxde
+	[ "$answr3" == "11" ] && lxqt
+	[ "$answr3" == "12" ] && sway
 	video_detection
-}
-function budgie {
-	clear
-	pacman -S lxdm-gtk3 budgie-desktop
-	systemctl enable lxdm
-}
-function enlightenment {
-	clear
-	pacman -S enlightenment lxdm-gtk3 terminology
-	systemctl enable lxdm
-}
-function sway {
-	clear
-	pacman -S sway pulseaudio pamixer
-}
-function cinnamon {
-	clear
-	pacman -S cinnamon lxdm-gtk3
-	systemctl enable lxdm
-}
-function deepin {
-	clear
-	pacman -S deepin
-	systemctl enable lightdm
 }
 function plasma {
 	clear
@@ -91,20 +73,59 @@ function disable_wallet {
 	echo "Enabled=false" >> /home/$name/.config/kwalletrc
 	chmod 777 /home/$name/.config/kwalletrc
 }
-function mate {
-	clear
-	pacman -S mate mate-extra lxdm-gtk3
-	systemctl enable lxdm
-}
 function gnome {
 	clear
 	pacman -S gnome ffmpegthumbnailer gst-libav gst-plugins-ugly
 	systemctl enable gdm
 }
+function deepin {
+	clear
+	pacman -S deepin
+	systemctl enable lightdm
+}
+function cutefish {
+	clear
+	pacman -S cutefish sddm
+	systemctl enable sddm
+}
+function budgie {
+	clear
+	pacman -S lxdm-gtk3 budgie-desktop
+	systemctl enable lxdm
+}
+function cinnamon {
+	clear
+	pacman -S cinnamon lxdm-gtk3
+	systemctl enable lxdm
+}
+function mate {
+	clear
+	pacman -S mate mate-extra lxdm-gtk3
+	systemctl enable lxdm
+}
 function xfce {
 	clear
 	pacman -S xfce4 lxdm-gtk3 xfce4-xkb-plugin mousepad xfce4-pulseaudio-plugin pavucontrol pulseaudio xfce4-screenshooter xfce4-taskmanager
 	systemctl enable lxdm
+}
+function enlightenment {
+	clear
+	pacman -S enlightenment lxdm-gtk3 terminology
+	systemctl enable lxdm
+}
+function lxde {
+	clear
+	pacman -S lxde-gtk3
+	systemctl enable lxdm
+}
+function lxqt {
+	clear
+	pacman -S lxqt lxdm-gtk3
+	systemctl enable lxdm
+}
+function sway {
+	clear
+	pacman -S sway pulseaudio pamixer
 }
 function pack {
 	clear

@@ -34,9 +34,7 @@ function systemdpart3 {
 	ls | grep -w "LTS" && echo "initrd /initramfs-linux-lts.img" >> /mnt/boot/loader/entries/arch.conf
 	ls | grep -w "ZEN" && echo "initrd /initramfs-linux-zen.img" >> /mnt/boot/loader/entries/arch.conf
 	clear
-	lsblk
-	echo -e "${red}${bold}Set your root partition(/dev/sda1,/dev/sdb2,/dev/sdc3...)${reset}"
-	read arg2
+	arg2=$(cat root_partition)
 	ls | grep -w "encrypt" && arg3=$(lsblk -fd $arg2 -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
 	ls | grep -w "encrypt" || arg3=$(lsblk -f $arg2 -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
 	arg4=$(lsblk -fd /dev/mapper/root -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
