@@ -458,4 +458,4 @@ ls /mnt | grep -w "mkinitcpio.conf" && rm /mnt/mkinitcpio.conf
 check_for_home_encryption
 ln -sf /usr/share/zoneinfo/"$(curl --fail https://ipapi.co/timezone)" /mnt/etc/localtime
 clear
-echo "${red}${bold}Installation is complete!!!${reset}"
+echo -e "${red}${bold}Installation is complete!!!${reset}"
