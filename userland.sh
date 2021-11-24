@@ -56,7 +56,7 @@ function wmy {
 }
 function plasma {
 	clear
-	pacman -S plasma-meta konsole dolphin kate plasma-wayland-session gwenview ark p7zip unrar unarchiver lzop lrzip okular filelight
+	pacman -S plasma-meta konsole dolphin kate plasma-wayland-session gwenview ark p7zip unrar unarchiver lzop lrzip okular filelight networkmanager
 	systemctl enable sddm
 	systemctl enable NetworkManager.service
 	clear
@@ -95,7 +95,7 @@ function budgie {
 }
 function cinnamon {
 	clear
-	pacman -S cinnamon lxdm-gtk3 xfce4-terminal xed
+	pacman -S cinnamon lxdm-gtk3 xfce4-terminal xed networkmanager
 	systemctl enable lxdm
 }
 function mate {
@@ -105,7 +105,7 @@ function mate {
 }
 function xfce {
 	clear
-	pacman -S xfce4 lxdm-gtk3 xfce4-xkb-plugin mousepad xfce4-pulseaudio-plugin pavucontrol pulseaudio xfce4-screenshooter xfce4-taskmanager
+	pacman -S xfce4 lxdm-gtk3 xfce4-xkb-plugin mousepad xfce4-pulseaudio-plugin pavucontrol pulseaudio xfce4-screenshooter xfce4-taskmanager networkmanager
 	systemctl enable lxdm
 }
 function enlightenment {
