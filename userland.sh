@@ -181,7 +181,7 @@ function video_detection {
 }
 function amdgpu_drivers {
 	clear
-	echo -e "${red}${bold}AMD GPU detected installing drivers{reset}"
+	echo -e "${red}${bold}AMD GPU detected installing drivers${reset}"
 	pacman -S xf86-video-amdgpu vulkan-radeon
 }
 clear
