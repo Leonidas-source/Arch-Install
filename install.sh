@@ -4,8 +4,8 @@ bold="\e[1m"
 reset="\e[0m"
 function erasedisk {
 	clear
-	lsblk
 	echo -e "${red}${bold}set your disk${reset}"
+	lsblk
 	read disk
 	clear
 	echo -e "${red}${bold}set mode of erasing
@@ -56,8 +56,8 @@ function check_BIOS {
 }
 function formatforBIOS {
 	clear
-	lsblk
 	echo -e "${red}${bold}set you / partition${reset}"
+	lsblk
 	read root
 	echo -e "${red}${bold}should I format it?
 	1) yes
@@ -96,8 +96,8 @@ function btrfser {
 }
 function formatforUEFI {
 	clear
-	lsblk
 	echo -e "${red}${bold}set your EFI partition${reset}"
+	lsblk
 	read part1
 	echo -e "${red}${bold}should I format it?
 	1) yes
@@ -105,8 +105,8 @@ function formatforUEFI {
 	read answr5
 	[ "$answr5" == "1" ] && format_efi
 	clear
-	lsblk
 	echo -e "${red}${bold}set your / partition${reset}"
+	lsblk
 	read -e ESP3
 	echo $ESP3 | cat >> root_partition
 	encryption
@@ -186,8 +186,8 @@ function ohhmanifeelsosleepy {
 }
 function swap {
 	clear
-	lsblk
 	echo -e "${red}${bold}set your swap partition${reset}"
+	lsblk
 	read part3
 	mkswap $part3
 	swapon $part3
@@ -212,8 +212,8 @@ function home_set {
 }
 function home_encryption {
 	clear
-	lsblk
 	echo -e "${red}${bold}set home partition${reset}"
+	lsblk
 	read home_encrypted
 	cryptsetup luksFormat $home_encrypted
 	cryptsetup open $home_encrypted secure_home
@@ -222,8 +222,8 @@ function home_encryption {
 function installhome {
 	clear
 	touch installhome_config
-	lsblk
 	echo -e "${red}${bold}set your home partition${reset}"
+	lsblk
 	read -e homepart
 	clear
 	echo -e "${red}${bold}should i format it?
@@ -372,8 +372,8 @@ function partition_another_disk_part1 {
 }
 function partition_another_disk_part2 {
 	clear
-	lsblk
 	echo -e "${red}${bold}set your disk${reset}"
+	lsblk
 	read answr7
 	cfdisk $answr7
 }
@@ -388,8 +388,8 @@ function bootloader {
 }
 function uefi_list {
 	clear
-	efibootmgr -v
 	echo -e "${red}${bold}set number of the bootloader(0001,0002..etc)${reset}"
+	efibootmgr -v
 	read uefi_arg
 	efibootmgr -b $uefi_arg -B
 	bootloader
