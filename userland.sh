@@ -53,6 +53,7 @@ function wmy {
 	[ "$answr3" == "11" ] && lxqt
 	[ "$answr3" == "12" ] && sway
 	video_detection
+	bluetooth
 }
 function plasma {
 	clear
@@ -126,6 +127,14 @@ function lxqt {
 function sway {
 	clear
 	pacman -S sway pulseaudio pamixer
+}
+function bluetooth {
+	clear
+	echo -e "${red}${bold}should I enable bluetooth?
+	1) yes
+	2) no${reset}"
+	read answr
+	[ "$answr" == "1" ] && (pacman -S bluez bluez-utils && systemctl enable bluetooth.service)
 }
 function pack {
 	clear
