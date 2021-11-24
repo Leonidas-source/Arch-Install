@@ -71,17 +71,17 @@ function format_root_BIOS {
 	echo -e "${red}${bold}set filesystem for /
 	1) ext4
 	2) ext3
-	3) xfs
-	4) btrfs
-	5) ext2
+	3) ext2
+	4) xfs
+	5) btrfs
 	6) fat32
 	7) exfat${reset}"
 	read filese
 	[ "$filese" == "1" ] && mkfs.ext4 $root
 	[ "$filese" == "2" ] && mkfs.ext3 $root
-	[ "$filese" == "3" ] && mkfs.xfs $root
-	[ "$filese" == "4" ] && btrfser
-	[ "$filese" == "5" ] && mkfs.ext2 $root
+	[ "$filese" == "3" ] && mkfs.ext2 $root
+	[ "$filese" == "4" ] && mkfs.xfs $root
+	[ "$filese" == "5" ] && btrfser
 	[ "$filese" == "6" ] && mkfs.vfat $root
 	[ "$filese" == "7" ] && mkfs.exfat $root
 }
@@ -150,17 +150,17 @@ function format_root {
 	echo -e "${red}${bold}set filesystem for /
 	1) ext4
 	2) ext3
-	3) xfs
-	4) btrfs
-	5) ext2
+	3) ext2
+	4) xfs
+	5) btrfs
 	6) fat32
 	7) exfat${reset}"
 	read filesys
 	[ "$filesys" == "1" ] && mkfs.ext4 $ESP3
 	[ "$filesys" == "2" ] && mkfs.ext3 $ESP3
-	[ "$filesys" == "3" ] && mkfs.xfs $ESP3
-	[ "$filesys" == "4" ] && ohhmanifeelsosleepy
-	[ "$filesys" == "5" ] && mkfs.ext2 $ESP3
+	[ "$filesys" == "3" ] && mkfs.ext2 $ESP3
+	[ "$filesys" == "4" ] && mkfs.xfs $ESP3
+	[ "$filesys" == "5" ] && ohhmanifeelsosleepy
 	[ "$filesys" == "6" ] && mkfs.vfat $ESP3
 	[ "$filesys" == "7" ] && mkfs.exfat $ESP3
 }
@@ -241,17 +241,17 @@ function formathome {
 	echo -e "${red}${bold}set your filesystem for /home
 	1) ext4
 	2) ext3
-	3) xfs
-	4) btrfs
-	5) ext2
+	3) ext2
+	4) xfs
+	5) btrfs
 	6) fat32
 	7) exfat${reset}"
 	read idea
 	[ "$idea" == "1" ] && mkfs.ext4 $homepart
 	[ "$idea" == "2" ] && mkfs.ext3 $homepart
-	[ "$idea" == "3" ] && mkfs.xfs $homepart
-	[ "$idea" == "4" ] && btrfserforhome
-	[ "$idea" == "5" ] && mkfs.ext2 $homepart
+	[ "$idea" == "3" ] && mkfs.ext2 $homepart
+	[ "$idea" == "4" ] && mkfs.xfs $homepart
+	[ "$idea" == "5" ] && btrfserforhome
 	[ "$idea" == "6" ] && mkfs.vfat $homepart
 	[ "$idea" == "7" ] && mkfs.exfat $homepart
 	ls | grep -w "installhome_config" || compensation
