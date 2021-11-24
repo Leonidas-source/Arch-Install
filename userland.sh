@@ -76,22 +76,22 @@ function disable_wallet {
 }
 function gnome {
 	clear
-	pacman -S gnome ffmpegthumbnailer gst-libav gst-plugins-ugly
+	pacman -S gnome ffmpegthumbnailer gst-libav gst-plugins-ugly networkmanager
 	systemctl enable gdm
 }
 function deepin {
 	clear
-	pacman -S deepin
+	pacman -S deepin networkmanager
 	systemctl enable lightdm
 }
 function cutefish {
 	clear
-	pacman -S cutefish sddm
+	pacman -S cutefish sddm networkmanager
 	systemctl enable sddm
 }
 function budgie {
 	clear
-	pacman -S lxdm-gtk3 budgie-desktop
+	pacman -S lxdm-gtk3 budgie-desktop networkmanager
 	systemctl enable lxdm
 }
 function cinnamon {
@@ -101,7 +101,7 @@ function cinnamon {
 }
 function mate {
 	clear
-	pacman -S mate mate-extra lxdm-gtk3
+	pacman -S mate mate-extra lxdm-gtk3 networkmanager
 	systemctl enable lxdm
 }
 function xfce {
@@ -111,17 +111,17 @@ function xfce {
 }
 function enlightenment {
 	clear
-	pacman -S enlightenment lxdm-gtk3 terminology
+	pacman -S enlightenment lxdm-gtk3 terminology networkmanager
 	systemctl enable lxdm
 }
 function lxde {
 	clear
-	pacman -S lxde-gtk3
+	pacman -S lxde-gtk3 networkmanager
 	systemctl enable lxdm
 }
 function lxqt {
 	clear
-	pacman -S lxqt lxdm-gtk3
+	pacman -S lxqt lxdm-gtk3 networkmanager
 	systemctl enable lxdm
 }
 function sway {
