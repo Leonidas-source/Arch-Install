@@ -180,6 +180,8 @@ function video_detection {
 	lspci | grep Radeon && amdgpu_drivers
 }
 function amdgpu_drivers {
+	clear
+	echo -e "${red}${bold}AMD GPU detected installing drivers{reset}"
 	pacman -S xf86-video-amdgpu vulkan-radeon
 }
 clear
