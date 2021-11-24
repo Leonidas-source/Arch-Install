@@ -405,8 +405,8 @@ echo -e "${red}${bold}should I erase your disk?
 read answr
 [ "$answr" == "1" ] && erasedisk
 clear
-lsblk
 echo -e "${red}${bold}set disk to install Arch Linux${reset}"
+lsblk
 read membrane
 clear
 cfdisk $membrane
