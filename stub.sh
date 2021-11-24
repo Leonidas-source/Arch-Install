@@ -19,16 +19,16 @@ ls | grep -w "zlib_root" && addsettings=$(echo "compress-force=zlib")
 ls | grep -w "lzo_root" && addsettings=$(echo "compress-force=lzo")
 ls | grep -w "zstd_root" && addsettings=$(echo "compress-force=zstd")
 clear
-lsblk
 echo -e "${red}${bold}Set your drive(not partition) with ESP${reset}"
+lsblk
 read ESP
 clear
-lsblk $ESP
 echo -e "${red}${bold}Set number of that(ESP) partition (1,2,3,4)${reset}"
+lsblk $ESP
 read ESP2
 clear
-lsblk
 echo -e "${red}${bold}Set / partition${reset}"
+lsblk
 read ESP3
 clear
 ESP4=$(lsblk -fd $ESP3 -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
