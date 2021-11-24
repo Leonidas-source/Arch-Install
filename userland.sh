@@ -95,7 +95,7 @@ function budgie {
 }
 function cinnamon {
 	clear
-	pacman -S cinnamon lxdm-gtk3 xfce4-terminal
+	pacman -S cinnamon lxdm-gtk3 xfce4-terminal xed
 	systemctl enable lxdm
 }
 function mate {
