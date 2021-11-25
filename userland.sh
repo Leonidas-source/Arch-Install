@@ -184,6 +184,10 @@ function amdgpu_drivers {
 	echo -e "${red}${bold}AMD GPU detected installing drivers${reset}"
 	pacman -S xf86-video-amdgpu vulkan-radeon
 }
+function trim_enabler {
+	systemctl enable fstrim.service
+	systemctl enable fstrim.timer
+}
 clear
 fstab
 rm /etc/locale.gen
@@ -220,3 +224,4 @@ wm
 clear
 pack
 ls | grep -w "encrypt" && (rm /etc/mkinitcpio.conf && mv mkinitcpio.conf /etc/ && mkinitcpio -P)
+find trim && trim_enabler

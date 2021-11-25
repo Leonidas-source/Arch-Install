@@ -394,8 +394,19 @@ function uefi_list {
 	efibootmgr -b $uefi_arg -B
 	bootloader
 }
-pewpew() {
+function pewpew {
 	arch-chroot /mnt bash grubinstall.sh
+}
+function detect_trim_support {
+	hdparm -I $membrane | grep TRIM &&
+}
+function trim_enabler {
+	clear
+	echo -e "${red}${bold}your disk does support trim should I enable it?
+	1) yes
+	2) no${reset}"
+	read answr
+	[ "$answr" == "1" ] && touch trim
 }
 bootloader
 clear
@@ -446,6 +457,7 @@ mv vconsole.conf /mnt/etc
 cp encrypt /mnt
 mv mkinitcpio.conf /mnt
 cp locale.gen /mnt
+find trim && mv trim /mnt
 arch-chroot /mnt bash userland.sh
 clear
 ls | grep 2 && mv 2 /mnt
@@ -457,5 +469,6 @@ ls /mnt | grep -w "encrypt" && rm /mnt/encrypt
 ls /mnt | grep -w "mkinitcpio.conf" && rm /mnt/mkinitcpio.conf
 check_for_home_encryption
 ln -sf /usr/share/zoneinfo/"$(curl --fail https://ipapi.co/timezone)" /mnt/etc/localtime
+ls /mnt | grep -w "trim" && rm /mnt/trim
 clear
 echo -e "${red}${bold}Installation is complete!!!${reset}"
