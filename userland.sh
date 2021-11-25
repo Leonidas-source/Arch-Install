@@ -103,6 +103,7 @@ function cinnamon {
 	pacman -S cinnamon lxdm-gtk3 xfce4-terminal xed networkmanager xfce4-taskmanager gvfs tumbler thunar-volman thunar-archive-plugin thunar
 	systemctl enable NetworkManager.service
 	systemctl enable lxdm
+	bluetooth_support=0
 }
 function mate {
 	clear
@@ -145,6 +146,7 @@ function bluetooth {
 	2) no${reset}"
 	read answr
 	[ "$answr" == "1" ] && (pacman -S bluez bluez-utils && systemctl enable bluetooth.service)
+	[ "$bluetooth_support" == "0" ] && pacman -S blueberry
 }
 function pack {
 	clear
