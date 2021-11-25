@@ -100,7 +100,7 @@ function budgie {
 }
 function cinnamon {
 	clear
-	pacman -S cinnamon lxdm-gtk3 xfce4-terminal xed networkmanager
+	pacman -S cinnamon lxdm-gtk3 xfce4-terminal xed networkmanager xfce4-taskmanager
 	systemctl enable NetworkManager.service
 	systemctl enable lxdm
 }
