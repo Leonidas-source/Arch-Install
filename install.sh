@@ -398,7 +398,7 @@ function pewpew {
 	arch-chroot /mnt bash grubinstall.sh
 }
 function detect_trim_support {
-	hdparm -I $membrane | grep TRIM &&
+	hdparm -I $membrane | grep TRIM && trim_enabler
 }
 function trim_enabler {
 	clear
@@ -421,6 +421,7 @@ lsblk
 read membrane
 clear
 cfdisk $membrane
+detect_trim_support 
 partition_another_disk_part1
 clear
 system
