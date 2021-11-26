@@ -52,7 +52,6 @@ function wmy {
 	[ "$answr3" == "10" ] && lxde
 	[ "$answr3" == "11" ] && lxqt
 	[ "$answr3" == "12" ] && sway
-	video_detection
 	bluetooth
 }
 function plasma {
@@ -176,15 +175,6 @@ function doas {
 	pacman -S opendoas
 	ls /etc | grep -w "doas.conf" && rm /etc/doas.conf
 	echo "permit persist $name as root" >> /etc/doas.conf
-}
-function video_detection {
-	clear
-	lspci | grep Radeon && amdgpu_drivers
-}
-function amdgpu_drivers {
-	clear
-	echo -e "${red}${bold}AMD GPU detected installing drivers${reset}"
-	pacman -S xf86-video-amdgpu vulkan-radeon
 }
 function trim_enabler {
 	systemctl enable fstrim.service
