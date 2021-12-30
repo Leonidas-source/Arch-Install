@@ -56,7 +56,7 @@ function wmy {
 }
 function plasma {
 	clear
-	pacman -S plasma-meta konsole dolphin kate plasma-wayland-session gwenview ark p7zip unrar unarchiver lzop lrzip okular filelight networkmanager
+	pacman -S plasma-meta konsole dolphin kate spectacle plasma-wayland-session gwenview ark p7zip unrar unarchiver lzop lrzip okular filelight networkmanager
 	systemctl enable sddm
 	systemctl enable NetworkManager.service
 	clear
