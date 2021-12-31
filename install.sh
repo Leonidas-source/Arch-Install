@@ -384,6 +384,29 @@ function trim_enabler {
 	read answr
 	[ "$answr" == "1" ] && touch trim
 }
+function yay {
+	clear
+	echo -e "${red}${bold}should I install yay(AUR helper)?
+	1) yes
+	2) no${reset}"
+	read answr
+	[ "$answr" == "1" ] && yay_install
+}
+function yay_install {
+	clear
+	cp yay.sh /mnt
+	cp yay-11.0.2-1-x86_64.pkg.tar.zst /mnt
+	arch-chroot /mnt bash yay.sh
+}
+
+function remove_garbage {
+	ls /mnt | grep -w "grubinstall.sh" && rm /mnt/grubinstall.sh
+	ls /mnt | grep -w "userland.sh" && rm /mnt/userland.sh
+	ls /mnt | grep -w "encrypt" && rm /mnt/encrypt
+	ls /mnt | grep -w "mkinitcpio.conf" && rm /mnt/mkinitcpio.conf
+	ls /mnt | grep -w "trim" && rm /mnt/trim
+	ls /mnt | grep -w "yay.sh" && rm /mnt/yay.sh
+}
 bootloader
 clear
 echo -e "${red}${bold}should I erase your disk?
@@ -397,7 +420,7 @@ lsblk
 read membrane
 clear
 cfdisk $membrane
-detect_trim_support 
+detect_trim_support
 partition_another_disk_part1
 clear
 system
@@ -440,12 +463,9 @@ clear
 ls | grep 2 && mv 2 /mnt
 ls /mnt | grep 2 && pewpew || booter
 clear
-rm /mnt/grubinstall.sh
-rm /mnt/userland.sh
-ls /mnt | grep -w "encrypt" && rm /mnt/encrypt
-ls /mnt | grep -w "mkinitcpio.conf" && rm /mnt/mkinitcpio.conf
 check_for_home_encryption
 ln -sf /usr/share/zoneinfo/"$(curl --fail https://ipapi.co/timezone)" /mnt/etc/localtime
-ls /mnt | grep -w "trim" && rm /mnt/trim
+yay
+remove_garbage
 clear
 echo -e "${red}${bold}Installation is complete!!!${reset}"
