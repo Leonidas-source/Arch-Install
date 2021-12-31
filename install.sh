@@ -28,7 +28,7 @@ function system {
 	[ "$some" == "1" ] && touch 2
 }
 function check_BIOS {
-	ls | grep 2 && formatforBIOS || formatforUEFI
+	find 2 && formatforBIOS || formatforUEFI
 }
 function formatforBIOS {
 	clear
