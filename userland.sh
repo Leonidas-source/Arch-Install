@@ -11,22 +11,22 @@ function user {
 	echo -e "${red}${bold}set password for your user${reset}"
 	passwd $name
 }
-function heyyy {
+function sudo_install {
 	clear
 	pacman -S sudo
 	EDITOR=nano visudo
 }
-function wm {
+function install_desktop_enviroment {
 	clear
-	echo -e "${red}${bold}should I install DE?
+	echo -e "${red}${bold}should I install desktop enviroment?
 	1) yes
 	2) no${reset}"
 	read answr2
-	[ "$answr2" == "1" ] && wmy
+	[ "$answr2" == "1" ] && desktop_enviroment
 }
-function wmy {
+function desktop_enviroment {
 	clear
-	echo -e "${red}${bold}set your DE
+	echo -e "${red}${bold}set your desktop enviroment
 	1) plasma
 	2) gnome
 	3) deepin
@@ -147,22 +147,22 @@ function bluetooth {
 	[ "$answr" == "1" ] && (pacman -S bluez bluez-utils && systemctl enable bluetooth.service)
 	[ "$bluetooth_support" == "0" ] && pacman -S blueberry
 }
-function pack {
+function additional_packages {
 	clear
 	echo -e "${red}${bold}should I install some additional packages?
 	1) yes
 	2) no${reset}"
 	read pick
-	[ "$pick" == "1" ] && installpack
+	[ "$pick" == "1" ] && install_additional_packages
 }
-function installpack {
+function install_additional_packages {
 	clear
 	echo -e "${red}${bold}enter packages to install${reset}"
 	read moar
 	clear
 	pacman -S $moar
 }
-function fstab {
+function mount_points {
 	mv boot.mount /etc/systemd/system/
 	ls | grep -w "home.mount" && mv home.mount /etc/systemd/system/
 	cd /etc/systemd/system/
@@ -181,7 +181,7 @@ function trim_enabler {
 	systemctl enable fstrim.timer
 }
 clear
-fstab
+mount_points
 rm /etc/locale.gen
 mv locale.gen /etc/
 locale-gen
@@ -210,10 +210,10 @@ echo -e "${red}${bold}what should I install?
 2) doas
 3) nothing${reset}"
 read sdo
-[ "$sdo" == "1" ] && heyyy
+[ "$sdo" == "1" ] && sudo_install
 [ "$sdo" == "2" ] && doas
-wm
+install_desktop_enviroment
 clear
-pack
+additional_packages
 ls | grep -w "encrypt" && (rm /etc/mkinitcpio.conf && mv mkinitcpio.conf /etc/ && mkinitcpio -P)
 find trim && trim_enabler
