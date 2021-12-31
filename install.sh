@@ -8,32 +8,12 @@ function erasedisk {
 	lsblk
 	read disk
 	clear
-	echo -e "${red}${bold}set mode of erasing
-	1) auto
-	2) manual${reset}"
-	read method
-	[ "$method" == "1" ] && full
-	[ "$method" == "2" ] && partial
+	full
 	once_more
 }
 function full {
 	clear
 	dd if=/dev/zero of=$disk status=progress
-}
-function partial {
-	clear
-	echo -e "${red}${bold}set your block size${reset}"
-	read block
-	clear
-	echo -e "${red}${bold}set your input(count)${reset}"
-	read input
-	clear
-	echo -e "${red}${bold}select source
-	1) zero
-	2) urandom${reset}"
-	read zeroing
-	[ "$zeroing" == "1" ] && dd if=/dev/zero of=$disk bs=$block count=$input status=progress
-	[ "$zeroing" == "2" ] && dd if=/dev/urandom of=$disk bs=$block count=$input status=progress iflag=fullblock
 }
 function once_more {
 	clear
