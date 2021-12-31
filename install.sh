@@ -8,12 +8,8 @@ function erasedisk {
 	lsblk
 	read disk
 	clear
-	full
-	once_more
-}
-function full {
-	clear
 	dd if=/dev/zero of=$disk status=progress
+	once_more
 }
 function once_more {
 	clear
