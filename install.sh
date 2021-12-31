@@ -398,7 +398,6 @@ function yay_install {
 	cp yay-11.0.2-1-x86_64.pkg.tar.zst /mnt
 	arch-chroot /mnt bash yay.sh
 }
-
 function remove_garbage {
 	ls /mnt | grep -w "grubinstall.sh" && rm /mnt/grubinstall.sh
 	ls /mnt | grep -w "userland.sh" && rm /mnt/userland.sh
