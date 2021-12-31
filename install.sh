@@ -72,7 +72,7 @@ function btrfser {
 }
 function formatforUEFI {
 	clear
-	echo -e "${red}${bold}set your EFI partition${reset}"
+	echo -e "${red}${bold}set your /boot partition${reset}"
 	lsblk
 	read part1
 	echo -e "${red}${bold}should I format it?
@@ -99,7 +99,7 @@ function formatforUEFI {
 	mount $part1 /mnt/boot
 }
 function format_efi {
-	echo -e "${red}${bold}set your filesystem for EFI partition
+	echo -e "${red}${bold}set your filesystem for /boot partition
 	1) FAT32
 	2) EXFAT${reset}"
 	read EXFAT
@@ -108,7 +108,7 @@ function format_efi {
 }
 function encryption {
 	clear
-	echo -e "${red}${bold}should I encrypt root partition?
+	echo -e "${red}${bold}should I encrypt / partition?
 	1) yes
 	2) no${reset}"
 	read answr
@@ -170,7 +170,7 @@ function swap {
 }
 function home {
 	clear
-	echo -e "${red}${bold}should I set home partition?
+	echo -e "${red}${bold}should I set /home partition?
 	1) yes
 	2) no${reset}"
 	read home
@@ -178,7 +178,7 @@ function home {
 }
 function home_set {
 	clear
-	echo -e "${red}${bold}should I encrypt /home
+	echo -e "${red}${bold}should I encrypt /home?
 	1) yes
 	2) no${reset}"
 	read home
@@ -188,7 +188,7 @@ function home_set {
 }
 function home_encryption {
 	clear
-	echo -e "${red}${bold}set home partition${reset}"
+	echo -e "${red}${bold}set /home partition${reset}"
 	lsblk
 	read home_encrypted
 	cryptsetup luksFormat $home_encrypted
@@ -198,7 +198,7 @@ function home_encryption {
 function installhome {
 	clear
 	touch installhome_config
-	echo -e "${red}${bold}set your home partition${reset}"
+	echo -e "${red}${bold}set your /home partition${reset}"
 	lsblk
 	read -e homepart
 	clear
