@@ -442,10 +442,10 @@ echo -e "${red}${bold}set your kernel
 3) LTS (long term support kernel)
 4) Zen Kernel (Zen patched kernel)${reset}"
 read kernel
-[ "$kernel" == "1" ] && pacstrap /mnt base linux linux-firmware polkit dhcpcd nano mc exfat-utils btrfs-progs && touch LINUX
-[ "$kernel" == "2" ] && pacstrap /mnt base linux-hardened linux-firmware dhcpcd nano mc exfat-utils btrfs-progs && touch HARD
-[ "$kernel" == "3" ] && pacstrap /mnt base linux-lts linux-firmware polkit dhcpcd nano mc exfat-utils btrfs-progs && touch LTS
-[ "$kernel" == "4" ] && pacstrap /mnt base linux-zen linux-firmware polkit dhcpcd nano mc exfat-utils btrfs-progs && touch ZEN
+[ "$kernel" == "1" ] && pacstrap /mnt base linux linux-firmware polkit dhcpcd nano vim mc exfat-utils btrfs-progs ntfs-3g && touch LINUX
+[ "$kernel" == "2" ] && pacstrap /mnt base linux-hardened linux-firmware dhcpcd nano vim mc exfat-utils btrfs-progs ntfs-3g && touch HARD
+[ "$kernel" == "3" ] && pacstrap /mnt base linux-lts linux-firmware polkit dhcpcd nano vim mc exfat-utils btrfs-progs ntfs-3g && touch LTS
+[ "$kernel" == "4" ] && pacstrap /mnt base linux-zen linux-firmware polkit dhcpcd nano vim mc exfat-utils btrfs-progs ntfs-3g && touch ZEN
 clear
 mv locale.conf /mnt/etc
 mv userland.sh /mnt
