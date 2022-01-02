@@ -449,17 +449,58 @@ function disk_to_install {
 	lsblk
 	read membrane
 	clear
-	cfdisk $membrane
+	echo -e "${red}${bold}how to partition your disk?
+	1) auto partitioning
+	2) manual partitioning${reset}"
+	read answr
+	[ "$answr" == "1" ] && set_auto_mode
+	[ "$answr" == "2" ] && cfdisk $membrane
+}
+function set_auto_mode {
+	find 2 && auto_partitioning_BIOS
+	find 2 || auto_partitioning_UEFI
+}
+function auto_partitioning_BIOS {
+	parted $membrane mklabel msdos -s
+	parted $membrane mkpart swap linux-swap 1MiB 8217MiB
+	parted $membrane mkpart root btrfs 8217MiB 100%
+	parted $membrane set 2 boot on
+	mkswap $membrane'1'
+	swapon $membrane'1'
+	mkfs.btrfs $membrane'2'
+	mount $membrane'2' /mnt
+}
+function auto_partitioning_UEFI {
+	parted $membrane mklabel gpt -s
+	parted $membrane mkpart boot fat32 1MiB 1025MiB
+	parted $membrane set 1 esp on
+	parted $membrane mkpart swap linux-swap 1025MiB 9225MiB
+	parted $membrane mkpart root btrfs 9225MiB 100%
+	part1=$membrane'1'
+	ESP3=$membrane'3'
+	mkfs.vfat $part1
+	mkfs.btrfs $ESP3
+	echo $ESP3 | cat >> root_partition
+	mount $ESP3 /mnt
+	mkdir /mnt/boot
+	create_boot_entry
+	mount $part1 /mnt/boot
+	mkswap $membrane'2'
+	swapon $membrane'2'
+	touch auto
+}
+function manual_mode_settings {
+	partition_another_disk_part1
+	check_BIOS
+	install_swap
+	home
 }
 efibootmgr || touch 2
 find 2 || bootloader
 erase_main_disk
 disk_to_install
 detect_trim_support
-partition_another_disk_part1
-check_BIOS
-install_swap
-home
+find auto || manual_mode_settings
 install_base_system
 move_files
 arch-chroot /mnt bash userland.sh
