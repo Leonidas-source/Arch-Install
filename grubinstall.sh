@@ -24,8 +24,8 @@ function grubB {
 	grub-install --target=i386-pc $deviceforinstall
 	clear
 	echo -e "${red}${bold}Do you have Windows installed on your PC?
-	1) Yes
-	2) No${reset}"
+	1) yes
+	2) no${reset}"
 	read winer
 	[ "$winer" == "1" ] && yes|pacman -S os-prober
 	clear
@@ -37,8 +37,8 @@ function grubU {
 	grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 	clear
 	echo -e "${red}${bold}Do you have Windows installed on your PC?
-	1) Yes
-	2) No${reset}"
+	1) yes
+	2) no${reset}"
 	read win
 	[ "$win" == "1" ] && yes|pacman -S os-prober
 	clear
