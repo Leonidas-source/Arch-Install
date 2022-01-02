@@ -405,6 +405,7 @@ function remove_garbage {
 	ls /mnt | grep -w "mkinitcpio.conf" && rm /mnt/mkinitcpio.conf
 	ls /mnt | grep -w "trim" && rm /mnt/trim
 	ls /mnt | grep -w "yay.sh" && rm /mnt/yay.sh
+	ls /mnt | grep -w "2" && rm /mnt/2
 }
 bootloader
 clear
