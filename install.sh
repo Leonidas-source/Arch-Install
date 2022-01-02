@@ -416,16 +416,16 @@ function install_base_system {
 	[ "$kernel" == "4" ] && pacstrap /mnt base linux-zen linux-firmware polkit dhcpcd nano vim mc exfat-utils btrfs-progs ntfs-3g && touch ZEN
 }
 function move_files {
-	mv locale.conf /mnt/etc
-	mv userland.sh /mnt
-	mv grubinstall.sh /mnt
-	mv boot.mount /mnt
+	cp locale.conf /mnt/etc
+	cp userland.sh /mnt
+	cp grubinstall.sh /mnt
+	cp boot.mount /mnt
 	ls | grep -w "home.mount" && mv home.mount /mnt
-	mv vconsole.conf /mnt/etc
-	mv encrypt /mnt
-	mv mkinitcpio.conf /mnt
-	mv locale.gen /mnt
-	find trim && mv trim /mnt
+	cp vconsole.conf /mnt/etc
+	cp encrypt /mnt
+	cp mkinitcpio.conf /mnt
+	cp locale.gen /mnt
+	cp trim /mnt
 }
 function install_swap {
 	clear
