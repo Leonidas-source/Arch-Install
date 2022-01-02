@@ -462,8 +462,8 @@ function set_auto_mode {
 }
 function auto_partitioning_BIOS {
 	parted $membrane mklabel msdos -s
-	parted $membrane mkpart swap linux-swap 1MiB 8217MiB
-	parted $membrane mkpart root btrfs 8217MiB 100%
+	parted $membrane mkpart primary linux-swap 1MiB 8217MiB
+	parted $membrane mkpart primary btrfs 8217MiB 100%
 	parted $membrane set 2 boot on
 	mkswap $membrane'1'
 	swapon $membrane'1'
