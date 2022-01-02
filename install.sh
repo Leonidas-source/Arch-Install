@@ -32,7 +32,7 @@ function check_BIOS {
 }
 function formatforBIOS {
 	clear
-	echo -e "${red}${bold}set you / partition${reset}"
+	echo -e "${red}${bold}set your / partition${reset}"
 	lsblk
 	read root
 	echo -e "${red}${bold}should I format it?
@@ -99,7 +99,7 @@ function formatforUEFI {
 	mount $part1 /mnt/boot
 }
 function format_efi {
-	echo -e "${red}${bold}set your filesystem for /boot partition
+	echo -e "${red}${bold}set filesystem for /boot partition
 	1) FAT32
 	2) EXFAT${reset}"
 	read EXFAT
