@@ -19,14 +19,6 @@ function once_more {
 	read addit
 	[ "$addit" == "1" ] && erasedisk
 }
-function system {
-	clear
-	echo -e "${red}${bold}set your system
-	1) BIOS
-	2) UEFI${reset}"
-	read some
-	[ "$some" == "1" ] && touch 2
-}
 function check_BIOS {
 	find 2 && formatforBIOS || formatforUEFI
 }
@@ -407,62 +399,72 @@ function remove_garbage {
 	ls /mnt | grep -w "yay.sh" && rm /mnt/yay.sh
 	ls /mnt | grep -w "2" && rm /mnt/2
 }
-bootloader
-clear
-echo -e "${red}${bold}should I erase your disk?
-1) yes
-2) no${reset}"
-read answr
-[ "$answr" == "1" ] && erasedisk
-clear
-echo -e "${red}${bold}set disk to install Arch Linux${reset}"
-lsblk
-read membrane
-clear
-cfdisk $membrane
+function install_base_system {
+	clear
+	echo -e "${red}${bold}Setting up optimal mirrors please wait...${reset}"
+	reflector --latest 50 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+	clear
+	echo -e "${red}${bold}set your kernel
+	1) Stable (stable kernel)
+	2) Hardened (more secure kernel)
+	3) LTS (long term support kernel)
+	4) Zen Kernel (Zen patched kernel)${reset}"
+	read kernel
+	[ "$kernel" == "1" ] && pacstrap /mnt base linux linux-firmware polkit dhcpcd nano vim mc exfat-utils btrfs-progs ntfs-3g && touch LINUX
+	[ "$kernel" == "2" ] && pacstrap /mnt base linux-hardened linux-firmware dhcpcd nano vim mc exfat-utils btrfs-progs ntfs-3g && touch HARD
+	[ "$kernel" == "3" ] && pacstrap /mnt base linux-lts linux-firmware polkit dhcpcd nano vim mc exfat-utils btrfs-progs ntfs-3g && touch LTS
+	[ "$kernel" == "4" ] && pacstrap /mnt base linux-zen linux-firmware polkit dhcpcd nano vim mc exfat-utils btrfs-progs ntfs-3g && touch ZEN
+}
+function move_files {
+	mv locale.conf /mnt/etc
+	mv userland.sh /mnt
+	mv grubinstall.sh /mnt
+	mv boot.mount /mnt
+	ls | grep -w "home.mount" && mv home.mount /mnt
+	mv vconsole.conf /mnt/etc
+	mv encrypt /mnt
+	mv mkinitcpio.conf /mnt
+	mv locale.gen /mnt
+	find trim && mv trim /mnt
+}
+function install_swap {
+	clear
+	echo -e "${red}${bold}should I install swap partition?
+	1) yes
+	2) no${reset}"
+	read answr3
+	[ "$answr3" == "1" ] && swap
+}
+function erase_main_disk {
+	clear
+	echo -e "${red}${bold}should I erase your disk?
+	1) yes
+	2) no${reset}"
+	read answr
+	[ "$answr" == "1" ] && erasedisk
+}
+function disk_to_install {
+	clear
+	echo -e "${red}${bold}set disk to install Arch Linux${reset}"
+	lsblk
+	read membrane
+	clear
+	cfdisk $membrane
+}
+efibootmgr || touch 2
+find 2 || bootloader
+erase_main_disk
+disk_to_install
 detect_trim_support
 partition_another_disk_part1
-clear
-system
 check_BIOS
-clear
-echo -e "${red}${bold}should I install swap partition?
-1) yes
-2) no${reset}"
-read answr3
-[ "$answr3" == "1" ] && swap
-clear
+install_swap
 home
-clear
-echo -e "${red}${bold}Setting up optimal mirrors please wait...${reset}"
-reflector --latest 50 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
-clear
-echo -e "${red}${bold}set your kernel
-1) Stable (stable kernel)
-2) Hardened (more secure kernel)
-3) LTS (long term support kernel)
-4) Zen Kernel (Zen patched kernel)${reset}"
-read kernel
-[ "$kernel" == "1" ] && pacstrap /mnt base linux linux-firmware polkit dhcpcd nano vim mc exfat-utils btrfs-progs ntfs-3g && touch LINUX
-[ "$kernel" == "2" ] && pacstrap /mnt base linux-hardened linux-firmware dhcpcd nano vim mc exfat-utils btrfs-progs ntfs-3g && touch HARD
-[ "$kernel" == "3" ] && pacstrap /mnt base linux-lts linux-firmware polkit dhcpcd nano vim mc exfat-utils btrfs-progs ntfs-3g && touch LTS
-[ "$kernel" == "4" ] && pacstrap /mnt base linux-zen linux-firmware polkit dhcpcd nano vim mc exfat-utils btrfs-progs ntfs-3g && touch ZEN
-clear
-mv locale.conf /mnt/etc
-mv userland.sh /mnt
-mv grubinstall.sh /mnt
-mv boot.mount /mnt
-ls | grep -w "home.mount" && mv home.mount /mnt
-mv vconsole.conf /mnt/etc
-cp encrypt /mnt
-mv mkinitcpio.conf /mnt
-cp locale.gen /mnt
-find trim && mv trim /mnt
+install_base_system
+move_files
 arch-chroot /mnt bash userland.sh
-clear
 ls | grep 2 && mv 2 /mnt
 ls /mnt | grep 2 && pewpew || booter
-clear
 check_for_home_encryption
 ln -sf /usr/share/zoneinfo/"$(curl --fail https://ipapi.co/timezone)" /mnt/etc/localtime
 yay
