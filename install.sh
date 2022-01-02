@@ -469,6 +469,7 @@ function auto_partitioning_BIOS {
 	swapon $membrane'1'
 	mkfs.btrfs $membrane'2'
 	mount $membrane'2' /mnt
+	touch auto
 }
 function auto_partitioning_UEFI {
 	parted $membrane mklabel gpt -s
