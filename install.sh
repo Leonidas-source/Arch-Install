@@ -227,10 +227,10 @@ function formathome {
 function btrfserforhome {
 	clear
 	mkfs.btrfs $homepart
-	mkdir fuckme
-	mount $homepart fuckme
-	btrfs subvolume create fuckme/home
-	btrfs subvolume set-default 256 fuckme
+	mkdir btrfs-folder
+	mount $homepart btrfs-folder
+	btrfs subvolume create btrfs-folder/home
+	btrfs subvolume set-default 256 btrfs-folder
 	umount $homepart
 	compression
 	create_home_entry
