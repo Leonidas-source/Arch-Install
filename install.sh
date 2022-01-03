@@ -398,6 +398,7 @@ function remove_garbage {
 	ls /mnt | grep -w "trim" && rm /mnt/trim
 	ls /mnt | grep -w "yay.sh" && rm /mnt/yay.sh
 	ls /mnt | grep -w "2" && rm /mnt/2
+	ls /mnt | grep -w "file_for_grub" && rm /mnt/file_for_grub
 }
 function install_base_system {
 	clear
@@ -415,7 +416,7 @@ function install_base_system {
 	[ "$kernel" == "3" ] && pacstrap /mnt base linux-lts linux-firmware polkit dhcpcd nano vim mc exfat-utils btrfs-progs ntfs-3g && touch LTS
 	[ "$kernel" == "4" ] && pacstrap /mnt base linux-zen linux-firmware polkit dhcpcd nano vim mc exfat-utils btrfs-progs ntfs-3g && touch ZEN
 }
-function move_files {
+function copy_files {
 	cp locale.conf /mnt/etc
 	cp userland.sh /mnt
 	cp grubinstall.sh /mnt
@@ -426,6 +427,7 @@ function move_files {
 	cp mkinitcpio.conf /mnt
 	cp locale.gen /mnt
 	cp trim /mnt
+	cp file_for_grub /mnt
 }
 function install_swap {
 	clear
@@ -448,6 +450,7 @@ function disk_to_install {
 	echo -e "${red}${bold}set disk to install Arch Linux${reset}"
 	lsblk
 	read membrane
+	echo $membrane | cat >> file_for_grub
 	clear
 	echo -e "${red}${bold}how to partition your disk?
 	1) auto partitioning
@@ -503,7 +506,7 @@ disk_to_install
 detect_trim_support
 find auto || manual_mode_settings
 install_base_system
-move_files
+copy_files
 arch-chroot /mnt bash userland.sh
 ls | grep 2 && mv 2 /mnt
 ls /mnt | grep 2 && pewpew || booter
