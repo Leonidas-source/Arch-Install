@@ -92,8 +92,8 @@ function formatforUEFI {
 }
 function format_efi {
 	echo -e "${red}${bold}set filesystem for /boot partition
-	1) FAT32
-	2) EXFAT${reset}"
+	1) fat32
+	2) exfat${reset}"
 	read EXFAT
 	[ "$EXFAT" == "1" ] && mkfs.vfat $part1
 	[ "$EXFAT" == "2" ] && mkfs.exfat $part1 && touch nobootloader
