@@ -183,8 +183,9 @@ function home_encryption {
 	echo -e "${red}${bold}set /home partition${reset}"
 	lsblk
 	read home_encrypted
-	cryptsetup luksFormat $home_encrypted
-	cryptsetup open $home_encrypted secure_home
+	dd if=/dev/urandom of=home_key bs=1M count=1
+	cryptsetup luksFormat $home_encrypted home_key
+	cryptsetup open $home_encrypted secure_home --key-file home_key
 	touch encrypt_for_home
 }
 function installhome {
@@ -328,7 +329,7 @@ function securetab {
 	rm /mnt/etc/crypttab
 	touch /mnt/etc/crypttab
 	Calc=$(lsblk -fd $home_encrypted -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
-	echo "secure_home UUID=$Calc none luks,timeout=120" >> /mnt/etc/crypttab
+	echo "secure_home UUID=$Calc /home_key" >> /mnt/etc/crypttab
 }
 function partition_another_disk_part1 {
 	clear
@@ -514,5 +515,6 @@ check_for_home_encryption
 ln -sf /usr/share/zoneinfo/"$(curl --fail https://ipapi.co/timezone)" /mnt/etc/localtime
 yay
 remove_garbage
+find home_key && mv home_key /mnt
 clear
 echo -e "${red}${bold}Installation is complete!!!${reset}"
