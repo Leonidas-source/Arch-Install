@@ -440,7 +440,6 @@ function copy_files {
 	cp locale.gen /mnt
 	cp trim /mnt
 	cp file_for_grub /mnt
-	find 2 || bootloader
 	find home_key && cp home_key /mnt
 }
 function install_swap {
@@ -514,6 +513,7 @@ function manual_mode_settings {
 	home
 }
 efibootmgr || touch 2
+find 2 || bootloader
 erase_main_disk
 disk_to_install
 detect_trim_support
