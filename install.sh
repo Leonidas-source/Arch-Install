@@ -2,6 +2,7 @@
 red="\e[0;91m"
 bold="\e[1m"
 reset="\e[0m"
+
 function erasedisk {
 	clear
 	echo -e "${red}${bold}set your disk${reset}"
