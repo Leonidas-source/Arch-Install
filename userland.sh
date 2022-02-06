@@ -162,14 +162,6 @@ function install_additional_packages {
 	clear
 	pacman -S $moar
 }
-function mount_points {
-	mv boot.mount /etc/systemd/system/
-	ls | grep -w "home.mount" && mv home.mount /etc/systemd/system/
-	cd /etc/systemd/system/
-	systemctl enable boot.mount
-	ls | grep -w "home.mount" && systemctl enable home.mount
-	cd /
-}
 function doas {
 	clear
 	pacman -S opendoas

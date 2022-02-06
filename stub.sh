@@ -3,21 +3,18 @@ red="\e[0;91m"
 bold="\e[1m"
 reset="\e[0m"
 function secure {
-  ls | grep LINUX && efibootmgr --disk $ESP --part $ESP2 --create --label "Arch" --loader  /vmlinuz-linux  --unicode 'rd.luks.name='$ESP4'=root root=/dev/mapper/root rw '$addsettings' initrd=\initramfs-linux.img'
-  ls | grep ZEN && efibootmgr --disk $ESP --part $ESP2 --create --label "Arch_Zen" --loader  /vmlinuz-linux-zen  --unicode 'rd.luks.name='$ESP4'=root root=/dev/mapper/root rw '$addsettings' initrd=\initramfs-linux-zen.img'
-  ls | grep LTS && efibootmgr --disk $ESP --part $ESP2 --create --label "Arch_Lts" --loader  /vmlinuz-linux-lts  --unicode 'rd.luks.name='$ESP4'=root root=/dev/mapper/root rw '$addsettings' initrd=\initramfs-linux-lts.img'
-  ls | grep HARD && efibootmgr --disk $ESP --part $ESP2 --create --label "Arch_Hard" --loader  /vmlinuz-linux-hardened  --unicode 'rd.luks.name='$ESP4'=root root=/dev/mapper/root rw '$addsettings' initrd=\initramfs-linux-hardened.img'
+  ls | grep LINUX && efibootmgr --disk $ESP --part $ESP2 --create --label "Arch" --loader  /vmlinuz-linux  --unicode 'rd.luks.uuid='$ESP4' root=/dev/mapper/root rw initrd=\initramfs-linux.img'
+  ls | grep ZEN && efibootmgr --disk $ESP --part $ESP2 --create --label "Arch_Zen" --loader  /vmlinuz-linux-zen  --unicode 'rd.luks.uuid='$ESP4' root=/dev/mapper/root rw initrd=\initramfs-linux-zen.img'
+  ls | grep LTS && efibootmgr --disk $ESP --part $ESP2 --create --label "Arch_Lts" --loader  /vmlinuz-linux-lts  --unicode 'rd.luks.uuid='$ESP4' root=/dev/mapper/root rw initrd=\initramfs-linux-lts.img'
+  ls | grep HARD && efibootmgr --disk $ESP --part $ESP2 --create --label "Arch_Hard" --loader  /vmlinuz-linux-hardened  --unicode 'rd.luks.uuid='$ESP4' root=/dev/mapper/root rw initrd=\initramfs-linux-hardened.img'
 }
 function regular {
   clear
-  ls | grep LINUX && efibootmgr --disk $ESP --part $ESP2 --create --label "Arch" --loader  /vmlinuz-linux  --unicode 'root=UUID='$ESP4' rw '$addsettings' initrd=\initramfs-linux.img'
-  ls | grep ZEN && efibootmgr --disk $ESP --part $ESP2 --create --label "Arch_Zen" --loader  /vmlinuz-linux-zen  --unicode 'root=UUID='$ESP4' rw '$addsettings' initrd=\initramfs-linux-zen.img'
-  ls | grep LTS && efibootmgr --disk $ESP --part $ESP2 --create --label "Arch_Lts" --loader  /vmlinuz-linux-lts  --unicode 'root=UUID='$ESP4' rw '$addsettings' initrd=\initramfs-linux-lts.img'
-  ls | grep HARD && efibootmgr --disk $ESP --part $ESP2 --create --label "Arch_Hard" --loader  /vmlinuz-linux-hardened  --unicode 'root=UUID='$ESP4' rw '$addsettings' initrd=\initramfs-linux-hardened.img'
+  ls | grep LINUX && efibootmgr --disk $ESP --part $ESP2 --create --label "Arch" --loader  /vmlinuz-linux  --unicode 'root=UUID='$ESP4' rw initrd=\initramfs-linux.img'
+  ls | grep ZEN && efibootmgr --disk $ESP --part $ESP2 --create --label "Arch_Zen" --loader  /vmlinuz-linux-zen  --unicode 'root=UUID='$ESP4' rw initrd=\initramfs-linux-zen.img'
+  ls | grep LTS && efibootmgr --disk $ESP --part $ESP2 --create --label "Arch_Lts" --loader  /vmlinuz-linux-lts  --unicode 'root=UUID='$ESP4' rw initrd=\initramfs-linux-lts.img'
+  ls | grep HARD && efibootmgr --disk $ESP --part $ESP2 --create --label "Arch_Hard" --loader  /vmlinuz-linux-hardened  --unicode 'root=UUID='$ESP4' rw initrd=\initramfs-linux-hardened.img'
 }
-ls | grep -w "zlib_root" && addsettings=$(echo "compress-force=zlib")
-ls | grep -w "lzo_root" && addsettings=$(echo "compress-force=lzo")
-ls | grep -w "zstd_root" && addsettings=$(echo "compress-force=zstd")
 clear
 echo -e "${red}${bold}Set your drive(not partition) with ESP${reset}"
 lsblk

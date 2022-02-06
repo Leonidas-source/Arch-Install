@@ -2,20 +2,57 @@
 red="\e[0;91m"
 bold="\e[1m"
 reset="\e[0m"
-
-function erasedisk {
-	echo -e "${red}${bold}set your disk${reset}"
+function disk_to_install {
+	echo -e "${red}${bold}set disk to install Arch Linux${reset}"
 	lsblk
-	read disk
-	dd if=/dev/zero of=$disk status=progress
-	once_more
+	read membrane
+	echo $membrane | cat >> file_for_grub
+	echo -e "${red}${bold}how to partition your disk?
+	1) auto partitioning
+	2) manual partitioning${reset}"
+	read answr
+	[ "$answr" == "1" ] && set_auto_mode
+	[ "$answr" == "2" ] && cfdisk $membrane
 }
-function once_more {
-	echo -e "${red}${bold}Should I erase another disk?
-	1) yes
-	2) no${reset}"
-	read addit
-	[ "$addit" == "1" ] && erasedisk
+function set_auto_mode {
+	find 2 && auto_partitioning_BIOS
+	find 2 || auto_partitioning_UEFI
+}
+function auto_partitioning_BIOS {
+	parted $membrane mklabel msdos -s
+	parted $membrane mkpart primary linux-swap 1MiB 8217MiB
+	parted $membrane mkpart primary btrfs 8217MiB 100%
+	parted $membrane set 2 boot on
+	mkswap $membrane'1'
+	swapon $membrane'1'
+	mkfs.btrfs $membrane'2'
+	mount $membrane'2' /mnt
+	touch auto
+}
+function auto_partitioning_UEFI {
+	parted $membrane mklabel gpt -s
+	parted $membrane mkpart boot fat32 1MiB 1025MiB
+	parted $membrane set 1 esp on
+	parted $membrane mkpart swap linux-swap 1025MiB 9225MiB
+	parted $membrane mkpart root btrfs 9225MiB 100%
+	part1=$membrane'1'
+	ESP3=$membrane'3'
+	mkfs.vfat $part1
+	mkfs.btrfs $ESP3
+	echo $ESP3 | cat >> root_partition
+	mount $ESP3 /mnt
+	mkdir /mnt/boot
+	create_boot_entry
+	mount $part1 /mnt/boot
+	mkswap $membrane'2'
+	swapon $membrane'2'
+	touch auto
+}
+function manual_mode_settings {
+	partition_another_disk_part1
+	check_BIOS
+	install_swap
+	home
 }
 function check_BIOS {
 	find 2 && formatforBIOS || formatforUEFI
@@ -127,16 +164,6 @@ function ohhmanifeelsosleepy {
 	btrfs subvolume create test/root
 	btrfs subvolume set-default 256 test
 	umount $ESP3
-	echo -e "${red}${bold}set your compression type
-	1) zlib
-	2) lzo
-	3) zstd
-	4) no compression${reset}"
-	read rofl
-	[ "$rofl" == "1" ] && touch zlib_root
-	[ "$rofl" == "2" ] && touch lzo_root
-	[ "$rofl" == "3" ] && touch zstd_root
-	[ "$rofl" == "4" ] && touch nocom_root
 }
 function swap {
 	echo -e "${red}${bold}set your swap partition${reset}"
@@ -190,7 +217,6 @@ function installhome {
 	read somehome
 	[ "$somehome" == "1" ] && formathome
 	ls /mnt | grep -w "home" || mkdir /mnt/home
-	ls | grep -w "home_entry" && compression
 	create_home_entry
 }
 function formathome {
@@ -220,61 +246,25 @@ function btrfserforhome {
 	btrfs subvolume create btrfs-folder/home
 	btrfs subvolume set-default 256 btrfs-folder
 	umount $homepart
-	compression
 	create_home_entry
 	touch create_home_entry_file
 }
 function create_home_entry {
-	ls | grep -w "zlib" && var=,compress-force=zlib
-	ls | grep -w "lzo" && var=,compress-force=lzo
-	ls | grep -w "zstd" && var=,compress-force=zstd
-	touch home.mount
-	echo "[Unit]" >> home.mount
-	echo "Description=home partition" >> home.mount
-	echo " " >> home.mount
-	echo "[Mount]" >> home.mount
 	oohmy=$(lsblk -fd $homepart -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
-	echo "What=/dev/disk/by-uuid/$oohmy" >> home.mount
-	echo "Where=/home" >> home.mount
 	oohmy2=$(lsblk -fd $homepart -o FSTYPE | sed s/"FSTYPE"/""/g | sed '/^$/d;s/[[:blank:]]//g')
-	echo "Type=$oohmy2" >> home.mount
-	echo "Options=rw$var" >> home.mount
-	echo " " >> home.mount
-	echo "[Install]" >> home.mount
-	echo "WantedBy=multi-user.target" >> home.mount
+	echo "UUID=$oohmy /home $oohmy2 defaults 0 0" >> /mnt/etc/fstab
 }
 function compensation {
 	ls /mnt | grep -w "home" || mkdir /mnt/home
 	create_home_entry
 	ls | grep -w "create_home_entry_file" || mount $homepart /mnt/home
 }
-function compression {
-	echo -e "${red}${bold}set your compression
-	1) zlib
-	2) lzo
-	3) zstd
-	4) no compression${reset}"
-	read compress
-	[ "$compress" == "1" ] && (mount -o compress-force=zlib $homepart /mnt/home && touch zlib)
-	[ "$compress" == "2" ] && (mount -o compress-force=lzo $homepart /mnt/home && touch lzo)
-	[ "$compress" == "3" ] && (mount -o compress-force=zstd $homepart /mnt/home && touch zstd)
-	[ "$compress" == "4" ] && mount $homepart /mnt/home
-	touch compression_file
-}
 function create_boot_entry {
-	touch boot.mount
-	echo "[Unit]" >> boot.mount
-	echo "Description=boot partition" >> boot.mount
-	echo " " >> boot.mount
-	echo "[Mount]" >> boot.mount
 	bootle=$(lsblk -f $part1 -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
-	echo "What=/dev/disk/by-uuid/$bootle" >> boot.mount
-	echo "Where=/boot" >> boot.mount
 	bootle2=$(lsblk -f $part1 -o FSTYPE | sed s/"FSTYPE"/""/g | sed '/^$/d;s/[[:blank:]]//g')
-	echo "Type=$bootle2" >> boot.mount
-	echo " " >> boot.mount
-	echo "[Install]" >> boot.mount
-	echo "WantedBy=multi-user.target" >> boot.mount
+	rm /mnt/etc/fstab
+	touch /mnt/etc/fstab
+	echo "UUID=$bootle /boot $bootle2 defaults 0 2" >> /mnt/etc/fstab
 }
 function booter {
 	find nobootloader || search
@@ -411,68 +401,8 @@ function install_swap {
 	read answr3
 	[ "$answr3" == "1" ] && swap
 }
-function erase_main_disk {
-	echo -e "${red}${bold}should I erase your disk?
-	1) yes
-	2) no${reset}"
-	read answr
-	[ "$answr" == "1" ] && erasedisk
-}
-function disk_to_install {
-	echo -e "${red}${bold}set disk to install Arch Linux${reset}"
-	lsblk
-	read membrane
-	echo $membrane | cat >> file_for_grub
-	echo -e "${red}${bold}how to partition your disk?
-	1) auto partitioning
-	2) manual partitioning${reset}"
-	read answr
-	[ "$answr" == "1" ] && set_auto_mode
-	[ "$answr" == "2" ] && cfdisk $membrane
-}
-function set_auto_mode {
-	find 2 && auto_partitioning_BIOS
-	find 2 || auto_partitioning_UEFI
-}
-function auto_partitioning_BIOS {
-	parted $membrane mklabel msdos -s
-	parted $membrane mkpart primary linux-swap 1MiB 8217MiB
-	parted $membrane mkpart primary btrfs 8217MiB 100%
-	parted $membrane set 2 boot on
-	mkswap $membrane'1'
-	swapon $membrane'1'
-	mkfs.btrfs $membrane'2'
-	mount $membrane'2' /mnt
-	touch auto
-}
-function auto_partitioning_UEFI {
-	parted $membrane mklabel gpt -s
-	parted $membrane mkpart boot fat32 1MiB 1025MiB
-	parted $membrane set 1 esp on
-	parted $membrane mkpart swap linux-swap 1025MiB 9225MiB
-	parted $membrane mkpart root btrfs 9225MiB 100%
-	part1=$membrane'1'
-	ESP3=$membrane'3'
-	mkfs.vfat $part1
-	mkfs.btrfs $ESP3
-	echo $ESP3 | cat >> root_partition
-	mount $ESP3 /mnt
-	mkdir /mnt/boot
-	create_boot_entry
-	mount $part1 /mnt/boot
-	mkswap $membrane'2'
-	swapon $membrane'2'
-	touch auto
-}
-function manual_mode_settings {
-	partition_another_disk_part1
-	check_BIOS
-	install_swap
-	home
-}
 efibootmgr || touch 2
 find 2 || bootloader
-erase_main_disk
 disk_to_install
 detect_trim_support
 find auto || manual_mode_settings
