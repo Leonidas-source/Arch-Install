@@ -178,6 +178,7 @@ function home {
 	[ "$home" == "1" ] && home_set
 }
 function home_set {
+	touch homm
 	echo -e "${red}${bold}should I encrypt /home?
 	1) yes
 	2) no${reset}"
@@ -395,8 +396,8 @@ function install_swap {
 	[ "$answr3" == "1" ] && swap
 }
 function create_fstab_file {
-	create_boot_entry
-	create_home_entry
+	efibootmgr && create_boot_entry
+	find homm && create_home_entry
 }
 efibootmgr || touch 2
 find 2 || bootloader
@@ -411,6 +412,6 @@ ls /mnt | grep 2 && pewpew || booter
 check_for_home_encryption
 ln -sf /usr/share/zoneinfo/"$(curl --fail https://ipapi.co/timezone)" /mnt/etc/localtime
 yay
+create_fstab_file
 remove_garbage
-efibootmgr && create_fstab_file
 echo -e "${red}${bold}Installation is complete!!!${reset}"
