@@ -4,16 +4,13 @@ bold="\e[1m"
 reset="\e[0m"
 
 function erasedisk {
-	clear
 	echo -e "${red}${bold}set your disk${reset}"
 	lsblk
 	read disk
-	clear
 	dd if=/dev/zero of=$disk status=progress
 	once_more
 }
 function once_more {
-	clear
 	echo -e "${red}${bold}Should I erase another disk?
 	1) yes
 	2) no${reset}"
@@ -24,7 +21,6 @@ function check_BIOS {
 	find 2 && formatforBIOS || formatforUEFI
 }
 function formatforBIOS {
-	clear
 	echo -e "${red}${bold}set your / partition${reset}"
 	lsblk
 	read root
@@ -33,7 +29,6 @@ function formatforBIOS {
 	2) no${reset}"
 	read answr6
 	[ "$answr6" == "1" ] && format_root_BIOS
-	clear
 	mount $root /mnt
 }
 function format_root_BIOS {
@@ -55,7 +50,6 @@ function format_root_BIOS {
 	[ "$filese" == "7" ] && mkfs.exfat $root
 }
 function btrfser {
-	clear
 	mkfs.btrfs $root
 	mkdir test
 	mount $root test
@@ -64,7 +58,6 @@ function btrfser {
 	umount $root
 }
 function formatforUEFI {
-	clear
 	echo -e "${red}${bold}set your /boot partition${reset}"
 	lsblk
 	read part1
@@ -73,19 +66,16 @@ function formatforUEFI {
 	2) no${reset}"
 	read answr5
 	[ "$answr5" == "1" ] && format_efi
-	clear
 	echo -e "${red}${bold}set your / partition${reset}"
 	lsblk
 	read -e ESP3
 	echo $ESP3 | cat >> root_partition
 	encryption
-	clear
 	echo -e "${red}${bold}should I format it?
 	1) yes
 	2) no${reset}"
 	read answr4
 	[ "$answr4" == "1" ] && format_root
-	clear
 	mount $ESP3 /mnt
 	mkdir /mnt/boot
 	create_boot_entry
@@ -100,7 +90,6 @@ function format_efi {
 	[ "$EXFAT" == "2" ] && mkfs.exfat $part1 && touch nobootloader
 }
 function encryption {
-	clear
 	echo -e "${red}${bold}should I encrypt / partition?
 	1) yes
 	2) no${reset}"
@@ -108,14 +97,12 @@ function encryption {
 	[ "$answr" == "1" ] && root_encryption
 }
 function root_encryption {
-	clear
 	cryptsetup luksFormat $ESP3
 	cryptsetup open $ESP3 root
 	touch encrypt
 }
 function format_root {
 	ls | grep -w "encrypt" && ESP3=/dev/mapper/root
-	clear
 	echo -e "${red}${bold}set filesystem for /
 	1) ext4
 	2) ext3
@@ -134,14 +121,12 @@ function format_root {
 	[ "$filesys" == "7" ] && mkfs.exfat $ESP3
 }
 function ohhmanifeelsosleepy {
-	clear
 	mkfs.btrfs $ESP3
 	mkdir test
 	mount $ESP3 test
 	btrfs subvolume create test/root
 	btrfs subvolume set-default 256 test
 	umount $ESP3
-	clear
 	echo -e "${red}${bold}set your compression type
 	1) zlib
 	2) lzo
@@ -154,7 +139,6 @@ function ohhmanifeelsosleepy {
 	[ "$rofl" == "4" ] && touch nocom_root
 }
 function swap {
-	clear
 	echo -e "${red}${bold}set your swap partition${reset}"
 	lsblk
 	read part3
@@ -162,7 +146,6 @@ function swap {
 	swapon $part3
 }
 function home {
-	clear
 	echo -e "${red}${bold}should I set /home partition?
 	1) yes
 	2) no${reset}"
@@ -170,7 +153,6 @@ function home {
 	[ "$home" == "1" ] && home_set
 }
 function home_set {
-	clear
 	echo -e "${red}${bold}should I encrypt /home?
 	1) yes
 	2) no${reset}"
@@ -180,7 +162,6 @@ function home_set {
 	ls | grep -w "encrypt_for_home" || installhome
 }
 function home_encryption {
-	clear
 	echo -e "${red}${bold}set /home partition${reset}"
 	lsblk
 	read home_encrypted
@@ -199,12 +180,10 @@ function hard_setup {
 	cryptsetup open $home_encrypted secure_home
 }
 function installhome {
-	clear
 	touch installhome_config
 	echo -e "${red}${bold}set your /home partition${reset}"
 	lsblk
 	read -e homepart
-	clear
 	echo -e "${red}${bold}should i format it?
 	1) yes
 	2) no${reset}"
@@ -216,7 +195,6 @@ function installhome {
 }
 function formathome {
 	ls | grep -w "encrypt_for_home" && homepart=/dev/mapper/secure_home
-	clear
 	echo -e "${red}${bold}set your filesystem for /home
 	1) ext4
 	2) ext3
@@ -236,7 +214,6 @@ function formathome {
 	ls | grep -w "installhome_config" || compensation
 }
 function btrfserforhome {
-	clear
 	mkfs.btrfs $homepart
 	mkdir btrfs-folder
 	mount $homepart btrfs-folder
@@ -272,7 +249,6 @@ function compensation {
 	ls | grep -w "create_home_entry_file" || mount $homepart /mnt/home
 }
 function compression {
-	clear
 	echo -e "${red}${bold}set your compression
 	1) zlib
 	2) lzo
@@ -301,7 +277,6 @@ function create_boot_entry {
 	echo "WantedBy=multi-user.target" >> boot.mount
 }
 function booter {
-	clear
 	find nobootloader || search
 	find nobootloader && bash stub.sh
 }
@@ -309,7 +284,6 @@ function search {
 	ls | grep -w "encrypt" && menu_for_encrypted || menu_for_non_encrypted
 }
 function menu_for_encrypted {
-	clear
 	echo -e "${red}${bold}set your bootloader
 	1) EFISTUB
 	2) systemd-boot
@@ -319,7 +293,6 @@ function menu_for_encrypted {
 	[ "$efilol" == "2" ] && bash systemd-boot.sh
 }
 function menu_for_non_encrypted {
-	clear
 	echo -e "${red}${bold}set your bootloader
 	1) grub
 	2) EFISTUB
@@ -331,11 +304,9 @@ function menu_for_non_encrypted {
 	[ "$efilol" == "3" ] && bash systemd-boot.sh
 }
 function check_for_home_encryption {
-	clear
 	ls | grep -w "encrypt_for_home" && securetab
 }
 function securetab {
-	clear
 	rm /mnt/etc/crypttab
 	touch /mnt/etc/crypttab
 	Calc=$(lsblk -fd $home_encrypted -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
@@ -343,7 +314,6 @@ function securetab {
 	[ "$encrypted_home" == "easy" ] || echo "secure_home UUID=$Calc none timeout=180" >> /mnt/etc/crypttab
 }
 function partition_another_disk_part1 {
-	clear
 	echo -e "${red}${bold}should I partition another disk?
 	1) yes
 	2) no${reset}"
@@ -351,14 +321,12 @@ function partition_another_disk_part1 {
 	[ "$answr7" == "1" ] && partition_another_disk_part2
 }
 function partition_another_disk_part2 {
-	clear
 	echo -e "${red}${bold}set your disk${reset}"
 	lsblk
 	read answr7
 	cfdisk $answr7
 }
 function bootloader {
-	clear
 	efibootmgr
 	echo -e "${red}${bold}should I remove your UEFI bootloader?
 	1) yes
@@ -367,7 +335,6 @@ function bootloader {
 	[ "$uefi_arg" == "1" ] && uefi_list
 }
 function uefi_list {
-	clear
 	echo -e "${red}${bold}set number of the bootloader(0001,0002..etc)${reset}"
 	efibootmgr -v
 	read uefi_arg
@@ -381,7 +348,6 @@ function detect_trim_support {
 	hdparm -I $membrane | grep TRIM && trim_enabler
 }
 function trim_enabler {
-	clear
 	echo -e "${red}${bold}your disk does support trim should I enable it?
 	1) yes
 	2) no${reset}"
@@ -389,7 +355,6 @@ function trim_enabler {
 	[ "$answr" == "1" ] && touch trim
 }
 function yay {
-	clear
 	echo -e "${red}${bold}should I install yay(AUR helper)?
 	1) yes
 	2) no${reset}"
@@ -397,7 +362,6 @@ function yay {
 	[ "$answr" == "1" ] && yay_install
 }
 function yay_install {
-	clear
 	cp yay.sh /mnt
 	cp yay-11.0.2-1-x86_64.pkg.tar.zst /mnt
 	arch-chroot /mnt bash yay.sh
@@ -413,10 +377,8 @@ function remove_garbage {
 	ls /mnt | grep -w "file_for_grub" && rm /mnt/file_for_grub
 }
 function install_base_system {
-	clear
 	echo -e "${red}${bold}Setting up optimal mirrors please wait...${reset}"
 	reflector --latest 50 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
-	clear
 	echo -e "${red}${bold}set your kernel
 	1) Stable (stable kernel)
 	2) Hardened (more secure kernel)
@@ -443,7 +405,6 @@ function copy_files {
 	find home_key && cp home_key /mnt
 }
 function install_swap {
-	clear
 	echo -e "${red}${bold}should I install swap partition?
 	1) yes
 	2) no${reset}"
@@ -451,7 +412,6 @@ function install_swap {
 	[ "$answr3" == "1" ] && swap
 }
 function erase_main_disk {
-	clear
 	echo -e "${red}${bold}should I erase your disk?
 	1) yes
 	2) no${reset}"
@@ -459,12 +419,10 @@ function erase_main_disk {
 	[ "$answr" == "1" ] && erasedisk
 }
 function disk_to_install {
-	clear
 	echo -e "${red}${bold}set disk to install Arch Linux${reset}"
 	lsblk
 	read membrane
 	echo $membrane | cat >> file_for_grub
-	clear
 	echo -e "${red}${bold}how to partition your disk?
 	1) auto partitioning
 	2) manual partitioning${reset}"
@@ -527,5 +485,4 @@ check_for_home_encryption
 ln -sf /usr/share/zoneinfo/"$(curl --fail https://ipapi.co/timezone)" /mnt/etc/localtime
 yay
 remove_garbage
-clear
 echo -e "${red}${bold}Installation is complete!!!${reset}"
