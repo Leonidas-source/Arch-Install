@@ -42,7 +42,6 @@ function auto_partitioning_UEFI {
 	echo $ESP3 | cat >> root_partition
 	mount $ESP3 /mnt
 	mkdir /mnt/boot
-	create_boot_entry
 	mount $part1 /mnt/boot
 	mkswap $membrane'2'
 	swapon $membrane'2'
@@ -115,7 +114,6 @@ function formatforUEFI {
 	[ "$answr4" == "1" ] && format_root
 	mount $ESP3 /mnt
 	mkdir /mnt/boot
-	create_boot_entry
 	mount $part1 /mnt/boot
 }
 function format_efi {
@@ -217,7 +215,6 @@ function installhome {
 	read somehome
 	[ "$somehome" == "1" ] && formathome
 	ls /mnt | grep -w "home" || mkdir /mnt/home
-	create_home_entry
 }
 function formathome {
 	ls | grep -w "encrypt_for_home" && homepart=/dev/mapper/secure_home
@@ -246,7 +243,6 @@ function btrfserforhome {
 	btrfs subvolume create btrfs-folder/home
 	btrfs subvolume set-default 256 btrfs-folder
 	umount $homepart
-	create_home_entry
 	touch create_home_entry_file
 }
 function create_home_entry {
@@ -256,7 +252,6 @@ function create_home_entry {
 }
 function compensation {
 	ls /mnt | grep -w "home" || mkdir /mnt/home
-	create_home_entry
 	ls | grep -w "create_home_entry_file" || mount $homepart /mnt/home
 }
 function create_boot_entry {
@@ -384,8 +379,6 @@ function copy_files {
 	cp locale.conf /mnt/etc
 	cp userland.sh /mnt
 	cp grubinstall.sh /mnt
-	cp boot.mount /mnt
-	ls | grep -w "home.mount" && mv home.mount /mnt
 	cp vconsole.conf /mnt/etc
 	cp encrypt /mnt
 	cp mkinitcpio.conf /mnt
@@ -401,6 +394,10 @@ function install_swap {
 	read answr3
 	[ "$answr3" == "1" ] && swap
 }
+function create_fstab_file {
+	create_boot_entry
+	create_home_entry
+}
 efibootmgr || touch 2
 find 2 || bootloader
 disk_to_install
@@ -415,4 +412,5 @@ check_for_home_encryption
 ln -sf /usr/share/zoneinfo/"$(curl --fail https://ipapi.co/timezone)" /mnt/etc/localtime
 yay
 remove_garbage
+efibootmgr && create_fstab_file
 echo -e "${red}${bold}Installation is complete!!!${reset}"
