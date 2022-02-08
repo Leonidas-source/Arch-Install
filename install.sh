@@ -2,22 +2,8 @@
 red="\e[0;91m"
 bold="\e[1m"
 reset="\e[0m"
-function disk_to_install {
-	echo -e "${red}${bold}set disk to install Arch Linux${reset}"
-	lsblk
-	read membrane
-	echo $membrane | cat >> file_for_grub
-	echo -e "${red}${bold}how to partition your disk?
-	1) auto partitioning
-	2) manual partitioning${reset}"
-	read answr
-	[ "$answr" == "1" ] && set_auto_mode
-	[ "$answr" == "2" ] && cfdisk $membrane
-}
-function set_auto_mode {
-	find 2 && auto_partitioning_BIOS
-	find 2 || auto_partitioning_UEFI
-}
+
+### BIOS_INSTALL BEGIN
 function auto_partitioning_BIOS {
 	parted $membrane mklabel msdos -s
 	parted $membrane mkpart primary linux-swap 1MiB 8217MiB
@@ -28,33 +14,6 @@ function auto_partitioning_BIOS {
 	mkfs.btrfs $membrane'2'
 	mount $membrane'2' /mnt
 	touch auto
-}
-function auto_partitioning_UEFI {
-	parted $membrane mklabel gpt -s
-	parted $membrane mkpart boot fat32 1MiB 1025MiB
-	parted $membrane set 1 esp on
-	parted $membrane mkpart swap linux-swap 1025MiB 9225MiB
-	parted $membrane mkpart root btrfs 9225MiB 100%
-	part1=$membrane'1'
-	ESP3=$membrane'3'
-	mkfs.vfat $part1
-	mkfs.btrfs $ESP3
-	echo $ESP3 | cat >> root_partition
-	mount $ESP3 /mnt
-	mkdir /mnt/boot
-	mount $part1 /mnt/boot
-	mkswap $membrane'2'
-	swapon $membrane'2'
-	touch auto
-}
-function manual_mode_settings {
-	partition_another_disk_part1
-	check_BIOS
-	install_swap
-	home
-}
-function check_BIOS {
-	find 2 && formatforBIOS || formatforUEFI
 }
 function formatforBIOS {
 	echo -e "${red}${bold}set your / partition${reset}"
@@ -93,6 +52,71 @@ function btrfser {
 	btrfs subvolume set-default 256 test
 	umount $root
 }
+
+### BIOS_INSTALL END
+function disk_to_install {
+	echo -e "${red}${bold}set disk to install Arch Linux${reset}"
+	lsblk
+	read membrane
+	echo $membrane | cat >> file_for_grub
+	echo -e "${red}${bold}how to partition your disk?
+	1) auto partitioning
+	2) manual partitioning${reset}"
+	read answr
+	[ "$answr" == "1" ] && set_auto_mode
+	[ "$answr" == "2" ] && cfdisk $membrane
+}
+function set_auto_mode {
+	find 2 && auto_partitioning_BIOS
+	find 2 || auto_partitioning_UEFI
+}
+
+### UEFI_INSTALL BEGIN
+function auto_partitioning_UEFI {
+	parted $membrane mklabel gpt -s
+	parted $membrane mkpart boot fat32 1MiB 1025MiB
+	parted $membrane set 1 esp on
+	parted $membrane mkpart swap linux-swap 1025MiB 9225MiB
+	parted $membrane mkpart root btrfs 9225MiB 100%
+	part1=$membrane'1'
+	ESP3=$membrane'3'
+	mkfs.vfat $part1
+	mkfs.btrfs $ESP3
+	echo $ESP3 | cat >> root_partition
+	mount $ESP3 /mnt
+	mkdir /mnt/boot
+	mount $part1 /mnt/boot
+	mkswap $membrane'2'
+	swapon $membrane'2'
+	touch auto
+}
+function format_root {
+	ls | grep -w "encrypt" && ESP3=/dev/mapper/root
+	echo -e "${red}${bold}set filesystem for /
+	1) ext4
+	2) ext3
+	3) ext2
+	4) xfs
+	5) btrfs
+	6) fat32
+	7) exfat${reset}"
+	read filesys
+	[ "$filesys" == "1" ] && mkfs.ext4 $ESP3
+	[ "$filesys" == "2" ] && mkfs.ext3 $ESP3
+	[ "$filesys" == "3" ] && mkfs.ext2 $ESP3
+	[ "$filesys" == "4" ] && mkfs.xfs $ESP3
+	[ "$filesys" == "5" ] && ohhmanifeelsosleepy
+	[ "$filesys" == "6" ] && mkfs.vfat $ESP3
+	[ "$filesys" == "7" ] && mkfs.exfat $ESP3
+}
+function ohhmanifeelsosleepy {
+	mkfs.btrfs $ESP3
+	mkdir test
+	mount $ESP3 test
+	btrfs subvolume create test/root
+	btrfs subvolume set-default 256 test
+	umount $ESP3
+}
 function formatforUEFI {
 	echo -e "${red}${bold}set your /boot partition${reset}"
 	lsblk
@@ -124,6 +148,47 @@ function format_efi {
 	[ "$EXFAT" == "1" ] && mkfs.vfat $part1
 	[ "$EXFAT" == "2" ] && mkfs.exfat $part1 && touch nobootloader
 }
+### UEFI_INSTALL END
+
+### Encryption BEGIN
+function home_encryption {
+	echo -e "${red}${bold}set /home partition${reset}"
+	lsblk
+	read home_encrypted
+	ls | grep -w "encrypt" && easy_setup
+	ls | grep -w "encrypt" || hard_setup
+	touch encrypt_for_home
+}
+function home_set {
+	touch homm
+	echo -e "${red}${bold}should I encrypt /home?
+	1) yes
+	2) no${reset}"
+	read home
+	[ "$home" == "1" ] && home_encryption
+	ls | grep -w "encrypt_for_home" && formathome
+	ls | grep -w "encrypt_for_home" || installhome
+}
+function easy_setup {
+	dd if=/dev/urandom of=home_key bs=1M count=1
+	cryptsetup luksFormat $home_encrypted home_key
+	cryptsetup open $home_encrypted secure_home --key-file home_key
+	encrypted_home=easy
+}
+function hard_setup {
+	cryptsetup luksFormat $home_encrypted
+	cryptsetup open $home_encrypted secure_home
+}
+function check_for_home_encryption {
+	ls | grep -w "encrypt_for_home" && securetab
+}
+function securetab {
+	rm /mnt/etc/crypttab
+	touch /mnt/etc/crypttab
+	Calc=$(lsblk -fd $home_encrypted -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
+	[ "$encrypted_home" == "easy" ] && echo "secure_home UUID=$Calc /home_key" >> /mnt/etc/crypttab
+	[ "$encrypted_home" == "easy" ] || echo "secure_home UUID=$Calc none timeout=180" >> /mnt/etc/crypttab
+}
 function encryption {
 	echo -e "${red}${bold}should I encrypt / partition?
 	1) yes
@@ -136,40 +201,9 @@ function root_encryption {
 	cryptsetup open $ESP3 root
 	touch encrypt
 }
-function format_root {
-	ls | grep -w "encrypt" && ESP3=/dev/mapper/root
-	echo -e "${red}${bold}set filesystem for /
-	1) ext4
-	2) ext3
-	3) ext2
-	4) xfs
-	5) btrfs
-	6) fat32
-	7) exfat${reset}"
-	read filesys
-	[ "$filesys" == "1" ] && mkfs.ext4 $ESP3
-	[ "$filesys" == "2" ] && mkfs.ext3 $ESP3
-	[ "$filesys" == "3" ] && mkfs.ext2 $ESP3
-	[ "$filesys" == "4" ] && mkfs.xfs $ESP3
-	[ "$filesys" == "5" ] && ohhmanifeelsosleepy
-	[ "$filesys" == "6" ] && mkfs.vfat $ESP3
-	[ "$filesys" == "7" ] && mkfs.exfat $ESP3
-}
-function ohhmanifeelsosleepy {
-	mkfs.btrfs $ESP3
-	mkdir test
-	mount $ESP3 test
-	btrfs subvolume create test/root
-	btrfs subvolume set-default 256 test
-	umount $ESP3
-}
-function swap {
-	echo -e "${red}${bold}set your swap partition${reset}"
-	lsblk
-	read part3
-	mkswap $part3
-	swapon $part3
-}
+### Encryption END
+
+### Home BEGIN
 function home {
 	echo -e "${red}${bold}should I set /home partition?
 	1) yes
@@ -177,36 +211,8 @@ function home {
 	read home
 	[ "$home" == "1" ] && home_set
 }
-function home_set {
-	touch homm
-	echo -e "${red}${bold}should I encrypt /home?
-	1) yes
-	2) no${reset}"
-	read home
-	[ "$home" == "1" ] && home_encryption
-	ls | grep -w "encrypt_for_home" && formathome
-	ls | grep -w "encrypt_for_home" || installhome
-}
-function home_encryption {
-	echo -e "${red}${bold}set /home partition${reset}"
-	lsblk
-	read home_encrypted
-	ls | grep -w "encrypt" && easy_setup
-	ls | grep -w "encrypt" || hard_setup
-	touch encrypt_for_home
-}
-function easy_setup {
-	dd if=/dev/urandom of=home_key bs=1M count=1
-	cryptsetup luksFormat $home_encrypted home_key
-	cryptsetup open $home_encrypted secure_home --key-file home_key
-	encrypted_home=easy
-}
-function hard_setup {
-	cryptsetup luksFormat $home_encrypted
-	cryptsetup open $home_encrypted secure_home
-}
 function installhome {
-	touch installhome_config
+	mkdir /mnt/home
 	echo -e "${red}${bold}set your /home partition${reset}"
 	lsblk
 	read -e homepart
@@ -215,7 +221,6 @@ function installhome {
 	2) no${reset}"
 	read somehome
 	[ "$somehome" == "1" ] && formathome
-	ls /mnt | grep -w "home" || mkdir /mnt/home
 }
 function formathome {
 	ls | grep -w "encrypt_for_home" && homepart=/dev/mapper/secure_home
@@ -235,7 +240,7 @@ function formathome {
 	[ "$idea" == "5" ] && btrfserforhome
 	[ "$idea" == "6" ] && mkfs.vfat $homepart
 	[ "$idea" == "7" ] && mkfs.exfat $homepart
-	ls | grep -w "installhome_config" || compensation
+	mount $homepart /mnt/home
 }
 function btrfserforhome {
 	mkfs.btrfs $homepart
@@ -246,14 +251,13 @@ function btrfserforhome {
 	umount $homepart
 	touch create_home_entry_file
 }
+### Home END
+
+### FSTAB BEGIN
 function create_home_entry {
 	oohmy=$(lsblk -fd $homepart -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
 	oohmy2=$(lsblk -fd $homepart -o FSTYPE | sed s/"FSTYPE"/""/g | sed '/^$/d;s/[[:blank:]]//g')
 	echo "UUID=$oohmy /home $oohmy2 defaults 0 0" >> /mnt/etc/fstab
-}
-function compensation {
-	ls /mnt | grep -w "home" || mkdir /mnt/home
-	ls | grep -w "create_home_entry_file" || mount $homepart /mnt/home
 }
 function create_boot_entry {
 	bootle=$(lsblk -f $part1 -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
@@ -262,6 +266,13 @@ function create_boot_entry {
 	touch /mnt/etc/fstab
 	echo "UUID=$bootle /boot $bootle2 defaults 0 2" >> /mnt/etc/fstab
 }
+function create_fstab_file {
+	efibootmgr && create_boot_entry
+	find homm && create_home_entry
+}
+### FSTAB END
+
+### Bootloader BEGIN
 function booter {
 	find nobootloader || search
 	find nobootloader && bash stub.sh
@@ -289,29 +300,6 @@ function menu_for_non_encrypted {
 	[ "$efilol" == "2" ] && bash stub.sh
 	[ "$efilol" == "3" ] && bash systemd-boot.sh
 }
-function check_for_home_encryption {
-	ls | grep -w "encrypt_for_home" && securetab
-}
-function securetab {
-	rm /mnt/etc/crypttab
-	touch /mnt/etc/crypttab
-	Calc=$(lsblk -fd $home_encrypted -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
-	[ "$encrypted_home" == "easy" ] && echo "secure_home UUID=$Calc /home_key" >> /mnt/etc/crypttab
-	[ "$encrypted_home" == "easy" ] || echo "secure_home UUID=$Calc none timeout=180" >> /mnt/etc/crypttab
-}
-function partition_another_disk_part1 {
-	echo -e "${red}${bold}should I partition another disk?
-	1) yes
-	2) no${reset}"
-	read answr7
-	[ "$answr7" == "1" ] && partition_another_disk_part2
-}
-function partition_another_disk_part2 {
-	echo -e "${red}${bold}set your disk${reset}"
-	lsblk
-	read answr7
-	cfdisk $answr7
-}
 function bootloader {
 	efibootmgr
 	echo -e "${red}${bold}should I remove your UEFI bootloader?
@@ -330,6 +318,9 @@ function uefi_list {
 function pewpew {
 	arch-chroot /mnt bash grubinstall.sh
 }
+### Bootloader END
+
+### Trim BEGIN
 function detect_trim_support {
 	hdparm -I $membrane | grep TRIM && trim_enabler
 }
@@ -340,6 +331,9 @@ function trim_enabler {
 	read answr
 	[ "$answr" == "1" ] && touch trim
 }
+### Trim END
+
+### yay BEGIN
 function yay {
 	echo -e "${red}${bold}should I install yay(AUR helper)?
 	1) yes
@@ -351,6 +345,38 @@ function yay_install {
 	cp yay.sh /mnt
 	cp yay-11.0.2-1-x86_64.pkg.tar.zst /mnt
 	arch-chroot /mnt bash yay.sh
+}
+### yay END
+
+### everything else BEGIN
+function manual_mode_settings {
+	partition_another_disk_part1
+	check_BIOS
+	install_swap
+	home
+}
+function check_BIOS {
+	find 2 && formatforBIOS || formatforUEFI
+}
+function swap {
+	echo -e "${red}${bold}set your swap partition${reset}"
+	lsblk
+	read part3
+	mkswap $part3
+	swapon $part3
+}
+function partition_another_disk_part1 {
+	echo -e "${red}${bold}should I partition another disk?
+	1) yes
+	2) no${reset}"
+	read answr7
+	[ "$answr7" == "1" ] && partition_another_disk_part2
+}
+function partition_another_disk_part2 {
+	echo -e "${red}${bold}set your disk${reset}"
+	lsblk
+	read answr7
+	cfdisk $answr7
 }
 function remove_garbage {
 	ls /mnt | grep -w "grubinstall.sh" && rm /mnt/grubinstall.sh
@@ -395,10 +421,8 @@ function install_swap {
 	read answr3
 	[ "$answr3" == "1" ] && swap
 }
-function create_fstab_file {
-	efibootmgr && create_boot_entry
-	find homm && create_home_entry
-}
+
+### everything else END
 efibootmgr || touch 2
 find 2 || bootloader
 disk_to_install
