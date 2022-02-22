@@ -7,11 +7,11 @@ reset="\e[0m"
 function auto_partitioning_BIOS {
 	parted $membrane mklabel msdos -s
 	parted $membrane mkpart primary linux-swap 1MiB 8217MiB
-	parted $membrane mkpart primary btrfs 8217MiB 100%
+	parted $membrane mkpart primary ext2 8217MiB 100%
 	parted $membrane set 2 boot on
 	mkswap $membrane'1'
 	swapon $membrane'1'
-	mkfs.btrfs $membrane'2'
+	mkfs.ext4 $membrane'2'
 	mount $membrane'2' /mnt
 	touch auto
 }
@@ -77,11 +77,11 @@ function auto_partitioning_UEFI {
 	parted $membrane mkpart boot fat32 1MiB 1025MiB
 	parted $membrane set 1 esp on
 	parted $membrane mkpart swap linux-swap 1025MiB 9225MiB
-	parted $membrane mkpart root btrfs 9225MiB 100%
+	parted $membrane mkpart root ext2 9225MiB 100%
 	part1=$membrane'1'
 	ESP3=$membrane'3'
 	mkfs.vfat $part1
-	mkfs.btrfs $ESP3
+	mkfs.ext4 $ESP3
 	echo $ESP3 | cat >> root_partition
 	mount $ESP3 /mnt
 	mkdir /mnt/boot
