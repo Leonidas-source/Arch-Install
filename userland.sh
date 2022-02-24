@@ -173,7 +173,6 @@ function trim_enabler {
 	systemctl enable fstrim.timer
 }
 clear
-mount_points
 rm /etc/locale.gen
 mv locale.gen /etc/
 locale-gen
