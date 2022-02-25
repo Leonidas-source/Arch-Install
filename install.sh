@@ -29,20 +29,12 @@ function formatforBIOS {
 function format_root_BIOS {
 	echo -e "${red}${bold}set filesystem for /
 	1) ext4
-	2) ext3
-	3) ext2
-	4) xfs
-	5) btrfs
-	6) fat32
-	7) exfat${reset}"
+	2) xfs
+	3) btrfs${reset}"
 	read filese
 	[ "$filese" == "1" ] && mkfs.ext4 $root
-	[ "$filese" == "2" ] && mkfs.ext3 $root
-	[ "$filese" == "3" ] && mkfs.ext2 $root
-	[ "$filese" == "4" ] && mkfs.xfs $root
-	[ "$filese" == "5" ] && btrfser
-	[ "$filese" == "6" ] && mkfs.vfat $root
-	[ "$filese" == "7" ] && mkfs.exfat $root
+	[ "$filese" == "2" ] && mkfs.xfs $root
+	[ "$filese" == "3" ] && btrfser
 }
 function btrfser {
 	mkfs.btrfs $root
@@ -94,20 +86,12 @@ function format_root {
 	ls | grep -w "encrypt" && ESP3=/dev/mapper/root
 	echo -e "${red}${bold}set filesystem for /
 	1) ext4
-	2) ext3
-	3) ext2
-	4) xfs
-	5) btrfs
-	6) fat32
-	7) exfat${reset}"
+	2) xfs
+	3) btrfs${reset}"
 	read filesys
 	[ "$filesys" == "1" ] && mkfs.ext4 $ESP3
-	[ "$filesys" == "2" ] && mkfs.ext3 $ESP3
-	[ "$filesys" == "3" ] && mkfs.ext2 $ESP3
-	[ "$filesys" == "4" ] && mkfs.xfs $ESP3
-	[ "$filesys" == "5" ] && ohhmanifeelsosleepy
-	[ "$filesys" == "6" ] && mkfs.vfat $ESP3
-	[ "$filesys" == "7" ] && mkfs.exfat $ESP3
+	[ "$filesys" == "2" ] && mkfs.xfs $ESP3
+	[ "$filesys" == "3" ] && ohhmanifeelsosleepy
 }
 function ohhmanifeelsosleepy {
 	mkfs.btrfs $ESP3
