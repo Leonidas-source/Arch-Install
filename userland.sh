@@ -75,7 +75,7 @@ function disable_wallet {
 }
 function gnome {
 	clear
-	pacman -S gnome ffmpegthumbnailer gst-libav gst-plugins-ugly networkmanager
+	pacman -S gnome ffmpegthumbnailer gst-libav gst-plugins-ugly networkmanager gnome-tweaks
 	systemctl enable NetworkManager.service
 	systemctl enable gdm
 }
