@@ -371,7 +371,7 @@ function remove_garbage {
 	ls /mnt | grep -w "yay.sh" && rm /mnt/yay.sh
 	ls /mnt | grep -w "2" && rm /mnt/2
 	ls /mnt | grep -w "file_for_grub" && rm /mnt/file_for_grub
-	ls /mnt | grep -w "yay-11.0.2-1-x86_64.pkg.tar.zst" && rm /mnt/yay-11.0.2-1-x86_64.pkg.tar.zst
+	ls /mnt | grep -w "yay-11.1.1-1-x86_64.pkg.tar.zst" && rm /mnt/yay-11.1.1-1-x86_64.pkg.tar.zst
 }
 function install_base_system {
 	echo -e "${red}${bold}Setting up optimal mirrors please wait...${reset}"
