@@ -16,9 +16,11 @@ function auto_partitioning_BIOS {
 	touch auto
 }
 function formatforBIOS {
+	clear
 	echo -e "${red}${bold}set your / partition${reset}"
 	lsblk
 	read root
+	clear
 	echo -e "${red}${bold}should I format it?
 	1) yes
 	2) no${reset}"
@@ -27,6 +29,7 @@ function formatforBIOS {
 	mount $root /mnt
 }
 function format_root_BIOS {
+	clear
 	echo -e "${red}${bold}set filesystem for /
 	1) ext4
 	2) xfs
@@ -47,10 +50,12 @@ function btrfser {
 
 ### BIOS_INSTALL END
 function disk_to_install {
+	clear
 	echo -e "${red}${bold}set disk to install Arch Linux${reset}"
 	lsblk
 	read membrane
 	echo $membrane | cat >> file_for_grub
+	clear
 	echo -e "${red}${bold}how to partition your disk?
 	1) auto partitioning
 	2) manual partitioning${reset}"
@@ -84,6 +89,7 @@ function auto_partitioning_UEFI {
 }
 function format_root {
 	ls | grep -w "encrypt" && ESP3=/dev/mapper/root
+	clear
 	echo -e "${red}${bold}set filesystem for /
 	1) ext4
 	2) xfs
@@ -102,19 +108,23 @@ function ohhmanifeelsosleepy {
 	umount $ESP3
 }
 function formatforUEFI {
+	clear
 	echo -e "${red}${bold}set your /boot partition${reset}"
 	lsblk
 	read part1
+	clear
 	echo -e "${red}${bold}should I format it?
 	1) yes
 	2) no${reset}"
 	read answr5
 	[ "$answr5" == "1" ] && format_efi
+	clear
 	echo -e "${red}${bold}set your / partition${reset}"
 	lsblk
 	read -e ESP3
 	echo $ESP3 | cat >> root_partition
 	encryption
+	clear
 	echo -e "${red}${bold}should I format it?
 	1) yes
 	2) no${reset}"
@@ -125,6 +135,7 @@ function formatforUEFI {
 	mount $part1 /mnt/boot
 }
 function format_efi {
+	clear
 	echo -e "${red}${bold}set filesystem for /boot partition
 	1) fat32
 	2) exfat${reset}"
@@ -136,6 +147,7 @@ function format_efi {
 
 ### Encryption BEGIN
 function home_encryption {
+	clear
 	echo -e "${red}${bold}set /home partition${reset}"
 	lsblk
 	read home_encrypted
@@ -145,6 +157,7 @@ function home_encryption {
 }
 function home_set {
 	touch homm
+	clear
 	echo -e "${red}${bold}should I encrypt /home?
 	1) yes
 	2) no${reset}"
@@ -174,6 +187,7 @@ function securetab {
 	[ "$encrypted_home" == "easy" ] || echo "secure_home UUID=$Calc none timeout=180" >> /mnt/etc/crypttab
 }
 function encryption {
+	clear
 	echo -e "${red}${bold}should I encrypt / partition?
 	1) yes
 	2) no${reset}"
@@ -189,6 +203,7 @@ function root_encryption {
 
 ### Home BEGIN
 function home {
+	clear
 	echo -e "${red}${bold}should I set /home partition?
 	1) yes
 	2) no${reset}"
@@ -197,10 +212,12 @@ function home {
 }
 function installhome {
 	mkdir /mnt/home
+	clear
 	echo -e "${red}${bold}set your /home partition${reset}"
 	lsblk
 	read -e homepart
-	echo -e "${red}${bold}should i format it?
+	clear
+	echo -e "${red}${bold}should I format it?
 	1) yes
 	2) no${reset}"
 	read somehome
@@ -208,6 +225,7 @@ function installhome {
 }
 function formathome {
 	ls | grep -w "encrypt_for_home" && homepart=/dev/mapper/secure_home
+	clear
 	echo -e "${red}${bold}set your filesystem for /home
 	1) ext4
 	2) ext3
@@ -265,6 +283,7 @@ function search {
 	ls | grep -w "encrypt" && menu_for_encrypted || menu_for_non_encrypted
 }
 function menu_for_encrypted {
+	clear
 	echo -e "${red}${bold}set your bootloader
 	1) EFISTUB
 	2) systemd-boot
@@ -274,6 +293,7 @@ function menu_for_encrypted {
 	[ "$efilol" == "2" ] && bash systemd-boot.sh
 }
 function menu_for_non_encrypted {
+	clear
 	echo -e "${red}${bold}set your bootloader
 	1) grub
 	2) EFISTUB
@@ -286,6 +306,7 @@ function menu_for_non_encrypted {
 }
 function bootloader {
 	efibootmgr
+	clear
 	echo -e "${red}${bold}should I remove your UEFI bootloader?
 	1) yes
 	2) no${reset}"
@@ -293,6 +314,7 @@ function bootloader {
 	[ "$uefi_arg" == "1" ] && uefi_list
 }
 function uefi_list {
+	clear
 	echo -e "${red}${bold}set number of the bootloader(0001,0002..etc)${reset}"
 	efibootmgr -v
 	read uefi_arg
@@ -309,6 +331,7 @@ function detect_trim_support {
 	hdparm -I $membrane | grep TRIM && trim_enabler
 }
 function trim_enabler {
+	clear
 	echo -e "${red}${bold}your disk does support trim should I enable it?
 	1) yes
 	2) no${reset}"
@@ -319,6 +342,7 @@ function trim_enabler {
 
 ### yay BEGIN
 function yay {
+	clear
 	echo -e "${red}${bold}should I install yay(AUR helper)?
 	1) yes
 	2) no${reset}"
@@ -343,6 +367,7 @@ function check_BIOS {
 	find 2 && formatforBIOS || formatforUEFI
 }
 function swap {
+	clear
 	echo -e "${red}${bold}set your swap partition${reset}"
 	lsblk
 	read part3
@@ -350,6 +375,7 @@ function swap {
 	swapon $part3
 }
 function partition_another_disk_part1 {
+	clear
 	echo -e "${red}${bold}should I partition another disk?
 	1) yes
 	2) no${reset}"
@@ -357,6 +383,7 @@ function partition_another_disk_part1 {
 	[ "$answr7" == "1" ] && partition_another_disk_part2
 }
 function partition_another_disk_part2 {
+	clear
 	echo -e "${red}${bold}set your disk${reset}"
 	lsblk
 	read answr7
@@ -374,8 +401,10 @@ function remove_garbage {
 	ls /mnt | grep -w "yay-11.1.1-1-x86_64.pkg.tar.zst" && rm /mnt/yay-11.1.1-1-x86_64.pkg.tar.zst
 }
 function install_base_system {
+	clear
 	echo -e "${red}${bold}Setting up optimal mirrors please wait...${reset}"
 	reflector --latest 50 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+	clear
 	echo -e "${red}${bold}set your kernel
 	1) Stable (stable kernel)
 	2) Hardened (more secure kernel)
@@ -400,6 +429,7 @@ function copy_files {
 	find home_key && cp home_key /mnt
 }
 function install_swap {
+	clear
 	echo -e "${red}${bold}should I install swap partition?
 	1) yes
 	2) no${reset}"
@@ -423,4 +453,5 @@ ln -sf /usr/share/zoneinfo/"$(curl --fail https://ipapi.co/timezone)" /mnt/etc/l
 yay
 create_fstab_file
 remove_garbage
+clear
 echo -e "${red}${bold}Installation is complete!!!${reset}"
