@@ -436,6 +436,10 @@ function install_swap {
 	read answr3
 	[ "$answr3" == "1" ] && swap
 }
+function vim_fix {
+	echo "set clipboard=unnamedplus" >> /mnt/etc/vimrc
+	echo "set mouse=a" >> /mnt/etc/vimrc
+}
 
 ### everything else END
 efibootmgr || touch 2
@@ -453,5 +457,6 @@ ln -sf /usr/share/zoneinfo/"$(curl --fail https://ipapi.co/timezone)" /mnt/etc/l
 yay
 create_fstab_file
 remove_garbage
+vim_fix
 clear
 echo -e "${red}${bold}Installation is complete!!!${reset}"

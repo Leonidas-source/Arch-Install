@@ -35,9 +35,9 @@ function systemdpart3 {
 	ls | grep -w "ZEN" && echo "initrd /initramfs-linux-zen.img" >> /mnt/boot/loader/entries/arch.conf
 	clear
 	arg2=$(cat root_partition)
-	ls | grep -w "encrypt" && arg3=$(lsblk -fd $arg2 -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
-	ls | grep -w "encrypt" || arg3=$(lsblk -f $arg2 -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
-	arg4=$(lsblk -fd /dev/mapper/root -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
+	ls | grep -w "encrypt" && arg3=$(lsblk -fd $arg2 -o UUID | sed "1d")
+	ls | grep -w "encrypt" || arg3=$(lsblk -f $arg2 -o UUID | sed "1d")
+	arg4=$(lsblk -fd /dev/mapper/root -o UUID | sed "1d")
 	ls | grep -w "encrypt" && echo "options rd.luks.uuid=$arg3 root=\"UUID=$arg4\" rw " >> /mnt/boot/loader/entries/arch.conf
 	ls | grep -w "encrypt" || echo "options root=\"UUID=$arg3\" rw " >> /mnt/boot/loader/entries/arch.conf
 }

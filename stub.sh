@@ -28,5 +28,5 @@ echo -e "${red}${bold}Set / partition${reset}"
 lsblk
 read ESP3
 clear
-ESP4=$(lsblk -fd $ESP3 -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
+ESP4=$(lsblk -fd $ESP3 -o UUID | sed "1d")
 ls | grep -w "encrypt" && secure || regular
