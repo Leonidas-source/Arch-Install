@@ -439,6 +439,7 @@ function install_swap {
 function vim_fix {
 	echo "set clipboard=unnamedplus" >> /mnt/etc/vimrc
 	echo "set mouse=a" >> /mnt/etc/vimrc
+	echo "set number" >> /mnt/etc/vimrc
 }
 
 ### everything else END
