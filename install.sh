@@ -351,7 +351,7 @@ function yay {
 }
 function yay_install {
 	cp yay.sh /mnt
-	cp yay-11.1.1-1-x86_64.pkg.tar.zst /mnt
+	cp yay-11.2.0-1-x86_64.pkg.tar.zst /mnt
 	arch-chroot /mnt bash yay.sh
 }
 ### yay END
