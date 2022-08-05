@@ -417,13 +417,13 @@ function install_base_system {
 	[ "$kernel" == "4" ] && pacstrap /mnt base linux-zen linux-firmware dhcpcd nano gvim mc exfat-utils btrfs-progs ntfs-3g htop dosfstools && touch ZEN
 }
 function copy_files {
-	cp locale.conf /mnt/etc
+	echo "LANG=en_US.UTF-8" >> /mnt/etc/locale.conf
 	cp userland.sh /mnt
 	cp grubinstall.sh /mnt
-	cp vconsole.conf /mnt/etc
+	echo "KEYMAP=us" >> /mnt/etc/vconsole.conf
 	cp encrypt /mnt
 	cp mkinitcpio.conf /mnt
-	cp locale.gen /mnt
+	echo "en_US.UTF-8 UTF-8" >> /mnt/etc/locale.gen
 	cp trim /mnt
 	cp file_for_grub /mnt
 	find home_key && cp home_key /mnt
