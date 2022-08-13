@@ -173,8 +173,6 @@ function trim_enabler {
 	systemctl enable fstrim.timer
 }
 clear
-rm /etc/locale.gen
-mv locale.gen /etc/
 locale-gen
 clear
 echo -e "${red}${bold}set your hostname${reset}"
