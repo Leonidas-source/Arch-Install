@@ -54,7 +54,7 @@ function disk_to_install {
 	echo -e "${red}${bold}set disk to install Arch Linux${reset}"
 	lsblk
 	read membrane
-	echo $membrane | cat >> file_for_grub
+	echo $membrane >> file_for_grub
 	clear
 	echo -e "${red}${bold}how to partition your disk?
 	1) auto partitioning
@@ -79,7 +79,7 @@ function auto_partitioning_UEFI {
 	ESP3=$membrane'3'
 	mkfs.vfat $part1
 	mkfs.ext4 $ESP3
-	echo $ESP3 | cat >> root_partition
+	echo $ESP3 >> root_partition
 	mount $ESP3 /mnt
 	mkdir /mnt/boot
 	mount $part1 /mnt/boot
@@ -122,7 +122,7 @@ function formatforUEFI {
 	echo -e "${red}${bold}set your / partition${reset}"
 	lsblk
 	read -e ESP3
-	echo $ESP3 | cat >> root_partition
+	echo $ESP3 >> root_partition
 	encryption
 	clear
 	echo -e "${red}${bold}should I format it?
