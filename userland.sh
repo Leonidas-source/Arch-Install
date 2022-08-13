@@ -176,8 +176,8 @@ clear
 locale-gen
 clear
 echo -e "${red}${bold}set your hostname${reset}"
-echo -e "${red}${bold}to exit press CTRL+D twice${reset}"
-cat > /etc/hostname
+read host
+echo $host >> /etc/hostname
 clear
 echo -e "${red}${bold}set your root password${reset}"
 passwd
