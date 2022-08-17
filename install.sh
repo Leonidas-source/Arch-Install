@@ -264,8 +264,6 @@ function create_home_entry {
 function create_boot_entry {
 	bootle=$(lsblk -f $part1 -o UUID | sed s/"UUID"/""/g | sed '/^$/d;s/[[:blank:]]//g')
 	bootle2=$(lsblk -f $part1 -o FSTYPE | sed s/"FSTYPE"/""/g | sed '/^$/d;s/[[:blank:]]//g')
-	rm /mnt/etc/fstab
-	touch /mnt/etc/fstab
 	echo "UUID=$bootle /boot $bootle2 defaults 0 2" >> /mnt/etc/fstab
 }
 function create_fstab_file {
