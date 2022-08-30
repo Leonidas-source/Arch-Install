@@ -96,7 +96,7 @@ function format_root {
 	1) ext4
 	2) xfs
 	3) btrfs
-	$) exfat${reset}"
+	4) exfat${reset}"
 	read filesys
 	[ "$filesys" == "1" ] && mkfs.ext4 $ESP3
 	[ "$filesys" == "2" ] && mkfs.xfs $ESP3
