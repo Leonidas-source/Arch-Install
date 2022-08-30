@@ -33,11 +33,13 @@ function format_root_BIOS {
 	echo -e "${red}${bold}set filesystem for /
 	1) ext4
 	2) xfs
-	3) btrfs${reset}"
+	3) btrfs
+	4) exfat${reset}"
 	read filese
 	[ "$filese" == "1" ] && mkfs.ext4 $root
 	[ "$filese" == "2" ] && mkfs.xfs $root
 	[ "$filese" == "3" ] && btrfser
+	[ "$filese" == "4" ] && mkfs.exfat $root
 }
 function btrfser {
 	mkfs.btrfs $root
@@ -93,11 +95,13 @@ function format_root {
 	echo -e "${red}${bold}set filesystem for /
 	1) ext4
 	2) xfs
-	3) btrfs${reset}"
+	3) btrfs
+	$) exfat${reset}"
 	read filesys
 	[ "$filesys" == "1" ] && mkfs.ext4 $ESP3
 	[ "$filesys" == "2" ] && mkfs.xfs $ESP3
 	[ "$filesys" == "3" ] && ohhmanifeelsosleepy
+	[ "$filesys" == "4" ] && mkfs.exfat $ESP3
 }
 function ohhmanifeelsosleepy {
 	mkfs.btrfs $ESP3
