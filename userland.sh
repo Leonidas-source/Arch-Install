@@ -56,7 +56,7 @@ function desktop_enviroment {
 }
 function plasma {
 	clear
-	pacman -S plasma konsole dolphin kate spectacle plasma-wayland-session gwenview ark p7zip unrar unarchiver lzop lrzip okular filelight networkmanager flatpak
+	pacman -S plasma konsole dolphin kate spectacle plasma-wayland-session gwenview ark p7zip unrar unarchiver lzop lrzip okular filelight networkmanager flatpak rsibreak
 	systemctl enable sddm
 	systemctl enable NetworkManager.service
 	clear
