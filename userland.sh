@@ -93,34 +93,34 @@ function cutefish {
 }
 function budgie {
 	clear
-	pacman -S lxdm-gtk3 budgie-desktop networkmanager
+	pacman -S lightdm lightdm-gtk-greeter budgie-desktop networkmanager
 	systemctl enable NetworkManager.service
-	systemctl enable lxdm
+	systemctl enable lightdm
 }
 function cinnamon {
 	clear
-	pacman -S cinnamon lxdm-gtk3 xfce4-terminal xed networkmanager xfce4-taskmanager gvfs tumbler thunar-volman thunar-archive-plugin thunar
+	pacman -S cinnamon lightdm lightdm-gtk-greeter xfce4-terminal xed networkmanager xfce4-taskmanager gvfs tumbler thunar-volman thunar-archive-plugin thunar
 	systemctl enable NetworkManager.service
-	systemctl enable lxdm
+	systemctl enable lightdm
 	bluetooth_support=0
 }
 function mate {
 	clear
-	pacman -S mate mate-extra lxdm-gtk3 networkmanager
+	pacman -S mate mate-extra lightdm lightdm-gtk-greeter networkmanager
 	systemctl enable NetworkManager.service
-	systemctl enable lxdm
+	systemctl enable lightdm
 }
 function xfce {
 	clear
-	pacman -S xfce4 lxdm-gtk3 xfce4-xkb-plugin mousepad xfce4-pulseaudio-plugin pavucontrol pulseaudio xfce4-screenshooter xfce4-taskmanager networkmanager
+	pacman -S xfce4 lightdm lightdm-gtk-greeter xfce4-xkb-plugin mousepad xfce4-pulseaudio-plugin pavucontrol pulseaudio xfce4-screenshooter xfce4-taskmanager networkmanager
 	systemctl enable NetworkManager.service
-	systemctl enable lxdm
+	systemctl enable lightdm
 }
 function enlightenment {
 	clear
-	pacman -S enlightenment lxdm-gtk3 terminology networkmanager
+	pacman -S enlightenment lightdm lightdm-gtk-greeter terminology networkmanager
 	systemctl enable NetworkManager.service
-	systemctl enable lxdm
+	systemctl enable lightdm
 }
 function lxde {
 	clear
@@ -130,9 +130,9 @@ function lxde {
 }
 function lxqt {
 	clear
-	pacman -S lxqt lxdm-gtk3 networkmanager
+	pacman -S lxqt lightdm lightdm-gtk-greeter networkmanager
 	systemctl enable NetworkManager.service
-	systemctl enable lxdm
+	systemctl enable lightdm
 }
 function sway {
 	clear
