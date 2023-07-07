@@ -349,7 +349,7 @@ function yay {
 }
 function yay_install {
 	cp yay.sh /mnt
-	cp yay-11.3.1-1-x86_64.pkg.tar.zst /mnt
+	cp yay-12.1.0-1-x86_64.pkg.tar.zst /mnt
 	arch-chroot /mnt bash yay.sh
 }
 ### yay END
@@ -396,7 +396,7 @@ function remove_garbage {
 	ls /mnt | grep -w "yay.sh" && rm /mnt/yay.sh
 	ls /mnt | grep -w "2" && rm /mnt/2
 	ls /mnt | grep -w "file_for_grub" && rm /mnt/file_for_grub
-	ls /mnt | grep -w "yay-11.2.0-1-x86_64.pkg.tar.zst" && rm /mnt/yay-11.2.0-1-x86_64.pkg.tar.zst
+	ls /mnt | grep -w "yay-12.1.0-1-x86_64.pkg.tar.zst" && rm /mnt/yay-12.1.0-1-x86_64.pkg.tar.zst
 }
 function install_base_system {
 	clear
